@@ -1,0 +1,1 @@
+import{i as e,B as i,E as r}from"./K2cKJ6Jp.js";const l=()=>{const t=e(null),s=e(!1),a=e(!1);i(()=>{o()});const o=()=>{t.value=n.width/n.height,s.value=t.value<1,a.value=t.value>=1},n=r(o);return{isPortrait:s,isLandscape:a}};export{l as u};

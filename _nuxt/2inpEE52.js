@@ -1,0 +1,1 @@
+function h(i,e,n,s=!0,t){let a=window.devicePixelRatio?window.devicePixelRatio:1;a=Math.max(a,1),i.canvas.width=e,i.canvas.height=n,i.canvas.style.width=`${e}px`,i.canvas.style.height=`${n}px`,s&&(a=Math.min(a,t),i.canvas.width=e*a,i.canvas.height=n*a,i.scale(a,a))}export{h as r};

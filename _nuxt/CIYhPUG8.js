@@ -1,0 +1,1 @@
+/* empty css        */import{_ as o,b as t,o as s,C as n,D as r}from"./K2cKJ6Jp.js";const c={},a={class:"sectionFooter textBodySmall"},i={class:"sectionFooter__inner gridMain gridContainerFill"};function d(e,_){return s(),t("div",a,[n("div",i,[r(e.$slots,"default",{},void 0,!0)])])}const m=o(c,[["render",d],["__scopeId","data-v-4f667663"]]);export{m as S};

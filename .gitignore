@@ -1,0 +1,39 @@
+# macOS and Windows metadata
+.DS_Store
+._*
+Thumbs.db
+Desktop.ini
+
+# Local environment and credentials
+.env
+.env.*
+!.env.example
+!.env.sample
+
+# Vercel local project settings and generated output
+.vercel/
+
+# Dependencies and tool caches
+node_modules/
+.npm/
+.cache/
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+
+# Logs and temporary files
+*.log
+*.tmp
+*.swp
+*.swo
+
+# Local editor settings and test artifacts
+.idea/
+.vscode/
+coverage/
+playwright-report/
+test-results/
+
+# This repository contains the deployable static website.
+# Keep _nuxt/, _i18n/, _payload.json, pages/, assets/, and fonts/ tracked.
