@@ -1,6 +1,6 @@
 window.SION_THAI = {
   "Logo":"Logo", "Typography":"Typography", "Color":"Color", "Photography":"Photography", "Campaign":"Campaign", "Motion":"Motion",
-  "Explore":"สำรวจ", "Index":"เมนู", "Close":"ปิด", "Shuffle":"สุ่ม", "Back":"กลับ", "Next":"ถัดไป", "Previous":"ก่อนหน้า", "Reset":"เริ่มใหม่", "Loading":"กำลังโหลด",
+  "Explore":"สำรวจ", "Index":"เมนู", "Close":"ปิด", "Shuffle":"สุ่ม", "Back":"กลับ", "Next":"ถัดไป", "Previous":"ก่อนหน้า", "Reset":"เริ่มใหม่", "Loading":"Loading",
   "Tap to Explore":"แตะเพื่อสำรวจ", "Drag to Explore":"ลากเพื่อสำรวจ", "Click to Explore":"คลิกเพื่อสำรวจ", "Click or Drag to Explore":"คลิกหรือลากเพื่อสำรวจ", "Tap or Drag to Explore":"แตะหรือลากเพื่อสำรวจ",
   "Privacy Policy":"นโยบายความเป็นส่วนตัว", "Terms":"ข้อกำหนด", "Notes":"หมายเหตุ", "Design":"การออกแบบ", "In Use":"การใช้งาน", "Gallery":"แกลเลอรี", "Recent":"ผลงานล่าสุด", "Awards":"รางวัล", "Library":"คลังผลงาน", "Unavailable":"ไม่พร้อมใช้งาน",
   "Primary":"สีหลัก", "Secondary":"สีรอง", "Core":"สีพื้นฐาน", "Dark":"โทนเข้ม", "Light":"โทนอ่อน", "Bright":"โทนสด", "Shop now":"เลือกซื้อ", "get started":"เริ่มต้น", "Social":"โซเชียลมีเดีย",

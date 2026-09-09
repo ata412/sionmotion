@@ -7,6 +7,12 @@ from pathlib import Path
 
 
 class StaticSiteHandler(SimpleHTTPRequestHandler):
+    def do_GET(self):
+        route = self.path.split("?", 1)[0].rstrip("/")
+        if route in {"/logo", "/typography", "/color", "/photography", "/campaign", "/motion", "/commercial-production"}:
+            self.path = "/index.html"
+        super().do_GET()
+
     def end_headers(self):
         self.send_header("Cache-Control", "no-store")
         super().end_headers()
