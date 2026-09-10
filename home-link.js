@@ -1,5 +1,17 @@
 const headerLogoStyle = document.createElement("style");
 headerLogoStyle.textContent = `
+  .colorIntroLayout1 .sionColorLogo {
+    display: flex; align-items: center; gap: .7em; aspect-ratio: auto;
+  }
+  .sionColorLogo__mark {
+    display: block; flex: 0 0 2em; height: 3em; background: currentColor;
+    -webkit-mask: url('/assets/sion-motion-mark.png') center / contain no-repeat;
+    mask: url('/assets/sion-motion-mark.png') center / contain no-repeat;
+  }
+  .sionColorLogo__name {
+    font-family: Clarkson, Arial, sans-serif; font-size: 2.1em;
+    font-weight: 400; line-height: 1; letter-spacing: -.035em; white-space: nowrap;
+  }
   .sionHeaderLogo { display: block; width: auto; height: 56px; object-fit: contain; }
   @media (max-width: 767px) { .sionHeaderLogo { height: 44px; } }
   .homeCarouselUi .homeCarouselUi__inner.gridMain {
