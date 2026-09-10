@@ -14,8 +14,3 @@ if (staticRoute === '/commercial-production' || staticRoute === '/logo') {
   }
 }
 
-if (staticRoute === '/logo') {
-  const script = document.createElement('script');
-  script.src = '/logo-work-showcase.js';
-  document.body.append(script);
-}
