@@ -1,15 +1,12 @@
 (() => {
-  const sources = {
-    background: '/assets/pitch-portfolio/hotel-main.webp',
-    details: [
-      '/assets/pitch-portfolio/hotel-detail-1.webp',
-      '/assets/pitch-portfolio/hotel-detail-2.webp',
-      '/assets/pitch-portfolio/hotel-detail-3.webp'
-    ]
-  };
+  const sets = ['hotel', 'food', 'lifestyle', 'portrait', 'street', 'travel'].map((name) => ({
+    background: `/assets/pitch-portfolio/${name}-main.webp`,
+    details: [1, 2, 3].map((number) => `/assets/pitch-portfolio/${name}-detail-${number}.webp`)
+  }));
 
   function replaceImages() {
-    document.querySelectorAll('.homeCarouselPhotographyItem').forEach((item) => {
+    document.querySelectorAll('.homeCarouselPhotographyItem').forEach((item, itemIndex) => {
+      const sources = sets[itemIndex % sets.length];
       const background = item.querySelector('.homeCarouselPhotographyItem__bg');
       if (background && background.getAttribute('src') !== sources.background) {
         background.setAttribute('src', sources.background);
