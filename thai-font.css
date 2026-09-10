@@ -1,0 +1,41 @@
+@font-face {
+  font-family: "PTT45Pride";
+  src: url("/fonts/ptt45pride/PTT45Pride-light.woff2") format("woff2");
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+  unicode-range: U+0E00-0E7F;
+}
+@font-face {
+  font-family: "PTT45Pride";
+  src: url("/fonts/ptt45pride/PTT45Pride-regular.woff2") format("woff2");
+  font-weight: 400 500;
+  font-style: normal;
+  font-display: swap;
+  unicode-range: U+0E00-0E7F;
+}
+@font-face {
+  font-family: "PTT45Pride";
+  src: url("/fonts/ptt45pride/PTT45Pride-bold.woff2") format("woff2");
+  font-weight: 600 900;
+  font-style: normal;
+  font-display: swap;
+  unicode-range: U+0E00-0E7F;
+}
+:root {
+  --font-ptt45pride: "PTT45Pride", Clarkson, Tahoma, Arial, sans-serif;
+}
+html[data-sion-language="th"] body,
+html[data-sion-language="th"] .textBodyIntro,
+html[data-sion-language="th"] .textBodyBig,
+html[data-sion-language="th"] .textBodySmall,
+html[data-sion-language="th"] .textCaption,
+html[data-sion-language="th"] .textEyebrow,
+html[data-sion-language="th"] .textEyebrowFaded,
+html[data-sion-language="th"] .textMenu,
+html[data-sion-language="th"] .textH1,
+html[data-sion-language="th"] .textH2,
+html[data-sion-language="th"] .textH3,
+.sionLanguage button[lang="th"] {
+  font-family: var(--font-ptt45pride) !important;
+}

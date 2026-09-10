@@ -11,8 +11,9 @@
     }).join(', ');
   };
   document.documentElement.lang = language;
+  document.documentElement.dataset.sionLanguage = language;
   const style = document.createElement('style');
-  style.textContent = `html[lang="th"] body {font-family:Tahoma,Arial,sans-serif} html[lang="th"] .textBodyIntro,html[lang="th"] .textBodyBig,html[lang="th"] .textBodySmall{line-height:1.55;letter-spacing:0} .sionLanguage{position:fixed;bottom:16px;right:16px;z-index:10000;display:flex;gap:4px;padding:5px;border-radius:24px;background:#111;color:white;border:1px solid #777;font:14px/1.4 Tahoma,Arial,sans-serif}.sionLanguage button{font:inherit;color:inherit;background:transparent;border:0;border-radius:18px;padding:8px 12px;cursor:pointer}.sionLanguage button[aria-pressed="true"]{background:white;color:#111}`;
+  style.textContent = `html[lang="th"] body {font-family:var(--font-ptt45pride)} html[lang="th"] .textBodyIntro,html[lang="th"] .textBodyBig,html[lang="th"] .textBodySmall{line-height:1.55;letter-spacing:0} .sionLanguage{position:fixed;bottom:16px;right:16px;z-index:10000;display:flex;gap:4px;padding:5px;border-radius:24px;background:#111;color:white;border:1px solid #777;font:14px/1.4 Tahoma,Arial,sans-serif}.sionLanguage button{font:inherit;color:inherit;background:transparent;border:0;border-radius:18px;padding:8px 12px;cursor:pointer}.sionLanguage button[aria-pressed="true"]{background:white;color:#111}`;
   document.head.append(style);
   style.textContent += `
     @media (min-width: 768px) {
