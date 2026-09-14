@@ -102,10 +102,15 @@ const syncFullscreenShowreel = () => {
     video.src = '/pages/home/show-reel/background-clear.mp4';
     video.poster = '/pages/home/show-reel/poster.jpg';
     video.muted = true;
-    video.loop = true;
+    video.loop = false;
     video.playsInline = true;
     video.preload = 'metadata';
     video.setAttribute('aria-hidden', 'true');
+    video.addEventListener('ended', () => {
+      if (!video.classList.contains('is-visible')) return;
+      video.currentTime = 0;
+      video.play().catch(() => {});
+    });
     carousel.prepend(video);
   }
 

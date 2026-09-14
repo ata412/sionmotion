@@ -1,6 +1,7 @@
 (() => {
-  let language = 'en';
-  try { language = localStorage.getItem('sion-language') === 'th' ? 'th' : 'en'; } catch {}
+  // Thai is the initial language. A visitor's explicit language choice is kept.
+  let language = 'th';
+  try { language = localStorage.getItem('sion-language') === 'en' ? 'en' : 'th'; } catch {}
   const dictionary = window.SION_THAI || {};
   window.sionTranslate = text => {
     if (language !== 'th') return text;
