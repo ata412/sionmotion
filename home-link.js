@@ -73,27 +73,22 @@ document.addEventListener(
   true,
 );
 
-// Browsers block autoplay with sound. Keep the showreel visible immediately,
-// then the existing carousel handler restores sound after the visitor interacts.
-const startShowreelBackground = () => {
+// The bundled carousel creates its own showreel video. Keep that copy stopped;
+// the full-size video below is the single playback source for this slide.
+const stopEmbeddedShowreel = () => {
   const video = document.querySelector('.sionShowreel__background');
-  if (!video || !video.paused || video.readyState < HTMLMediaElement.HAVE_CURRENT_DATA) return;
-
-  if (!video.dataset.sionShowreelStarted) {
-    video.dataset.sionShowreelStarted = 'true';
-    video.currentTime = 4;
-  }
-
+  if (!video) return;
   video.muted = true;
-  video.play().catch(() => {});
+  if (!video.paused) video.pause();
 };
 
-setInterval(startShowreelBackground, 400);
+setInterval(stopEmbeddedShowreel, 300);
 
 const syncFullscreenShowreel = () => {
   const carousel = document.querySelector('.homeCarousel');
+  const showreel = carousel?.querySelector('.sionShowreel');
   const title = document.querySelector('.homeCarouselUi__title')?.textContent || '';
-  if (!carousel) return;
+  if (!carousel || !showreel) return;
 
   let video = carousel.querySelector('.sionShowreelFullBackground');
   if (!video) {
@@ -102,16 +97,18 @@ const syncFullscreenShowreel = () => {
     video.src = '/pages/home/show-reel/background-clear.mp4';
     video.poster = '/pages/home/show-reel/poster.jpg';
     video.muted = true;
-    video.loop = false;
+    video.loop = true;
     video.playsInline = true;
-    video.preload = 'metadata';
+    video.preload = 'auto';
     video.setAttribute('aria-hidden', 'true');
     video.addEventListener('ended', () => {
       if (!video.classList.contains('is-visible')) return;
       video.currentTime = 0;
       video.play().catch(() => {});
     });
-    carousel.prepend(video);
+    // This must live inside the showreel panel. The panel has an opaque black
+    // background, so inserting it behind the carousel makes it disappear.
+    showreel.prepend(video);
   }
 
   let soundToggle = carousel.querySelector('.sionShowreelSoundToggle');
@@ -124,13 +121,6 @@ const syncFullscreenShowreel = () => {
       if (!background) return;
       background.muted = !background.muted;
       background.play().catch(() => {});
-      const original = carousel.querySelector('.sionShowreel__background');
-      setTimeout(() => {
-        if (original) {
-          original.muted = true;
-          original.pause();
-        }
-      }, 0);
       updateShowreelSoundToggle(soundToggle, background);
     });
     carousel.append(soundToggle);
@@ -144,9 +134,14 @@ const syncFullscreenShowreel = () => {
 
   if (!isShowreel) {
     video.pause();
+    video.dataset.sionActive = 'false';
     return;
   }
 
+  if (video.dataset.sionActive !== 'true') {
+    video.dataset.sionActive = 'true';
+    video.currentTime = 0;
+  }
   video.play().catch(() => {});
 };
 
