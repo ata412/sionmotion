@@ -13,7 +13,7 @@ headerLogoStyle.textContent = `
     font-weight: 400; line-height: 1; letter-spacing: -.035em; white-space: nowrap;
   }
   .sionHeaderLogo { display: block; width: auto; height: 56px; object-fit: contain; }
-  @media (max-width: 767px) { .sionHeaderLogo { height: 44px; } }
+  @media (max-width: 767px) { .sionHeaderLogo { height: 46px; } }
   .homeCarouselUi .homeCarouselUi__inner.gridMain {
     display: flex; column-gap: .65em;
   }
@@ -61,6 +61,22 @@ headerLogoStyle.textContent = `
   }
 `;
 document.head.append(headerLogoStyle);
+
+const replaceHeaderLogo = () => {
+  document.querySelectorAll('.sionHeaderLogo').forEach((logo) => {
+    if (logo.getAttribute('src') === '/assets/sion-motion-logo-header.png') return;
+    logo.src = '/assets/sion-motion-logo-header.png';
+    logo.width = 312;
+    logo.height = 496;
+    logo.alt = 'Sion Motion';
+  });
+};
+
+new MutationObserver(replaceHeaderLogo).observe(document.documentElement, {
+  childList: true,
+  subtree: true,
+});
+replaceHeaderLogo();
 
 document.addEventListener(
   "click",
