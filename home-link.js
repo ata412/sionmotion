@@ -12,8 +12,8 @@ headerLogoStyle.textContent = `
     font-family: Clarkson, Arial, sans-serif; font-size: 2.1em;
     font-weight: 400; line-height: 1; letter-spacing: -.035em; white-space: nowrap;
   }
-  .sionHeaderLogo { display: block; width: auto; height: 56px; object-fit: contain; }
-  @media (max-width: 767px) { .sionHeaderLogo { height: 46px; } }
+  .sionHeaderLogo { display: block; width: auto; height: 72px; object-fit: contain; }
+  @media (max-width: 767px) { .sionHeaderLogo { height: 58px; } }
   .homeCarouselUi .homeCarouselUi__inner.gridMain {
     display: flex; column-gap: .65em;
   }
