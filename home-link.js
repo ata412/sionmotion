@@ -1,5 +1,9 @@
 const headerLogoStyle = document.createElement("style");
 headerLogoStyle.textContent = `
+  html.sionLandingPending .homeCarousel {
+    opacity: 0 !important;
+    visibility: hidden !important;
+  }
   .colorIntroLayout1 .sionColorLogo {
     display: flex; align-items: center; gap: .7em; aspect-ratio: auto;
   }
@@ -61,6 +65,52 @@ headerLogoStyle.textContent = `
   }
 `;
 document.head.append(headerLogoStyle);
+
+// Hide the original carousel from the first paint while the readable landing
+// page is being mounted. The class is cleared as soon as that page is in place.
+if (location.pathname === '/' || location.pathname === '/index.html') {
+  document.documentElement.classList.add('sionLandingPending');
+}
+
+// The original Vue component briefly unmutes its own hidden showreel before
+// our replacement can stop it. Force that specific media element to be muted
+// synchronously, before the browser receives any play request.
+const nativeMediaPlay = HTMLMediaElement.prototype.play;
+if (!HTMLMediaElement.prototype.sionSafePlay) {
+  Object.defineProperty(HTMLMediaElement.prototype, 'sionSafePlay', { value: true });
+  HTMLMediaElement.prototype.play = function (...args) {
+    if (this.classList?.contains('sionShowreel__background')) {
+      this.muted = true;
+      this.defaultMuted = true;
+      this.setAttribute('muted', '');
+    }
+    return nativeMediaPlay.apply(this, args);
+  };
+}
+
+const blockCarouselInputBehindLanding = (event) => {
+  if (!document.querySelector('.sionLanding')) return;
+  if (document.body.classList.contains('sionLandingCarouselReady')) return;
+  event.stopImmediatePropagation();
+};
+
+addEventListener('wheel', blockCarouselInputBehindLanding, { capture: true, passive: true });
+addEventListener('touchmove', blockCarouselInputBehindLanding, { capture: true, passive: true });
+addEventListener('keydown', (event) => {
+  if (event.key === 'ArrowLeft' || event.key === 'ArrowRight') {
+    blockCarouselInputBehindLanding(event);
+  }
+}, { capture: true });
+
+if (!document.querySelector('script[data-sion-landing]')) {
+  const landingScript = document.createElement('script');
+  landingScript.src = '/landing-page.js?v=20260915-2';
+  landingScript.dataset.sionLanding = 'true';
+  landingScript.addEventListener('error', () => {
+    document.documentElement.classList.remove('sionLandingPending');
+  });
+  document.head.append(landingScript);
+}
 
 const replaceHeaderLogo = () => {
   document.querySelectorAll('.sionHeaderLogo').forEach((logo) => {
