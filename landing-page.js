@@ -8,7 +8,8 @@
     .sionLanding *{box-sizing:border-box}
     .sionLanding section{pointer-events:auto;position:relative}
     .sionLanding__wrap{margin:0 auto;max-width:1440px;padding-left:clamp(2rem,5vw,7.2rem);padding-right:clamp(2rem,5vw,7.2rem)}
-    .sionLanding__hero{align-items:flex-end;background:var(--landing-black);color:#fff;display:flex;min-height:100svh;overflow:hidden;padding:calc(var(--headerHeight,8.8rem) + 8vh) 0 7vh}
+    .sionLanding__hero{background:var(--landing-black);color:#fff;height:300svh;overflow:clip}
+    .sionLanding__heroSticky{align-items:flex-end;display:flex;height:100svh;overflow:hidden;padding:calc(var(--headerHeight,8.8rem) + 8vh) 0 7vh;position:sticky;top:0}
     .sionLanding__heroMedia{inset:0;opacity:.48;position:absolute}
     .sionLanding__heroMedia:after{background:linear-gradient(180deg,rgba(0,0,0,.18),rgba(0,0,0,.18) 48%,rgba(0,0,0,.9));content:"";inset:0;position:absolute}
     .sionLanding__heroMedia img{height:100%;object-fit:cover;transform:scale(1.025);width:100%}
@@ -17,6 +18,15 @@
     .sionLanding__eyebrow:before{background:currentColor;border-radius:50%;content:"";height:.7rem;width:.7rem}
     .sionLanding__hero h1{font:400 clamp(6rem,11.2vw,16rem)/.78 Clarkson,Arial,sans-serif;letter-spacing:-.075em;margin:0;max-width:12ch;text-transform:uppercase}
     .sionLanding__hero h1 span{color:var(--landing-accent)}
+    html[data-sion-language="th"] .sionLanding__hero h1{font-family:var(--font-ptt45pride),Tahoma,sans-serif;font-size:clamp(5.5rem,8.5vw,12rem);font-weight:700;letter-spacing:-.045em;line-height:.84;max-width:none;text-transform:none}
+    .sionLanding__heroSequence{position:relative}
+    .sionLanding__heroHeadline{align-items:center;display:flex;width:fit-content;will-change:opacity,transform}
+    .sionLanding__heroLogoSlot{flex:0 0 auto;margin-left:0;overflow:hidden;width:0}
+    .sionLanding__heroLogo{display:block;height:auto;opacity:0;transform:translateX(-2.5rem) scale(.94);transform-origin:left center;width:clamp(14rem,18vw,26rem);will-change:clip-path,opacity,transform}
+    .sionLanding__heroHeadlineSecond{left:0;position:absolute;top:50%;transform:translateY(-50%);width:100%}
+    .sionLanding__heroHeadlineSecond h1{display:flex;flex-direction:column;gap:clamp(2rem,3vw,4rem);max-width:12ch}
+    .sionLanding__heroHeadlineSecond h1 span{color:#fff;display:block;opacity:0;will-change:opacity,transform}
+    .sionLanding__heroHeadlineSecond h1 strong{color:var(--landing-accent);font:inherit}
     .sionLanding__heroBottom{align-items:end;border-top:1px solid rgba(255,255,255,.35);display:grid;gap:3rem;grid-template-columns:1fr minmax(26rem,44rem);margin-top:5rem;padding-top:2rem}
     .sionLanding__heroBottom p{font-size:clamp(1.65rem,1.55vw,2.2rem);line-height:1.45;margin:0}
     .sionLanding__anchorNav{display:flex;flex-wrap:wrap;gap:.8rem}
@@ -69,7 +79,9 @@
     .sionLanding__reveal.is-in{opacity:1;transform:none}
     @keyframes sionLandingArrow{50%{transform:translateY(1rem)}}
     @media(max-width:800px){
-      .sionLanding__hero{padding-bottom:5rem}.sionLanding__hero h1{font-size:clamp(5.4rem,18vw,9rem)}
+      .sionLanding__heroSticky{padding-bottom:5rem}.sionLanding__hero h1{font-size:clamp(5.4rem,18vw,9rem)}
+      html[data-sion-language="th"] .sionLanding__hero h1{font-size:clamp(5.5rem,14.5vw,7rem)}
+      .sionLanding__heroLogo{width:clamp(10rem,27vw,14rem)}
       .sionLanding__heroBottom,.sionLanding__introText,.sionLanding__sectionHead{grid-template-columns:1fr}
       .sionLanding__heroBottom{margin-top:4rem}.sionLanding__introText{margin-top:6rem}
       .sionLanding__service{align-items:start;gap:1rem;grid-template-columns:4rem 1fr;padding:2.8rem 0}
@@ -89,6 +101,10 @@
 
   const copy = {
     th: {
+      headline: 'สีอะไร?',
+      secondLead: 'บริการดุจญาติมิตร',
+      secondTail: 'แต่',
+      secondAccent: 'คิดตัง',
       hero: 'เราออกแบบเว็บไซต์ สร้างคอนเทนต์ วางแผนการตลาด และผลิตภาพเคลื่อนไหวให้ทุกส่วนของแบรนด์ทำงานไปในทิศทางเดียวกัน',
       intro: 'Sion Motion คือทีมสร้างสรรค์ที่เชื่อว่ากลยุทธ์ ภาพ และเทคโนโลยีควรเล่าเรื่องเดียวกัน เราดูแลตั้งแต่ความคิดแรกจนถึงชิ้นงานที่พร้อมเผยแพร่และสร้างผลลัพธ์จริง',
       services: 'เลือกทำเฉพาะส่วนที่ต้องการ หรือให้เราดูแลเป็นทีมเดียวตั้งแต่การวางแนวคิดจนถึงการส่งมอบ',
@@ -105,6 +121,10 @@
       portal: 'Scroll to explore Sion Motion',
     },
     en: {
+      headline: 'We build brands that <span>move.</span>',
+      secondLead: 'Friendly service.',
+      secondTail: 'But',
+      secondAccent: 'serious work.',
       hero: 'We design websites, build content, shape marketing and produce moving images so every part of a brand moves in one direction.',
       intro: 'Sion Motion is a creative team that believes strategy, image and technology should tell the same story. We work from the first idea through to finished work ready to launch and perform.',
       services: 'Choose the discipline you need, or bring us in as one team from the first concept through final delivery.',
@@ -131,13 +151,21 @@
     landing.className = 'sionLanding';
     landing.innerHTML = `
       <section class="sionLanding__hero">
-        <div class="sionLanding__heroMedia"><img src="/pages/home/show-reel/poster.jpg" alt="" fetchpriority="high"></div>
-        <div class="sionLanding__heroInner sionLanding__wrap">
-          <p class="sionLanding__eyebrow">Sion Motion · Bangkok</p>
-          <h1>We build brands that <span>move.</span></h1>
-          <div class="sionLanding__heroBottom">
-            <nav class="sionLanding__anchorNav" aria-label="Landing page sections"><a href="#sion-capabilities">Capabilities</a><a href="#sion-work">Work</a><a href="#sion-process">Process</a></nav>
-            <p>${t.hero}</p>
+        <div class="sionLanding__heroSticky">
+          <div class="sionLanding__heroMedia"><img src="/pages/home/show-reel/poster.jpg" alt="" fetchpriority="high"></div>
+          <div class="sionLanding__heroInner sionLanding__wrap">
+            <p class="sionLanding__eyebrow">Sion Motion · Bangkok</p>
+            <div class="sionLanding__heroSequence">
+              <div class="sionLanding__heroHeadline">
+                <h1>${t.headline}</h1>
+                <div class="sionLanding__heroLogoSlot"><img class="sionLanding__heroLogo" src="/assets/sion-motion-logo-header.png" alt="Sion Motion" width="312" height="496"></div>
+              </div>
+              <div class="sionLanding__heroHeadlineSecond"><h1><span class="sionLanding__heroSecondLead">${t.secondLead}</span><span class="sionLanding__heroSecondTail">${t.secondTail}<strong>${t.secondAccent}</strong></span></h1></div>
+            </div>
+            <div class="sionLanding__heroBottom">
+              <nav class="sionLanding__anchorNav" aria-label="Landing page sections"><a href="#sion-capabilities">Capabilities</a><a href="#sion-work">Work</a><a href="#sion-process">Process</a></nav>
+              <p>${t.hero}</p>
+            </div>
           </div>
         </div>
       </section>
@@ -206,6 +234,46 @@
         target.scrollIntoView({ behavior: 'smooth' });
       });
     });
+
+    const hero = landing.querySelector('.sionLanding__hero');
+    const heroLogoSlot = landing.querySelector('.sionLanding__heroLogoSlot');
+    const heroLogo = landing.querySelector('.sionLanding__heroLogo');
+    const heroFirstHeadline = landing.querySelector('.sionLanding__heroHeadline');
+    const heroSecondLead = landing.querySelector('.sionLanding__heroSecondLead');
+    const heroSecondTail = landing.querySelector('.sionLanding__heroSecondTail');
+    let heroFrame = 0;
+    const updateHeroLogo = () => {
+      heroFrame = 0;
+      if (!hero.isConnected) return;
+      const distance = Math.max(1, hero.offsetHeight - innerHeight);
+      const rawProgress = Math.max(0, Math.min(1, (scrollY - hero.offsetTop) / distance));
+      const progress = Math.max(0, Math.min(1, (rawProgress - .04) / .44));
+      const eased = progress * progress * (3 - 2 * progress);
+      const leadProgress = Math.max(0, Math.min(1, (rawProgress - .5) / .22));
+      const leadEntry = leadProgress * leadProgress * (3 - 2 * leadProgress);
+      const tailProgress = Math.max(0, Math.min(1, (rawProgress - .7) / .22));
+      const tailEntry = tailProgress * tailProgress * (3 - 2 * tailProgress);
+      const firstExit = leadEntry;
+      const targetWidth = parseFloat(getComputedStyle(heroLogo).width) || 0;
+      const gap = innerWidth <= 800 ? 12 : 28;
+      heroLogoSlot.style.width = `${targetWidth * eased}px`;
+      heroLogoSlot.style.marginLeft = `${gap * eased}px`;
+      heroLogo.style.opacity = `${eased}`;
+      heroLogo.style.clipPath = `inset(0 ${100 * (1 - eased)}% 0 0)`;
+      heroLogo.style.transform = `translateX(${-25 * (1 - eased)}px) scale(${.94 + .06 * eased})`;
+      heroFirstHeadline.style.opacity = `${1 - firstExit}`;
+      heroFirstHeadline.style.transform = `translateY(${-30 * firstExit}px)`;
+      heroSecondLead.style.opacity = `${leadEntry}`;
+      heroSecondLead.style.transform = `translateY(${30 * (1 - leadEntry)}px)`;
+      heroSecondTail.style.opacity = `${tailEntry}`;
+      heroSecondTail.style.transform = `translateY(${30 * (1 - tailEntry)}px)`;
+    };
+    const requestHeroUpdate = () => {
+      if (!heroFrame) heroFrame = requestAnimationFrame(updateHeroLogo);
+    };
+    addEventListener('scroll', requestHeroUpdate, { passive: true });
+    addEventListener('resize', requestHeroUpdate, { passive: true });
+    updateHeroLogo();
 
     const observer = new IntersectionObserver((entries) => {
       entries.forEach((entry) => {
