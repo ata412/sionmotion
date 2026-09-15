@@ -2,8 +2,8 @@
   const style = document.createElement('style');
   style.textContent = `
     body:has(.sionLanding) > .sionLanguage{bottom:auto;right:10rem;top:1.1rem}
-    body:has(.sionLanding) .homeCarousel{clip-path:inset(38% 34% round .4rem);opacity:0;transform:scale(.84);transform-origin:50% 50%;transition:clip-path 1.45s cubic-bezier(.16,.84,.32,1),opacity .28s ease,transform 1.45s cubic-bezier(.16,.84,.32,1);visibility:hidden;will-change:clip-path,opacity,transform}
-    body:has(.sionLanding).sionLandingCarouselReady .homeCarousel{clip-path:inset(0 round 0);opacity:1;transform:scale(1);visibility:visible}
+    body:has(.sionLanding) .homeCarousel{clip-path:inset(var(--sion-carousel-clip-y,38%) var(--sion-carousel-clip-x,34%) round var(--sion-carousel-radius,.4rem));opacity:var(--sion-carousel-opacity,0);transform:scale(var(--sion-carousel-scale,.84));transform-origin:50% 50%;transition:clip-path .12s linear,opacity .12s linear,transform .12s linear;visibility:hidden;will-change:clip-path,opacity,transform}
+    body:has(.sionLanding).sionLandingCarouselOpening .homeCarousel,body:has(.sionLanding).sionLandingCarouselReady .homeCarousel{visibility:visible}
     .sionLanding{--landing-black:#080808;--landing-paper:#f2efe8;--landing-accent:#ff4d24;color:#111;position:relative;z-index:4;pointer-events:none}
     .sionLanding *{box-sizing:border-box}
     .sionLanding section{pointer-events:auto;position:relative}
@@ -42,15 +42,12 @@
     .sionLanding__work .sionLanding__kicker{color:#aaa}
     .sionLanding__workGrid{display:grid;gap:clamp(1.2rem,2vw,2.8rem);grid-template-columns:repeat(12,1fr)}
     .sionLanding__project{color:#fff;display:block;text-decoration:none}
-    .sionLanding__project:nth-child(1){grid-column:1/span 7}
-    .sionLanding__project:nth-child(2){grid-column:8/span 5;margin-top:14rem}
-    .sionLanding__project:nth-child(3){grid-column:1/span 5;margin-top:3rem}
-    .sionLanding__project:nth-child(4){grid-column:6/span 7;margin-top:10rem}
+    .sionLanding__project:nth-child(odd){grid-column:1/span 5}
+    .sionLanding__project:nth-child(even){grid-column:7/span 5;margin-top:14rem}
     .sionLanding__projectMedia{background:#161616;overflow:hidden;position:relative}
-    .sionLanding__project:nth-child(1) .sionLanding__projectMedia,.sionLanding__project:nth-child(4) .sionLanding__projectMedia{aspect-ratio:16/10}
-    .sionLanding__project:nth-child(2) .sionLanding__projectMedia,.sionLanding__project:nth-child(3) .sionLanding__projectMedia{aspect-ratio:4/5}
-    .sionLanding__project img{height:100%;object-fit:cover;transition:transform 1s cubic-bezier(.16,.84,.32,1);width:100%}
-    .sionLanding__project:hover img{transform:scale(1.035)}
+    .sionLanding__projectMedia{aspect-ratio:9/16}
+    .sionLanding__project img,.sionLanding__project video{display:block;height:100%;object-fit:cover;transition:transform 1s cubic-bezier(.16,.84,.32,1);width:100%}
+    .sionLanding__project:hover img,.sionLanding__project:hover video{transform:scale(1.025)}
     .sionLanding__projectMeta{align-items:baseline;border-top:1px solid #555;display:flex;justify-content:space-between;margin-top:1.4rem;padding-top:1.2rem}
     .sionLanding__projectMeta h3{font:400 clamp(2rem,2.2vw,3.2rem)/1 Clarkson,Arial,sans-serif;letter-spacing:-.04em;margin:0;text-transform:uppercase}
     .sionLanding__projectMeta span{color:#aaa;font:500 1rem/1 Clarkson,Arial,sans-serif;letter-spacing:.08em;text-transform:uppercase}
@@ -84,7 +81,7 @@
     @media(max-width:520px){
       .sionLanding__processGrid{grid-template-columns:1fr}.sionLanding__step{border-left:0;border-top:1px solid rgba(0,0,0,.4);min-height:0;padding:3rem 0}
       .sionLanding__step:first-child{border-top:0}.sionLanding__step h3{margin:6rem 0 1.5rem}
-      .sionLanding__project:nth-child(n) .sionLanding__projectMedia{aspect-ratio:4/5}
+      .sionLanding__project:nth-child(n) .sionLanding__projectMedia{aspect-ratio:9/16}
     }
     @media(prefers-reduced-motion:reduce){.sionLanding__reveal{opacity:1;transform:none}.sionLanding__project img,.sionLanding__portalLabel:after{animation:none;transition:none}}
   `;
@@ -164,10 +161,18 @@
         <div class="sionLanding__wrap">
           <div class="sionLanding__sectionHead sionLanding__reveal"><div><p class="sionLanding__kicker">Selected Direction</p><h2>Work that<br>moves people.</h2></div><p>${t.work}</p></div>
           <div class="sionLanding__workGrid">
-            <article class="sionLanding__project sionLanding__reveal"><div class="sionLanding__projectMedia"><img src="/assets/pitch-portfolio/hotel-main.webp" alt="Hospitality visual direction" loading="lazy"></div><div class="sionLanding__projectMeta"><h3>Hospitality</h3><span>Campaign · Film</span></div></article>
-            <article class="sionLanding__project sionLanding__reveal"><div class="sionLanding__projectMedia"><img src="/assets/pitch-portfolio/portrait-main.webp" alt="Portrait visual direction" loading="lazy"></div><div class="sionLanding__projectMeta"><h3>Portrait</h3><span>Production</span></div></article>
+            <article class="sionLanding__project sionLanding__reveal"><div class="sionLanding__projectMedia"><video src="/assets/reels/cocktail.mp4" poster="/assets/reels/cocktail.jpg" muted loop playsinline preload="metadata" aria-label="Cocktail reel"></video></div><div class="sionLanding__projectMeta"><h3>Cocktail</h3><span>Food · Film</span></div></article>
+            <article class="sionLanding__project sionLanding__reveal"><div class="sionLanding__projectMedia"><video src="/assets/reels/coffee.mp4" poster="/assets/reels/coffee.jpg" muted loop playsinline preload="metadata" aria-label="Coffee reel"></video></div><div class="sionLanding__projectMeta"><h3>Coffee</h3><span>Lifestyle · Film</span></div></article>
+            <article class="sionLanding__project sionLanding__reveal"><div class="sionLanding__projectMedia"><img src="/assets/pitch-portfolio/hotel-main.webp" alt="Hospitality visual direction" loading="lazy"></div><div class="sionLanding__projectMeta"><h3>Hospitality</h3><span>Campaign · Photo</span></div></article>
+            <article class="sionLanding__project sionLanding__reveal"><div class="sionLanding__projectMedia"><video src="/assets/reels/msn.mp4" poster="/assets/reels/msn.jpg" muted loop playsinline preload="metadata" aria-label="MSN reel"></video></div><div class="sionLanding__projectMeta"><h3>MSN</h3><span>Social · Content</span></div></article>
+            <article class="sionLanding__project sionLanding__reveal"><div class="sionLanding__projectMedia"><video src="/assets/reels/morph.mp4" poster="/assets/reels/morph.jpg" muted loop playsinline preload="metadata" aria-label="Morph reel"></video></div><div class="sionLanding__projectMeta"><h3>Morph</h3><span>Hotel · Film</span></div></article>
+            <article class="sionLanding__project sionLanding__reveal"><div class="sionLanding__projectMedia"><img src="/assets/pitch-portfolio/portrait-main.webp" alt="Portrait visual direction" loading="lazy"></div><div class="sionLanding__projectMeta"><h3>Portrait</h3><span>Production · Photo</span></div></article>
+            <article class="sionLanding__project sionLanding__reveal"><div class="sionLanding__projectMedia"><video src="/assets/reels/picnic.mp4" poster="/assets/reels/picnic.jpg" muted loop playsinline preload="metadata" aria-label="Picnic reel"></video></div><div class="sionLanding__projectMeta"><h3>Picnic</h3><span>Lifestyle · Campaign</span></div></article>
+            <article class="sionLanding__project sionLanding__reveal"><div class="sionLanding__projectMedia"><video src="/assets/reels/christmas.mp4" poster="/assets/reels/christmas.jpg" muted loop playsinline preload="metadata" aria-label="Christmas reel"></video></div><div class="sionLanding__projectMeta"><h3>Christmas</h3><span>Seasonal · Film</span></div></article>
             <article class="sionLanding__project sionLanding__reveal"><div class="sionLanding__projectMedia"><img src="/assets/pitch-portfolio/food-main.webp" alt="Food visual direction" loading="lazy"></div><div class="sionLanding__projectMeta"><h3>Food</h3><span>Content · Photo</span></div></article>
-            <article class="sionLanding__project sionLanding__reveal"><div class="sionLanding__projectMedia"><img src="/assets/pitch-portfolio/travel-main.webp" alt="Travel visual direction" loading="lazy"></div><div class="sionLanding__projectMeta"><h3>Travel</h3><span>Brand · Digital</span></div></article>
+            <article class="sionLanding__project sionLanding__reveal"><div class="sionLanding__projectMedia"><video src="/assets/reels/vampire.mp4" poster="/assets/reels/vampire.jpg" muted loop playsinline preload="metadata" aria-label="Vampire Grill reel"></video></div><div class="sionLanding__projectMeta"><h3>Vampire Grill</h3><span>Experience · Film</span></div></article>
+            <article class="sionLanding__project sionLanding__reveal"><div class="sionLanding__projectMedia"><video src="/assets/reels/valentine.mp4" poster="/assets/reels/valentine.jpg" muted loop playsinline preload="metadata" aria-label="Valentine reel"></video></div><div class="sionLanding__projectMeta"><h3>Valentine</h3><span>Campaign · Content</span></div></article>
+            <article class="sionLanding__project sionLanding__reveal"><div class="sionLanding__projectMedia"><img src="/assets/pitch-portfolio/travel-main.webp" alt="Travel visual direction" loading="lazy"></div><div class="sionLanding__projectMeta"><h3>Travel</h3><span>Brand · Photo</span></div></article>
           </div>
         </div>
       </section>
@@ -212,6 +217,18 @@
     }, { rootMargin: '0px 0px -8% 0px', threshold: .08 });
     landing.querySelectorAll('.sionLanding__reveal').forEach((item) => observer.observe(item));
 
+    const videoObserver = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        const video = entry.target;
+        if (entry.isIntersecting) {
+          video.play().catch(() => {});
+        } else {
+          video.pause();
+        }
+      });
+    }, { rootMargin: '20% 0px', threshold: .12 });
+    landing.querySelectorAll('.sionLanding__project video').forEach((video) => videoObserver.observe(video));
+
     const portal = landing.querySelector('.sionLanding__portal');
     let lastCarouselReset = 0;
     const resetCarousel = () => {
@@ -222,10 +239,21 @@
     };
     const updateCarouselAccess = () => {
       if (!landing.isConnected) {
+        document.body.classList.remove('sionLandingCarouselOpening');
         document.body.classList.remove('sionLandingCarouselReady');
         return;
       }
-      const ready = portal.getBoundingClientRect().top <= 1;
+      const portalTop = portal.getBoundingClientRect().top;
+      const progress = Math.max(0, Math.min(1, (innerHeight - portalTop) / innerHeight));
+      const easedProgress = 1 - Math.pow(1 - progress, 2.2);
+      const carousel = document.querySelector('.homeCarousel');
+      carousel?.style.setProperty('--sion-carousel-clip-y', `${38 * (1 - easedProgress)}%`);
+      carousel?.style.setProperty('--sion-carousel-clip-x', `${34 * (1 - easedProgress)}%`);
+      carousel?.style.setProperty('--sion-carousel-radius', `${.4 * (1 - easedProgress)}rem`);
+      carousel?.style.setProperty('--sion-carousel-opacity', `${Math.min(1, progress * 1.8)}`);
+      carousel?.style.setProperty('--sion-carousel-scale', `${.84 + .16 * easedProgress}`);
+      const ready = progress >= .995;
+      document.body.classList.toggle('sionLandingCarouselOpening', progress > .001);
       document.body.classList.toggle('sionLandingCarouselReady', ready);
       if (!ready) resetCarousel();
     };
@@ -234,6 +262,7 @@
     const carouselGuard = setInterval(() => {
       if (!landing.isConnected) {
         clearInterval(carouselGuard);
+        document.body.classList.remove('sionLandingCarouselOpening');
         document.body.classList.remove('sionLandingCarouselReady');
         return;
       }
