@@ -94,8 +94,14 @@ const blockCarouselInputBehindLanding = (event) => {
   event.stopImmediatePropagation();
 };
 
-addEventListener('wheel', blockCarouselInputBehindLanding, { capture: true, passive: true });
-addEventListener('touchmove', blockCarouselInputBehindLanding, { capture: true, passive: true });
+// Wheel and vertical touch gestures belong to the landing page. Let their
+// native scrolling continue, but keep them out of the fixed carousel's own
+// gesture handler so scrolling back up cannot rotate its slides.
+const blockCarouselScrollGesture = (event) => {
+  if (document.querySelector('.sionLanding')) event.stopImmediatePropagation();
+};
+addEventListener('wheel', blockCarouselScrollGesture, { capture: true, passive: true });
+addEventListener('touchmove', blockCarouselScrollGesture, { capture: true, passive: true });
 addEventListener('keydown', (event) => {
   if (event.key === 'ArrowLeft' || event.key === 'ArrowRight') {
     blockCarouselInputBehindLanding(event);
@@ -104,7 +110,7 @@ addEventListener('keydown', (event) => {
 
 if (!document.querySelector('script[data-sion-landing]')) {
   const landingScript = document.createElement('script');
-  landingScript.src = '/landing-page.js?v=20260915-5';
+  landingScript.src = '/landing-page.js?v=20260915-6';
   landingScript.dataset.sionLanding = 'true';
   landingScript.addEventListener('error', () => {
     document.documentElement.classList.remove('sionLandingPending');
@@ -149,6 +155,48 @@ const stopEmbeddedShowreel = () => {
 };
 
 setInterval(stopEmbeddedShowreel, 300);
+
+// Keep the original cursor-trail timing and transitions, but give the Show
+// Reel slide its own production footage instead of reusing Motion assets.
+const syncShowreelTrailAssets = () => {
+  const showreel = document.querySelector('.sionShowreel');
+  if (!showreel) return;
+
+  showreel.querySelectorAll('.homeCarouselMotionItem video').forEach((video) => {
+    const match = video.currentSrc.match(/\/pages\/home\/motion\/(\d{2})@sm\.mp4/) ||
+      video.getAttribute('src')?.match(/\/pages\/home\/motion\/(\d{2})@sm\.mp4/);
+    const index = match?.[1] || video.dataset.sionTrailIndex;
+    if (!index) return;
+    const source = `/assets/showreel-trail/${index}@sm.mp4`;
+    video.dataset.sionTrailIndex = index;
+    video.muted = true;
+    video.defaultMuted = true;
+    video.playsInline = true;
+    video.preload = 'metadata';
+    video.setAttribute('muted', '');
+    video.setAttribute('playsinline', '');
+    if (video.getAttribute('src') === source) return;
+    video.src = source;
+    video.load();
+  });
+
+  showreel.querySelectorAll('.homeCarouselMotionItem img').forEach((poster) => {
+    const match = poster.currentSrc.match(/\/pages\/home\/motion\/(\d{2})-poster@(lg|sm)\.webp/) ||
+      poster.getAttribute('src')?.match(/\/pages\/home\/motion\/(\d{2})-poster@(lg|sm)\.webp/);
+    const index = match?.[1] || poster.dataset.sionTrailIndex;
+    if (!index) return;
+    poster.dataset.sionTrailIndex = index;
+    const source = `/assets/showreel-trail/${index}-poster.jpg`;
+    if (poster.getAttribute('src') !== source) poster.src = source;
+    poster.removeAttribute('srcset');
+  });
+};
+
+new MutationObserver(syncShowreelTrailAssets).observe(document.documentElement, {
+  childList: true,
+  subtree: true,
+});
+syncShowreelTrailAssets();
 
 const syncFullscreenShowreel = () => {
   const carousel = document.querySelector('.homeCarousel');

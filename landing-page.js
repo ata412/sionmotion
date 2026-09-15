@@ -255,7 +255,9 @@
       const ready = progress >= .995;
       document.body.classList.toggle('sionLandingCarouselOpening', progress > .001);
       document.body.classList.toggle('sionLandingCarouselReady', ready);
-      if (!ready) resetCarousel();
+      // Keep the current slide still while the carousel closes. Resetting it
+      // during this visible portion made the whole carousel appear to jump up.
+      if (progress <= .001) resetCarousel();
     };
     addEventListener('scroll', updateCarouselAccess, { passive: true });
     addEventListener('resize', updateCarouselAccess, { passive: true });
