@@ -66,6 +66,29 @@ headerLogoStyle.textContent = `
 `;
 document.head.append(headerLogoStyle);
 
+// The cloned app has its own smooth-scroll controller. While the fixed home
+// carousel is active, ignore programmatic attempts from that controller to
+// move the document; the header logo removes the lock before scrolling home.
+if (!window.sionCarouselScrollGuard) {
+  Object.defineProperty(window, 'sionCarouselScrollGuard', { value: true });
+  const nativeScrollTo = window.scrollTo.bind(window);
+  const nativeScrollBy = window.scrollBy.bind(window);
+  const guardedScrollTo = (...args) => {
+    if (document.body?.classList.contains('sionLandingCarouselLocked')) {
+      const requestedTop = typeof args[0] === 'object' ? Number(args[0]?.top) : Number(args[1]);
+      const bottom = Math.max(0, document.documentElement.scrollHeight - innerHeight);
+      if (Number.isFinite(requestedTop) && requestedTop < bottom - 1) return;
+    }
+    return nativeScrollTo(...args);
+  };
+  window.scrollTo = guardedScrollTo;
+  window.scroll = guardedScrollTo;
+  window.scrollBy = (...args) => {
+    if (document.body?.classList.contains('sionLandingCarouselLocked')) return;
+    return nativeScrollBy(...args);
+  };
+}
+
 // Hide the original carousel from the first paint while the readable landing
 // page is being mounted. The class is cleared as soon as that page is in place.
 if (location.pathname === '/' || location.pathname === '/index.html') {
@@ -97,11 +120,58 @@ const blockCarouselInputBehindLanding = (event) => {
 // Wheel and vertical touch gestures belong to the landing page. Let their
 // native scrolling continue, but keep them out of the fixed carousel's own
 // gesture handler so scrolling back up cannot rotate its slides.
-const blockCarouselScrollGesture = (event) => {
-  if (document.querySelector('.sionLanding')) event.stopImmediatePropagation();
+let lastCarouselWheel = 0;
+let carouselTouchStart = null;
+const moveCarousel = (direction) => {
+  const now = performance.now();
+  if (now - lastCarouselWheel < 700) return;
+  lastCarouselWheel = now;
+  document.querySelector(direction > 0 ? '.homeCarouselUi__arrowRight' : '.homeCarouselUi__arrowLeft')?.click();
 };
-addEventListener('wheel', blockCarouselScrollGesture, { capture: true, passive: true });
-addEventListener('touchmove', blockCarouselScrollGesture, { capture: true, passive: true });
+const blockCarouselScrollGesture = (event) => {
+  // Synthetic wheel events are forwarded to the original Vue carousel so it
+  // can keep its zoom-out and wheel transition without moving the document.
+  if (!event.isTrusted) return;
+  if (!document.querySelector('.sionLanding')) return;
+  const carouselReady = document.body.classList.contains('sionLandingCarouselReady');
+  if (carouselReady) {
+    event.preventDefault();
+    event.stopImmediatePropagation();
+    if (event.type === 'wheel') {
+      const movement = Math.abs(event.deltaX) > Math.abs(event.deltaY) ? event.deltaX : event.deltaY;
+      if (Math.abs(movement) > 8) {
+        document.querySelector('.homeCarousel')?.dispatchEvent(new WheelEvent('wheel', {
+          bubbles: true,
+          cancelable: true,
+          deltaMode: event.deltaMode,
+          deltaX: event.deltaX,
+          deltaY: event.deltaY,
+        }));
+      }
+    }
+    return;
+  }
+  event.stopImmediatePropagation();
+};
+addEventListener('wheel', blockCarouselScrollGesture, { capture: true, passive: false });
+addEventListener('touchmove', blockCarouselScrollGesture, { capture: true, passive: false });
+addEventListener('touchstart', (event) => {
+  if (!document.body.classList.contains('sionLandingCarouselReady')) return;
+  const touch = event.touches[0];
+  carouselTouchStart = touch ? { x: touch.clientX, y: touch.clientY } : null;
+}, { capture: true, passive: true });
+addEventListener('touchend', (event) => {
+  if (!carouselTouchStart || !document.body.classList.contains('sionLandingCarouselReady')) return;
+  const touch = event.changedTouches[0];
+  if (!touch) return;
+  event.preventDefault();
+  event.stopImmediatePropagation();
+  const deltaX = carouselTouchStart.x - touch.clientX;
+  const deltaY = carouselTouchStart.y - touch.clientY;
+  const movement = Math.abs(deltaX) > Math.abs(deltaY) ? deltaX : deltaY;
+  if (Math.abs(movement) > 30) moveCarousel(movement);
+  carouselTouchStart = null;
+}, { capture: true, passive: false });
 addEventListener('keydown', (event) => {
   if (event.key === 'ArrowLeft' || event.key === 'ArrowRight') {
     blockCarouselInputBehindLanding(event);
@@ -110,7 +180,7 @@ addEventListener('keydown', (event) => {
 
 if (!document.querySelector('script[data-sion-landing]')) {
   const landingScript = document.createElement('script');
-  landingScript.src = '/landing-page.js?v=20260915-17';
+  landingScript.src = '/landing-page.js?v=20260915-26';
   landingScript.dataset.sionLanding = 'true';
   landingScript.addEventListener('error', () => {
     document.documentElement.classList.remove('sionLandingPending');
@@ -139,7 +209,12 @@ document.addEventListener(
   (event) => {
     if (event.target.closest(".header__name, .header__nameLink")) {
       event.preventDefault();
-      window.location.assign("/");
+      if (location.pathname === '/' || location.pathname === '/index.html') {
+        dispatchEvent(new Event('sion:carousel-unlock'));
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      } else {
+        window.location.assign("/");
+      }
     }
   },
   true,

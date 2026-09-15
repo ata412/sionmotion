@@ -4,15 +4,28 @@
     body:has(.sionLanding) > .sionLanguage{bottom:auto;right:10rem;top:1.1rem}
     body:has(.sionLanding) .homeCarousel{clip-path:inset(var(--sion-carousel-clip-y,38%) var(--sion-carousel-clip-x,34%) round var(--sion-carousel-radius,.4rem));opacity:var(--sion-carousel-opacity,0);transform:scale(var(--sion-carousel-scale,.84));transform-origin:50% 50%;transition:clip-path .12s linear,opacity .12s linear,transform .12s linear;visibility:hidden;will-change:clip-path,opacity,transform}
     body:has(.sionLanding).sionLandingCarouselOpening .homeCarousel,body:has(.sionLanding).sionLandingCarouselReady .homeCarousel{visibility:visible}
+    html:has(body.sionLandingCarouselLocked){overflow:hidden;overscroll-behavior:none}
+    body.sionLandingCarouselLocked{overflow:hidden;overscroll-behavior:none}
+    body.sionLandingCarouselLocked .homeCarousel{touch-action:none}
+    body:has(.sionLanding):not(.sionLandingCarouselOpening) .sionHomeLogoAsset,body:has(.sionLanding):not(.sionLandingCarouselOpening) .sionHomeWordmark{animation-play-state:paused}
+    body:has(.sionLanding) .homeCarouselLogo .sionHomeLogoAsset{animation-name:sionIconToLockupImmediate}
+    body:has(.sionLanding) .homeCarouselLogo .sionHomeWordmark{animation-name:sionWordmarkRevealImmediate}
+    @keyframes sionIconToLockupImmediate{
+      0%{left:50%;transform:translate(-50%,-50%) scale(3.05)}
+      30%,78%{left:24%;transform:translate(-50%,-50%) scale(1.7)}
+      100%{left:50%;transform:translate(-50%,-50%) scale(3.05)}
+    }
+    @keyframes sionWordmarkRevealImmediate{
+      0%{opacity:0;transform:translate(-1.5rem,-50%)}
+      30%,76%{opacity:1;transform:translate(0,-50%)}
+      100%{opacity:0;transform:translate(-1.5rem,-50%)}
+    }
     .sionLanding{--landing-black:#080808;--landing-paper:#f2efe8;--landing-accent:#ff4d24;color:#111;position:relative;z-index:4;pointer-events:none}
     .sionLanding *{box-sizing:border-box}
     .sionLanding section{pointer-events:auto;position:relative}
     .sionLanding__wrap{margin:0 auto;max-width:1440px;padding-left:clamp(2rem,5vw,7.2rem);padding-right:clamp(2rem,5vw,7.2rem)}
     .sionLanding__hero{background:var(--landing-black);color:#fff;height:430svh;overflow:clip}
     .sionLanding__heroSticky{align-items:center;display:flex;height:100svh;overflow:hidden;padding:calc(var(--headerHeight,8.8rem) + 4vh) 0 4vh;position:sticky;top:0}
-    .sionLanding__heroMedia{inset:0;opacity:.48;position:absolute}
-    .sionLanding__heroMedia:after{background:linear-gradient(180deg,rgba(0,0,0,.18),rgba(0,0,0,.18) 48%,rgba(0,0,0,.9));content:"";inset:0;position:absolute}
-    .sionLanding__heroMedia img{height:100%;object-fit:cover;transform:scale(1.025);width:100%}
     .sionLanding__heroInner{position:relative;text-align:center;width:100%;z-index:1}
     .sionLanding__eyebrow{align-items:center;display:flex;font:500 1.1rem/1 Clarkson,Arial,sans-serif;gap:1rem;justify-content:center;letter-spacing:.12em;margin:0 0 2.4rem;text-transform:uppercase}
     .sionLanding__eyebrow:before{background:currentColor;border-radius:50%;content:"";height:.7rem;width:.7rem}
@@ -91,6 +104,13 @@
       .sionLanding__processGrid{grid-template-columns:1fr 1fr;row-gap:5rem}
       .sionLanding__step{min-height:25rem}.sionLanding__step:nth-child(3){border-left:0;padding-left:0}
     }
+    @media(max-width:700px){
+      @keyframes sionIconToLockupImmediate{
+        0%{left:50%;transform:translate(-50%,-50%) scale(2.35)}
+        30%,78%{left:22%;transform:translate(-50%,-50%) scale(1.55)}
+        100%{left:50%;transform:translate(-50%,-50%) scale(2.35)}
+      }
+    }
     @media(max-width:520px){
       .sionLanding__processGrid{grid-template-columns:1fr}.sionLanding__step{border-left:0;border-top:1px solid rgba(0,0,0,.4);min-height:0;padding:3rem 0}
       .sionLanding__step:first-child{border-top:0}.sionLanding__step h3{margin:6rem 0 1.5rem}
@@ -153,9 +173,8 @@
     landing.innerHTML = `
       <section class="sionLanding__hero">
         <div class="sionLanding__heroSticky">
-          <div class="sionLanding__heroMedia"><img src="/pages/home/show-reel/poster.jpg" alt="" fetchpriority="high"></div>
           <div class="sionLanding__heroInner sionLanding__wrap">
-            <p class="sionLanding__eyebrow">Sion Motion · Bangkok</p>
+            <p class="sionLanding__eyebrow">Sion Motion</p>
             <div class="sionLanding__heroSequence">
               <div class="sionLanding__heroHeadline">
                 <h1>${t.headline}</h1>
@@ -302,6 +321,14 @@
 
     const portal = landing.querySelector('.sionLanding__portal');
     let lastCarouselReset = 0;
+    let carouselWasOpening = false;
+    let carouselLocked = false;
+    let carouselUnlocking = false;
+    addEventListener('sion:carousel-unlock', () => {
+      carouselUnlocking = true;
+      carouselLocked = false;
+      document.body.classList.remove('sionLandingCarouselLocked');
+    });
     const resetCarousel = () => {
       const index = document.querySelector('.homeCarouselUi__index')?.textContent.trim();
       if (!index || index === '01' || Date.now() - lastCarouselReset < 1200) return;
@@ -310,9 +337,20 @@
     };
     const updateCarouselAccess = () => {
       if (!landing.isConnected) {
-        document.body.classList.remove('sionLandingCarouselOpening');
-        document.body.classList.remove('sionLandingCarouselReady');
+        carouselLocked = false;
+        if (!document.querySelector('.sionLanding')) {
+          document.body.classList.remove('sionLandingCarouselOpening');
+          document.body.classList.remove('sionLandingCarouselReady');
+          document.body.classList.remove('sionLandingCarouselLocked');
+        }
         return;
+      }
+      if (carouselLocked) {
+        const bottom = Math.max(0, document.documentElement.scrollHeight - innerHeight);
+        if (scrollY < bottom - 1) {
+          scrollTo(0, bottom);
+          return;
+        }
       }
       const portalTop = portal.getBoundingClientRect().top;
       const progress = Math.max(0, Math.min(1, (innerHeight - portalTop) / innerHeight));
@@ -324,8 +362,23 @@
       carousel?.style.setProperty('--sion-carousel-opacity', `${Math.min(1, progress * 1.8)}`);
       carousel?.style.setProperty('--sion-carousel-scale', `${.84 + .16 * easedProgress}`);
       const ready = progress >= .995;
-      document.body.classList.toggle('sionLandingCarouselOpening', progress > .001);
+      const shouldLock = progress >= .9;
+      if (progress < .1) carouselUnlocking = false;
+      const opening = progress > .001;
+      document.body.classList.toggle('sionLandingCarouselOpening', opening);
       document.body.classList.toggle('sionLandingCarouselReady', ready);
+      if (shouldLock && !carouselLocked && !carouselUnlocking) {
+        carouselLocked = true;
+        document.body.classList.add('sionLandingCarouselLocked');
+        scrollTo(0, Math.max(0, document.documentElement.scrollHeight - innerHeight));
+      }
+      if (opening && !carouselWasOpening) {
+        const logoAnimations = document.querySelectorAll('.sionHomeLogoAsset, .sionHomeWordmark');
+        logoAnimations.forEach((item) => { item.style.animation = 'none'; });
+        if (logoAnimations.length) void logoAnimations[0].offsetWidth;
+        logoAnimations.forEach((item) => { item.style.removeProperty('animation'); });
+      }
+      carouselWasOpening = opening;
       // Keep the current slide still while the carousel closes. Resetting it
       // during this visible portion made the whole carousel appear to jump up.
       if (progress <= .001) resetCarousel();
@@ -335,8 +388,11 @@
     const carouselGuard = setInterval(() => {
       if (!landing.isConnected) {
         clearInterval(carouselGuard);
-        document.body.classList.remove('sionLandingCarouselOpening');
-        document.body.classList.remove('sionLandingCarouselReady');
+        if (!document.querySelector('.sionLanding')) {
+          document.body.classList.remove('sionLandingCarouselOpening');
+          document.body.classList.remove('sionLandingCarouselReady');
+          document.body.classList.remove('sionLandingCarouselLocked');
+        }
         return;
       }
       updateCarouselAccess();
