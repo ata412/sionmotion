@@ -57,12 +57,9 @@ headerLogoStyle.textContent = `
   .commercialProduction .intro .intro__subtitle { position: static; display: block; margin-bottom: 16px; }
   .commercialProduction .intro .intro__description .spacer { display: none; }
   .menu .menu__items { width: 100%; max-width: 100%; min-height: 0; overflow-y: auto; overflow-x: hidden; }
+  .menu .menu__items { scrollbar-width: none; }
+  .menu .menu__items::-webkit-scrollbar { display: none; }
   .menu .menu__headerGap, .menu .menu__footer { flex-shrink: 0; }
-  .menu .menu__items .menuItem[aria-label="Navigate to show reel video"] .menuItem__link {
-    font-size: clamp(24px, 5vw, 72px);
-    line-height: 1.2;
-    width: calc(100% - 4rem);
-  }
 `;
 document.head.append(headerLogoStyle);
 
@@ -180,7 +177,7 @@ addEventListener('keydown', (event) => {
 
 if (!document.querySelector('script[data-sion-landing]')) {
   const landingScript = document.createElement('script');
-  landingScript.src = '/landing-page.js?v=20260916-03';
+  landingScript.src = '/landing-page.js?v=20260916-06';
   landingScript.dataset.sionLanding = 'true';
   landingScript.addEventListener('error', () => {
     document.documentElement.classList.remove('sionLandingPending');
@@ -203,6 +200,61 @@ new MutationObserver(replaceHeaderLogo).observe(document.documentElement, {
   subtree: true,
 });
 replaceHeaderLogo();
+
+// The prerendered menu contains the six original chapters while the home
+// carousel has a seventh Show Reel chapter. Keep the top-right Index menu in
+// sync even if hydration is delayed or the cached server markup is shown.
+const syncTopRightMenu = () => {
+  const list = document.querySelector('.menu .menu__items');
+  if (!list) return;
+  const existing = [...list.querySelectorAll('.menuItem')].find((item) =>
+    /show\s*reel/i.test(item.textContent || '') ||
+    /commercial-production/i.test(item.getAttribute('aria-label') || '')
+  );
+  if (existing) {
+    const link = existing.querySelector('.menuItem__link');
+    if (link && /show\s*reel\s*video/i.test(link.textContent || '')) {
+      const walker = document.createTreeWalker(link, NodeFilter.SHOW_TEXT);
+      while (walker.nextNode()) {
+        const node = walker.currentNode;
+        if (!/show/i.test(node.nodeValue || '')) continue;
+        node.nodeValue = node.nodeValue.replace(/show/i, 'Show');
+        break;
+      }
+    }
+    return;
+  }
+
+  const items = [...list.querySelectorAll('.menuItem')];
+  if (items.length < 6) return;
+  const source = items.find((item) => /motion/i.test(item.textContent || '')) || items.at(-1);
+  if (!source) return;
+  const item = source.cloneNode(true);
+  item.classList.remove('active', 'clicked', 'rollover', 'dimmed');
+  item.dataset.sionMenuFallback = 'showreel';
+  item.setAttribute('aria-label', 'Navigate to show reel video');
+  const index = item.querySelector('.menuItem__index');
+  const link = item.querySelector('.menuItem__link');
+  if (index) index.textContent = '07';
+  if (link) link.textContent = 'Show reel video';
+  item.addEventListener('click', (event) => {
+    event.preventDefault();
+    event.stopImmediatePropagation();
+    window.location.assign('/commercial-production');
+  });
+  item.addEventListener('keydown', (event) => {
+    if (event.key !== 'Enter' && event.key !== ' ') return;
+    event.preventDefault();
+    window.location.assign('/commercial-production');
+  });
+  list.append(item);
+};
+
+new MutationObserver(syncTopRightMenu).observe(document.documentElement, {
+  childList: true,
+  subtree: true,
+});
+syncTopRightMenu();
 
 document.addEventListener(
   "click",

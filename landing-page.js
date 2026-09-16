@@ -24,7 +24,7 @@
     .sionLanding *{box-sizing:border-box}
     .sionLanding section{pointer-events:auto;position:relative}
     .sionLanding__wrap{margin:0 auto;max-width:1440px;padding-left:clamp(2rem,5vw,7.2rem);padding-right:clamp(2rem,5vw,7.2rem)}
-    .sionLanding__hero{background:var(--landing-black);color:#fff;height:520svh;overflow:clip}
+    .sionLanding__hero{background:var(--landing-black);color:#fff;height:640svh;overflow:clip}
     .sionLanding__heroSticky{align-items:center;display:flex;height:100svh;overflow:hidden;padding:calc(var(--headerHeight,8.8rem) + 4vh) 0 4vh;position:sticky;top:0}
     .sionLanding__heroInner{position:relative;text-align:center;width:100%;z-index:1}
     .sionLanding__eyebrow{align-items:center;display:flex;font:500 1.1rem/1 Clarkson,Arial,sans-serif;gap:1rem;justify-content:center;letter-spacing:.12em;margin:0 0 2.4rem;text-transform:uppercase}
@@ -42,7 +42,7 @@
     .sionLanding__heroHeadlineSecond .sionLanding__heroSecondTail{font-size:1.2em;line-height:.82}
     .sionLanding__hero h1 .sionLanding__heroTailPrompt{color:#fff;display:flex;justify-content:center;white-space:nowrap}
     .sionLanding__hero h1 .sionLanding__heroTailChar{color:#fff;display:inline-block;opacity:0;transform:translateY(.38em);will-change:opacity,transform}
-    .sionLanding__heroTailAccent{color:var(--landing-accent);display:block;font:inherit;font-size:1.12em;margin-top:.2em;opacity:0;transform:translateY(.55em);will-change:opacity,transform}
+    .sionLanding__heroTailAccent{color:var(--landing-accent);display:block;font:inherit;font-size:1.12em;margin-top:.28em;opacity:0;transform:translateY(.55em);will-change:opacity,transform}
     .sionLanding__heroBottom{align-items:end;border-top:1px solid rgba(255,255,255,.35);display:grid;gap:3rem;grid-template-columns:1fr minmax(26rem,44rem);margin-top:5rem;padding-top:2rem}
     .sionLanding__heroBottom p{font-size:clamp(1.65rem,1.55vw,2.2rem);line-height:1.45;margin:0;text-align:center}
     .sionLanding__anchorNav{display:flex;flex-wrap:wrap;gap:.8rem;justify-content:center}
@@ -128,7 +128,7 @@
       headline: 'สีอะไร?',
       secondLead: 'บริการดุจญาติมิตร',
       secondTail: 'แต่',
-      secondAccent: 'คิดตังค์',
+      secondAccent: '“คิดตังค์”',
       hero: 'เราออกแบบเว็บไซต์ สร้างคอนเทนต์ วางแผนการตลาด และผลิตภาพเคลื่อนไหวให้ทุกส่วนของแบรนด์ทำงานไปในทิศทางเดียวกัน',
       intro: 'Sion Motion คือทีมสร้างสรรค์ที่เชื่อว่ากลยุทธ์ ภาพ และเทคโนโลยีควรเล่าเรื่องเดียวกัน เราดูแลตั้งแต่ความคิดแรกจนถึงชิ้นงานที่พร้อมเผยแพร่และสร้างผลลัพธ์จริง',
       services: 'เลือกทำเฉพาะส่วนที่ต้องการ หรือให้เราดูแลเป็นทีมเดียวตั้งแต่การวางแนวคิดจนถึงการส่งมอบ',
@@ -272,13 +272,16 @@
       if (!hero.isConnected) return;
       const distance = Math.max(1, hero.offsetHeight - innerHeight);
       const rawProgress = Math.max(0, Math.min(1, (scrollY - hero.offsetTop) / distance));
-      const progress = Math.max(0, Math.min(1, (rawProgress - .04) / .4));
+      // The first 77.78% keeps the existing sequence timing. The remaining
+      // distance holds the completed "คิดตังค์" frame before the next section.
+      const timelineProgress = Math.min(1, rawProgress / .7777778);
+      const progress = Math.max(0, Math.min(1, (timelineProgress - .04) / .4));
       const eased = progress * progress * (3 - 2 * progress);
-      const leadProgress = Math.max(0, Math.min(1, (rawProgress - .63) / .1));
+      const leadProgress = Math.max(0, Math.min(1, (timelineProgress - .63) / .1));
       const leadEntry = leadProgress * leadProgress * (3 - 2 * leadProgress);
-      const leadExitProgress = Math.max(0, Math.min(1, (rawProgress - .76) / .07));
+      const leadExitProgress = Math.max(0, Math.min(1, (timelineProgress - .76) / .07));
       const leadExit = leadExitProgress * leadExitProgress * (3 - 2 * leadExitProgress);
-      const tailProgress = Math.max(0, Math.min(1, (rawProgress - .835) / .04));
+      const tailProgress = Math.max(0, Math.min(1, (timelineProgress - .835) / .04));
       const tailEntry = tailProgress * tailProgress * (3 - 2 * tailProgress);
       const firstExit = leadEntry;
       const targetWidth = parseFloat(getComputedStyle(heroLogo).width) || 0;
@@ -295,12 +298,12 @@
       heroSecondTail.style.opacity = `${tailEntry}`;
       heroSecondTail.style.transform = `translateY(${30 * (1 - tailEntry)}px)`;
       heroTailChars.forEach((char, index) => {
-        const charProgress = Math.max(0, Math.min(1, (rawProgress - (.875 + index * .012)) / .012));
+        const charProgress = Math.max(0, Math.min(1, (timelineProgress - (.875 + index * .012)) / .012));
         const charEntry = charProgress * charProgress * (3 - 2 * charProgress);
         char.style.opacity = `${charEntry}`;
         char.style.transform = `translateY(${.38 * (1 - charEntry)}em)`;
       });
-      const accentProgress = Math.max(0, Math.min(1, (rawProgress - .985) / .013));
+      const accentProgress = Math.max(0, Math.min(1, (timelineProgress - .985) / .013));
       const accentEntry = accentProgress * accentProgress * (3 - 2 * accentProgress);
       heroTailAccent.style.opacity = `${accentEntry}`;
       heroTailAccent.style.transform = `translateY(${.55 * (1 - accentEntry)}em)`;
