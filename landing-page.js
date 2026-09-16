@@ -4,10 +4,12 @@
     body:has(.sionLanding) > .sionLanguage{bottom:auto;right:10rem;top:1.1rem}
     body:has(.sionLanding) .homeCarousel{clip-path:inset(var(--sion-carousel-clip-y,38%) var(--sion-carousel-clip-x,34%) round var(--sion-carousel-radius,.4rem));opacity:var(--sion-carousel-opacity,0);transform:scale(var(--sion-carousel-scale,.84));transform-origin:50% 50%;transition:clip-path .12s linear,opacity .12s linear,transform .12s linear;visibility:hidden;will-change:clip-path,opacity,transform}
     body:has(.sionLanding).sionLandingCarouselOpening .homeCarousel,body:has(.sionLanding).sionLandingCarouselReady .homeCarousel{visibility:visible}
+    body:has(.sionLanding).sionLandingCarouselOpening:not(.sionCarouselHasInteracted) .homeCarouselItem.sionCarouselIntroActive>.homeCarouselItem__inner{clip-path:inset(0)!important;transform:rotateY(0deg) scale(1)!important}
+    body:has(.sionLanding).sionLandingCarouselOpening:not(.sionCarouselHasInteracted) .homeCarouselUi .text__inner{opacity:1!important;transform:translateY(0)!important}
     html:has(body.sionLandingCarouselLocked){overflow:hidden;overscroll-behavior:none}
     body.sionLandingCarouselLocked{overflow:hidden;overscroll-behavior:none}
     body.sionLandingCarouselLocked .homeCarousel{touch-action:none}
-    body:has(.sionLanding):not(.sionLandingCarouselOpening) .sionHomeLogoAsset,body:has(.sionLanding):not(.sionLandingCarouselOpening) .sionHomeWordmark{animation-play-state:paused}
+    body:has(.sionLanding):not(.sionLandingCarouselReady) .sionHomeLogoAsset,body:has(.sionLanding):not(.sionLandingCarouselReady) .sionHomeWordmark{animation-play-state:paused}
     body:has(.sionLanding) .homeCarouselLogo .sionHomeLogoAsset{animation-name:sionIconToLockupImmediate}
     body:has(.sionLanding) .homeCarouselLogo .sionHomeWordmark{animation-name:sionWordmarkRevealImmediate}
     @keyframes sionIconToLockupImmediate{
@@ -126,7 +128,7 @@
   const copy = {
     th: {
       headline: 'สีอะไร?',
-      secondLead: 'บริการดุจญาติมิตร',
+      secondLead: 'บริการ ดุจญาติมิตร',
       secondTail: 'แต่',
       secondAccent: '" คิดตังค์ "',
       hero: 'เราออกแบบเว็บไซต์ สร้างคอนเทนต์ วางแผนการตลาด และผลิตภาพเคลื่อนไหวให้ทุกส่วนของแบรนด์ทำงานไปในทิศทางเดียวกัน',
@@ -136,6 +138,7 @@
       service2: 'วางทิศทางคอนเทนต์ แคมเปญ และสื่อดิจิทัลให้เข้าถึงกลุ่มเป้าหมายอย่างมีระบบ',
       service3: 'ผลิตวิดีโอ โฆษณา ภาพนิ่ง และคอนเทนต์สำหรับทุกแพลตฟอร์ม',
       service4: 'สร้าง Motion Design, Title และภาพเคลื่อนไหวที่ทำให้แบรนด์มีชีวิต',
+      service5: 'ออกแบบและประยุกต์ใช้ AI เพื่อช่วยสร้างคอนเทนต์ พัฒนากระบวนการทำงาน และต่อยอดธุรกิจอย่างเหมาะสม',
       work: 'ตัวอย่างทิศทางภาพและงานสร้างสรรค์จากหลายรูปแบบของเรา',
       step1: 'คุยเป้าหมาย กลุ่มผู้ชม ขอบเขต และสิ่งที่งานต้องทำให้สำเร็จ',
       step2: 'กำหนดแนวคิด ภาษาภาพ โครงสร้าง และแผนการผลิตที่ชัดเจน',
@@ -156,6 +159,7 @@
       service2: 'Content direction, campaigns and digital media planned to reach the right audience with purpose.',
       service3: 'Video, commercial, still and platform-ready content produced from start to finish.',
       service4: 'Motion design, titles and moving identities that make the brand feel alive.',
+      service5: 'Practical AI solutions for content creation, smarter workflows and new opportunities tailored to the business.',
       work: 'A selection of visual directions and creative work across our disciplines.',
       step1: 'We align on the goal, audience, scope and the job the work needs to accomplish.',
       step2: 'We define the idea, visual language, structure and a clear production plan.',
@@ -202,10 +206,11 @@
       <section class="sionLanding__services" id="sion-capabilities">
         <div class="sionLanding__wrap">
           <div class="sionLanding__sectionHead sionLanding__reveal"><div><p class="sionLanding__kicker">What We Do</p><h2>One team.<br>Full range.</h2></div><p>${t.services}</p></div>
-          <div class="sionLanding__service sionLanding__reveal"><span class="sionLanding__serviceNum">01</span><h3>Web Design</h3><p>${t.service1}</p></div>
+          <div class="sionLanding__service sionLanding__reveal"><span class="sionLanding__serviceNum">01</span><h3>Production</h3><p>${t.service3}</p></div>
           <div class="sionLanding__service sionLanding__reveal"><span class="sionLanding__serviceNum">02</span><h3>Digital Marketing</h3><p>${t.service2}</p></div>
-          <div class="sionLanding__service sionLanding__reveal"><span class="sionLanding__serviceNum">03</span><h3>Production</h3><p>${t.service3}</p></div>
-          <div class="sionLanding__service sionLanding__reveal"><span class="sionLanding__serviceNum">04</span><h3>Motion Design</h3><p>${t.service4}</p></div>
+          <div class="sionLanding__service sionLanding__reveal"><span class="sionLanding__serviceNum">03</span><h3>AI Solution</h3><p>${t.service5}</p></div>
+          <div class="sionLanding__service sionLanding__reveal"><span class="sionLanding__serviceNum">04</span><h3>Web Design</h3><p>${t.service1}</p></div>
+          <div class="sionLanding__service sionLanding__reveal"><span class="sionLanding__serviceNum">05</span><h3>Motion Design</h3><p>${t.service4}</p></div>
         </div>
       </section>
       <section class="sionLanding__work" id="sion-work">
@@ -340,6 +345,8 @@
     const portal = landing.querySelector('.sionLanding__portal');
     let lastCarouselReset = 0;
     let carouselWasOpening = false;
+    let carouselWasReady = false;
+    let carouselIntroTimer = 0;
     let carouselLocked = false;
     let carouselUnlocking = false;
     addEventListener('sion:carousel-unlock', () => {
@@ -381,30 +388,67 @@
       carousel?.style.setProperty('--sion-carousel-scale', `${.84 + .16 * easedProgress}`);
       const ready = progress >= .995;
       const shouldLock = progress >= .9;
+      const logoAnimations = document.querySelectorAll('.sionHomeLogoAsset, .sionHomeWordmark');
       if (progress < .1) carouselUnlocking = false;
       const opening = progress > .001;
       document.body.classList.toggle('sionLandingCarouselOpening', opening);
       document.body.classList.toggle('sionLandingCarouselReady', ready);
+      const introIndex = Math.max(0, (parseInt(document.querySelector('.homeCarouselUi__index')?.textContent, 10) || 1) - 1);
+      document.querySelectorAll('.homeCarouselItem').forEach((item, index) => {
+        item.classList.toggle('sionCarouselIntroActive', opening && !document.body.classList.contains('sionCarouselHasInteracted') && index === introIndex);
+      });
       if (shouldLock && !carouselLocked && !carouselUnlocking) {
         carouselLocked = true;
         document.body.classList.add('sionLandingCarouselLocked');
         scrollTo(0, Math.max(0, document.documentElement.scrollHeight - innerHeight));
       }
       if (opening && !carouselWasOpening) {
-        const logoAnimations = document.querySelectorAll('.sionHomeLogoAsset, .sionHomeWordmark');
+        document.body.classList.remove('sionCarouselHasInteracted');
+      }
+      if (!ready) {
+        clearTimeout(carouselIntroTimer);
+        logoAnimations.forEach((item) => {
+          item.getAnimations().forEach((animation) => {
+            animation.pause();
+            animation.currentTime = 0;
+          });
+        });
+      }
+      if (ready && !carouselWasReady) {
+        clearTimeout(carouselIntroTimer);
         logoAnimations.forEach((item) => { item.style.animation = 'none'; });
         if (logoAnimations.length) void logoAnimations[0].offsetWidth;
-        logoAnimations.forEach((item) => { item.style.removeProperty('animation'); });
+        logoAnimations.forEach((item) => {
+          item.style.removeProperty('animation');
+          item.getAnimations().forEach((animation) => {
+            animation.currentTime = 0;
+            animation.pause();
+          });
+        });
+        carouselIntroTimer = setTimeout(() => {
+          if (!document.body.classList.contains('sionLandingCarouselReady')) return;
+          logoAnimations.forEach((item) => {
+            item.getAnimations().forEach((animation) => {
+              animation.currentTime = 0;
+              animation.play();
+            });
+          });
+        }, 500);
       }
       carouselWasOpening = opening;
+      carouselWasReady = ready;
       // Keep the current slide still while the carousel closes. Resetting it
       // during this visible portion made the whole carousel appear to jump up.
-      if (progress <= .001) resetCarousel();
+      if (progress <= .001) {
+        document.body.classList.remove('sionCarouselHasInteracted');
+        resetCarousel();
+      }
     };
     addEventListener('scroll', updateCarouselAccess, { passive: true });
     addEventListener('resize', updateCarouselAccess, { passive: true });
     const carouselGuard = setInterval(() => {
       if (!landing.isConnected) {
+        clearTimeout(carouselIntroTimer);
         clearInterval(carouselGuard);
         if (!document.querySelector('.sionLanding')) {
           document.body.classList.remove('sionLandingCarouselOpening');

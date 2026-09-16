@@ -14,6 +14,14 @@ logoPageBrandStyle.textContent = `
     aspect-ratio: auto;
     width: 70%;
   }
+  .page.logo .sionBrandReplacement--icon.logoBlock__logo {
+    aspect-ratio: auto;
+    width: 42%;
+  }
+  .page.logo .sionBrandReplacement--text.logoBlock__logo {
+    aspect-ratio: auto;
+    width: 70%;
+  }
   .page.logo .sionBrandReplacement__mark {
     display: block;
     height: 3.2em;
@@ -34,6 +42,9 @@ logoPageBrandStyle.textContent = `
   }
   .page.logo .sionBrandReplacement--text .sionBrandReplacement__name {
     font-size: inherit;
+  }
+  .page.logo .sionBrandReplacement--text.logoBlock__logo .sionBrandReplacement__name {
+    font-size: clamp(2rem, 4.3vw, 7rem);
   }
 `;
 document.head.append(logoPageBrandStyle);
@@ -69,7 +80,9 @@ function replaceLogoSymbols(page) {
     const svg = use.closest('svg');
     if (!svg || svg.classList.contains('sionBrandOriginal')) return;
     const href = use.getAttribute('href') || '';
-    const type = href.endsWith('-icon') ? 'icon' : href.endsWith('-text') ? 'text' : 'lockup';
+    let type = href.endsWith('-icon') ? 'icon' : href.endsWith('-text') ? 'text' : 'lockup';
+    if (svg.closest('.logoBlock__left')) type = 'icon';
+    if (svg.closest('.logoBlock__right')) type = 'text';
     svg.classList.add('sionBrandOriginal');
     svg.insertAdjacentElement('afterend', replacementFor(type, svg));
   });

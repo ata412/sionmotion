@@ -123,6 +123,8 @@ const moveCarousel = (direction) => {
   const now = performance.now();
   if (now - lastCarouselWheel < 700) return;
   lastCarouselWheel = now;
+  document.body.classList.add('sionCarouselHasInteracted');
+  document.querySelectorAll('.sionCarouselIntroActive').forEach((item) => item.classList.remove('sionCarouselIntroActive'));
   document.querySelector(direction > 0 ? '.homeCarouselUi__arrowRight' : '.homeCarouselUi__arrowLeft')?.click();
 };
 const blockCarouselScrollGesture = (event) => {
@@ -137,6 +139,8 @@ const blockCarouselScrollGesture = (event) => {
     if (event.type === 'wheel') {
       const movement = Math.abs(event.deltaX) > Math.abs(event.deltaY) ? event.deltaX : event.deltaY;
       if (Math.abs(movement) > 8) {
+        document.body.classList.add('sionCarouselHasInteracted');
+        document.querySelectorAll('.sionCarouselIntroActive').forEach((item) => item.classList.remove('sionCarouselIntroActive'));
         document.querySelector('.homeCarousel')?.dispatchEvent(new WheelEvent('wheel', {
           bubbles: true,
           cancelable: true,
@@ -169,6 +173,13 @@ addEventListener('touchend', (event) => {
   if (Math.abs(movement) > 30) moveCarousel(movement);
   carouselTouchStart = null;
 }, { capture: true, passive: false });
+addEventListener('pointerdown', (event) => {
+  if (!document.body.classList.contains('sionLandingCarouselReady')) return;
+  if (event.target.closest('.homeCarouselUi__arrowLeft, .homeCarouselUi__arrowRight')) {
+    document.body.classList.add('sionCarouselHasInteracted');
+    document.querySelectorAll('.sionCarouselIntroActive').forEach((item) => item.classList.remove('sionCarouselIntroActive'));
+  }
+}, { capture: true, passive: true });
 addEventListener('keydown', (event) => {
   if (event.key === 'ArrowLeft' || event.key === 'ArrowRight') {
     blockCarouselInputBehindLanding(event);
@@ -177,7 +188,7 @@ addEventListener('keydown', (event) => {
 
 if (!document.querySelector('script[data-sion-landing]')) {
   const landingScript = document.createElement('script');
-  landingScript.src = '/landing-page.js?v=20260916-07';
+  landingScript.src = '/landing-page.js?v=20260916-13';
   landingScript.dataset.sionLanding = 'true';
   landingScript.addEventListener('error', () => {
     document.documentElement.classList.remove('sionLandingPending');
