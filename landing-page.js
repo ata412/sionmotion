@@ -24,7 +24,7 @@
     .sionLanding *{box-sizing:border-box}
     .sionLanding section{pointer-events:auto;position:relative}
     .sionLanding__wrap{margin:0 auto;max-width:1440px;padding-left:clamp(2rem,5vw,7.2rem);padding-right:clamp(2rem,5vw,7.2rem)}
-    .sionLanding__hero{background:var(--landing-black);color:#fff;height:430svh;overflow:clip}
+    .sionLanding__hero{background:var(--landing-black);color:#fff;height:520svh;overflow:clip}
     .sionLanding__heroSticky{align-items:center;display:flex;height:100svh;overflow:hidden;padding:calc(var(--headerHeight,8.8rem) + 4vh) 0 4vh;position:sticky;top:0}
     .sionLanding__heroInner{position:relative;text-align:center;width:100%;z-index:1}
     .sionLanding__eyebrow{align-items:center;display:flex;font:500 1.1rem/1 Clarkson,Arial,sans-serif;gap:1rem;justify-content:center;letter-spacing:.12em;margin:0 0 2.4rem;text-transform:uppercase}
@@ -38,9 +38,11 @@
     .sionLanding__heroLogo{display:block;height:auto;opacity:0;transform:translateX(-2.5rem) scale(.94);transform-origin:left center;width:clamp(14rem,18vw,26rem);will-change:clip-path,opacity,transform}
     .sionLanding__heroHeadlineSecond{left:50%;position:absolute;top:50%;transform:translate(-50%,-50%);width:100%}
     .sionLanding__heroHeadlineSecond h1{display:grid;margin-left:auto;margin-right:auto;max-width:none;place-items:center;text-align:center;width:100%}
-    .sionLanding__heroHeadlineSecond h1 span{color:#fff;display:block;grid-area:1/1;opacity:0;will-change:opacity,transform}
-    .sionLanding__heroHeadlineSecond .sionLanding__heroSecondTail{font-size:1.4em;line-height:.78}
-    .sionLanding__heroHeadlineSecond h1 strong{color:var(--landing-accent);font:inherit}
+    .sionLanding__heroHeadlineSecond h1>.sionLanding__heroSecondLead,.sionLanding__heroHeadlineSecond h1>.sionLanding__heroSecondTail{color:#fff;display:block;grid-area:1/1;opacity:0;will-change:opacity,transform}
+    .sionLanding__heroHeadlineSecond .sionLanding__heroSecondTail{font-size:1.2em;line-height:.82}
+    .sionLanding__hero h1 .sionLanding__heroTailPrompt{color:#fff;display:flex;justify-content:center;white-space:nowrap}
+    .sionLanding__hero h1 .sionLanding__heroTailChar{color:#fff;display:inline-block;opacity:0;transform:translateY(.38em);will-change:opacity,transform}
+    .sionLanding__heroTailAccent{color:var(--landing-accent);display:block;font:inherit;font-size:1.12em;margin-top:.2em;opacity:0;transform:translateY(.55em);will-change:opacity,transform}
     .sionLanding__heroBottom{align-items:end;border-top:1px solid rgba(255,255,255,.35);display:grid;gap:3rem;grid-template-columns:1fr minmax(26rem,44rem);margin-top:5rem;padding-top:2rem}
     .sionLanding__heroBottom p{font-size:clamp(1.65rem,1.55vw,2.2rem);line-height:1.45;margin:0;text-align:center}
     .sionLanding__anchorNav{display:flex;flex-wrap:wrap;gap:.8rem;justify-content:center}
@@ -96,6 +98,7 @@
       .sionLanding__heroSticky{padding-bottom:3rem;padding-top:calc(var(--headerHeight,8.8rem) + 2rem)}.sionLanding__hero h1{font-size:clamp(5.4rem,18vw,9rem)}
       html[data-sion-language="th"] .sionLanding__hero h1{font-size:clamp(5.5rem,14.5vw,7rem)}
       .sionLanding__heroLogo{width:clamp(10rem,27vw,14rem)}
+      .sionLanding__heroHeadlineSecond .sionLanding__heroSecondTail{font-size:clamp(4rem,16vw,6rem)}
       .sionLanding__heroBottom,.sionLanding__introText,.sionLanding__sectionHead{grid-template-columns:1fr}
       .sionLanding__heroBottom{margin-top:4rem}.sionLanding__introText{margin-top:6rem}
       .sionLanding__service{align-items:start;gap:1rem;grid-template-columns:4rem 1fr;padding:2.8rem 0}
@@ -180,7 +183,7 @@
                 <h1>${t.headline}</h1>
                 <div class="sionLanding__heroLogoSlot"><img class="sionLanding__heroLogo" src="/assets/sion-motion-logo-header.png" alt="Sion Motion" width="312" height="496"></div>
               </div>
-              <div class="sionLanding__heroHeadlineSecond"><h1><span class="sionLanding__heroSecondLead">${t.secondLead}</span><span class="sionLanding__heroSecondTail">${t.secondTail}<strong>${t.secondAccent}</strong></span></h1></div>
+              <div class="sionLanding__heroHeadlineSecond"><h1><span class="sionLanding__heroSecondLead">${t.secondLead}</span><span class="sionLanding__heroSecondTail"><span class="sionLanding__heroTailPrompt">${t.secondTail}<span class="sionLanding__heroTailChar">.</span><span class="sionLanding__heroTailChar">.</span><span class="sionLanding__heroTailChar">.</span><span class="sionLanding__heroTailChar">?</span></span><strong class="sionLanding__heroTailAccent">${t.secondAccent}</strong></span></h1></div>
             </div>
             <div class="sionLanding__heroBottom">
               <nav class="sionLanding__anchorNav" aria-label="Landing page sections"><a href="#sion-capabilities">Capabilities</a><a href="#sion-work">Work</a><a href="#sion-process">Process</a></nav>
@@ -261,6 +264,8 @@
     const heroFirstHeadline = landing.querySelector('.sionLanding__heroHeadline');
     const heroSecondLead = landing.querySelector('.sionLanding__heroSecondLead');
     const heroSecondTail = landing.querySelector('.sionLanding__heroSecondTail');
+    const heroTailChars = [...landing.querySelectorAll('.sionLanding__heroTailChar')];
+    const heroTailAccent = landing.querySelector('.sionLanding__heroTailAccent');
     let heroFrame = 0;
     const updateHeroLogo = () => {
       heroFrame = 0;
@@ -269,11 +274,11 @@
       const rawProgress = Math.max(0, Math.min(1, (scrollY - hero.offsetTop) / distance));
       const progress = Math.max(0, Math.min(1, (rawProgress - .04) / .4));
       const eased = progress * progress * (3 - 2 * progress);
-      const leadProgress = Math.max(0, Math.min(1, (rawProgress - .68) / .12));
+      const leadProgress = Math.max(0, Math.min(1, (rawProgress - .63) / .1));
       const leadEntry = leadProgress * leadProgress * (3 - 2 * leadProgress);
-      const leadExitProgress = Math.max(0, Math.min(1, (rawProgress - .84) / .08));
+      const leadExitProgress = Math.max(0, Math.min(1, (rawProgress - .76) / .07));
       const leadExit = leadExitProgress * leadExitProgress * (3 - 2 * leadExitProgress);
-      const tailProgress = Math.max(0, Math.min(1, (rawProgress - .92) / .07));
+      const tailProgress = Math.max(0, Math.min(1, (rawProgress - .835) / .04));
       const tailEntry = tailProgress * tailProgress * (3 - 2 * tailProgress);
       const firstExit = leadEntry;
       const targetWidth = parseFloat(getComputedStyle(heroLogo).width) || 0;
@@ -289,6 +294,16 @@
       heroSecondLead.style.transform = `translateY(${30 * (1 - leadEntry) - 30 * leadExit}px)`;
       heroSecondTail.style.opacity = `${tailEntry}`;
       heroSecondTail.style.transform = `translateY(${30 * (1 - tailEntry)}px)`;
+      heroTailChars.forEach((char, index) => {
+        const charProgress = Math.max(0, Math.min(1, (rawProgress - (.875 + index * .012)) / .012));
+        const charEntry = charProgress * charProgress * (3 - 2 * charProgress);
+        char.style.opacity = `${charEntry}`;
+        char.style.transform = `translateY(${.38 * (1 - charEntry)}em)`;
+      });
+      const accentProgress = Math.max(0, Math.min(1, (rawProgress - .985) / .013));
+      const accentEntry = accentProgress * accentProgress * (3 - 2 * accentProgress);
+      heroTailAccent.style.opacity = `${accentEntry}`;
+      heroTailAccent.style.transform = `translateY(${.55 * (1 - accentEntry)}em)`;
     };
     const requestHeroUpdate = () => {
       if (!heroFrame) heroFrame = requestAnimationFrame(updateHeroLogo);
