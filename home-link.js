@@ -18,6 +18,43 @@ headerLogoStyle.textContent = `
   }
   .sionHeaderLogo { display: block; width: auto; height: 72px; object-fit: contain; }
   @media (max-width: 767px) { .sionHeaderLogo { height: 58px; } }
+  .header__top { z-index: 10020 !important; pointer-events: none !important; }
+  .header__name, .header__menuBtn, .sionGlobalNav,
+  .header__name a, .sionGlobalNav a { pointer-events: auto !important; }
+  .sionGlobalNav {
+    position: absolute; left: 50%; top: 50%; z-index: 10021;
+    display: flex; align-items: center; gap: clamp(1rem, 2.25vw, 2.75rem);
+    transform: translate(-50%, -50%); white-space: nowrap;
+    font-size: 1.1rem; line-height: 1; text-transform: uppercase;
+  }
+  .sionGlobalNav a { position: relative; padding: .55rem 0; color: inherit; text-decoration: none; }
+  .sionGlobalNav a::after {
+    content: ''; position: absolute; left: 0; right: 0; bottom: .25rem; height: 1px;
+    background: currentColor; transform: scaleX(0); transform-origin: right;
+    transition: transform .35s cubic-bezier(.16,1,.3,1);
+  }
+  .sionGlobalNav a:hover::after, .sionGlobalNav a[aria-current="page"]::after {
+    transform: scaleX(1); transform-origin: left;
+  }
+  .sionGlobalNav__services { color: #ff6038 !important; }
+  @media (hover: hover) and (pointer: fine) {
+    .sionGlobalNav { transition: gap .45s cubic-bezier(.16,1,.3,1); }
+    .sionGlobalNav:hover { gap: clamp(1.35rem, 2.8vw, 3.4rem); }
+    .sionGlobalNav a {
+      transform-origin: 50% 100%;
+      transition: transform .42s cubic-bezier(.16,1,.3,1), color .25s ease;
+      will-change: transform;
+    }
+    .sionGlobalNav a:hover { z-index: 2; transform: translateY(-.18rem) scale(1.32); }
+    .sionGlobalNav a:has(+ a:hover),
+    .sionGlobalNav a:hover + a { z-index: 1; transform: translateY(-.08rem) scale(1.13); }
+  }
+  @media (max-width: 1100px) {
+    .sionGlobalNav a:not(.sionGlobalNav__services) { display: none; }
+  }
+  @media (max-width: 767px) {
+    .sionGlobalNav { left: auto; right: 4.5rem; transform: translateY(-50%); font-size: .9rem; }
+  }
   .homeCarouselUi .homeCarouselUi__inner.gridMain {
     display: flex; column-gap: .65em;
   }
@@ -62,6 +99,19 @@ headerLogoStyle.textContent = `
   .menu .menu__headerGap, .menu .menu__footer { flex-shrink: 0; }
 `;
 document.head.append(headerLogoStyle);
+
+// Browsers cache tab icons very aggressively. Version every icon reference so
+// the Sion Motion artwork replaces the favicon from the cloned site at once.
+const sionIconVersion = '20260916-1';
+const refreshBrowserIcons = () => {
+  document.querySelectorAll('link[rel~="icon"], link[rel="apple-touch-icon"], link[rel="manifest"]').forEach((link) => {
+    const href = link.getAttribute('href') || '';
+    if (!href || href.includes(`v=${sionIconVersion}`)) return;
+    link.setAttribute('href', `${href.split('?')[0]}?v=${sionIconVersion}`);
+  });
+};
+new MutationObserver(refreshBrowserIcons).observe(document.head, { childList: true, subtree: true });
+refreshBrowserIcons();
 
 // The cloned app has its own smooth-scroll controller. While the fixed home
 // carousel is active, ignore programmatic attempts from that controller to
@@ -266,6 +316,66 @@ new MutationObserver(syncTopRightMenu).observe(document.documentElement, {
   subtree: true,
 });
 syncTopRightMenu();
+
+// Add a visible navigation bar to the original pages and expose Services in
+// the full-screen Index menu. Both are re-mounted after Nuxt route changes.
+const globalNavItems = [
+  ['/logo', 'Logo'],
+  ['/photography', 'Photography'],
+  ['/campaign', 'Web Design'],
+  ['/motion', 'Motion'],
+  ['/commercial-production', 'Show Reel'],
+  ['/services', 'Services'],
+];
+
+const syncGlobalNavigation = () => {
+  const header = document.querySelector('.header__inner');
+  if (header && !header.querySelector('.sionGlobalNav')) {
+    const nav = document.createElement('nav');
+    nav.className = 'sionGlobalNav';
+    nav.setAttribute('aria-label', 'Main navigation');
+    globalNavItems.forEach(([href, label]) => {
+      const link = document.createElement('a');
+      link.href = href;
+      link.textContent = label;
+      if (href === '/services') link.className = 'sionGlobalNav__services';
+      if (location.pathname === href) link.setAttribute('aria-current', 'page');
+      nav.append(link);
+    });
+    const menuButton = header.querySelector('.header__menuBtn');
+    header.insertBefore(nav, menuButton || null);
+  }
+
+  const list = document.querySelector('.menu .menu__items');
+  if (!list || list.querySelector('[data-sion-menu-fallback="services"]')) return;
+  if ([...list.querySelectorAll('.menuItem')].some((item) => /navigate to services/i.test(item.getAttribute('aria-label') || ''))) return;
+  const items = [...list.querySelectorAll('.menuItem')];
+  const source = items.find((item) => /show\s*reel/i.test(item.textContent || '')) || items.at(-1);
+  if (!source) return;
+  const item = source.cloneNode(true);
+  item.classList.remove('active', 'clicked', 'rollover', 'dimmed');
+  item.dataset.sionMenuFallback = 'services';
+  item.setAttribute('aria-label', 'Navigate to Services');
+  const index = item.querySelector('.menuItem__index');
+  const link = item.querySelector('.menuItem__link');
+  if (index) index.textContent = '08';
+  if (link) link.textContent = 'Services';
+  const openServices = (event) => {
+    if (event.type === 'keydown' && event.key !== 'Enter' && event.key !== ' ') return;
+    event.preventDefault();
+    event.stopImmediatePropagation();
+    window.location.assign('/services');
+  };
+  item.addEventListener('click', openServices);
+  item.addEventListener('keydown', openServices);
+  list.append(item);
+};
+
+new MutationObserver(syncGlobalNavigation).observe(document.documentElement, {
+  childList: true,
+  subtree: true,
+});
+syncGlobalNavigation();
 
 document.addEventListener(
   "click",

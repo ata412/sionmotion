@@ -66,6 +66,19 @@
     .sionLanding__serviceNum{color:#77736d;font:500 1.2rem/1 Clarkson,Arial,sans-serif}
     .sionLanding__service h3{font:400 clamp(2.8rem,4.2vw,6rem)/.95 Clarkson,Arial,sans-serif;letter-spacing:-.05em;margin:0;text-transform:uppercase}
     .sionLanding__service p{font-size:clamp(1.5rem,1.3vw,1.9rem);line-height:1.5;margin:0}
+    .sionLanding__marketing{background:var(--landing-paper);color:#111;padding:clamp(9rem,12vw,17rem) 0}
+    .sionLanding__marketing .sionLanding__sectionHead h2 i{color:var(--landing-accent);font-style:normal}
+    .sionLanding__marketingGrid{border-left:1px solid #111;border-top:1px solid #111;display:grid;grid-template-columns:repeat(3,minmax(0,1fr))}
+    .sionLanding__marketingCard{background:var(--landing-paper);border-bottom:1px solid #111;border-right:1px solid #111;color:#111;display:flex;flex-direction:column;min-height:clamp(40rem,48vw,58rem);padding:clamp(2rem,3vw,3.5rem);text-decoration:none;transition:background-color .45s ease,color .45s ease,transform .55s cubic-bezier(.16,1,.3,1)}
+    .sionLanding__marketingCard:first-child{background:var(--landing-accent)}
+    .sionLanding__marketingCard:nth-child(5){background:#d8d4cc}
+    .sionLanding__marketingCard:hover{background:#111;color:#fff;transform:translateY(-1rem)}
+    .sionLanding__marketingMeta{display:flex;font:500 1rem/1 Clarkson,Arial,sans-serif;justify-content:space-between;letter-spacing:.08em;text-transform:uppercase}
+    .sionLanding__marketingCard h3{font:400 clamp(3.5rem,5vw,6.5rem)/.84 Clarkson,Arial,sans-serif;letter-spacing:-.065em;margin:auto 0 3rem;max-width:8ch}
+    .sionLanding__marketingCard p{font-size:clamp(1.35rem,1.35vw,1.8rem);line-height:1.5;margin:0 0 4rem}
+    .sionLanding__marketingMore{align-items:center;border-top:1px solid currentColor;display:flex;font:500 1.05rem/1 Clarkson,Arial,sans-serif;justify-content:space-between;letter-spacing:.04em;margin-top:auto;padding-top:1.5rem;text-transform:uppercase}
+    .sionLanding__marketingMore i{font-size:2rem;font-style:normal;transition:transform .35s ease}
+    .sionLanding__marketingCard:hover .sionLanding__marketingMore i{transform:translate(.35rem,-.35rem)}
     .sionLanding__work{background:var(--landing-black);color:#fff;padding:clamp(9rem,12vw,17rem) 0}
     .sionLanding__work .sionLanding__kicker{color:#aaa}
     .sionLanding__workGrid{display:grid;gap:clamp(1.2rem,2vw,2.8rem);grid-template-columns:repeat(12,1fr)}
@@ -105,6 +118,7 @@
       .sionLanding__heroBottom{margin-top:4rem}.sionLanding__introText{margin-top:6rem}
       .sionLanding__service{align-items:start;gap:1rem;grid-template-columns:4rem 1fr;padding:2.8rem 0}
       .sionLanding__service p{grid-column:2}
+      .sionLanding__marketingGrid{grid-template-columns:1fr}.sionLanding__marketingCard{min-height:38rem}.sionLanding__marketingCard:hover{transform:none}
       .sionLanding__project:nth-child(n){grid-column:1/-1;margin-top:4rem}.sionLanding__project:first-child{margin-top:0}
       .sionLanding__processGrid{grid-template-columns:1fr 1fr;row-gap:5rem}
       .sionLanding__step{min-height:25rem}.sionLanding__step:nth-child(3){border-left:0;padding-left:0}
@@ -134,6 +148,18 @@
       hero: 'เราออกแบบเว็บไซต์ สร้างคอนเทนต์ วางแผนการตลาด และผลิตภาพเคลื่อนไหวให้ทุกส่วนของแบรนด์ทำงานไปในทิศทางเดียวกัน',
       intro: 'Sion Motion คือทีมสร้างสรรค์ที่เชื่อว่ากลยุทธ์ ภาพ และเทคโนโลยีควรเล่าเรื่องเดียวกัน เราดูแลตั้งแต่ความคิดแรกจนถึงชิ้นงานที่พร้อมเผยแพร่และสร้างผลลัพธ์จริง',
       services: 'เลือกทำเฉพาะส่วนที่ต้องการ หรือให้เราดูแลเป็นทีมเดียวตั้งแต่การวางแนวคิดจนถึงการส่งมอบ',
+      marketingEyebrow: 'บริการรับทำการตลาดออนไลน์',
+      marketingHeading: 'Digital Marketing<br>Agency <i>ครบวงจร!</i>',
+      marketingIntro: 'บริการรับทำการตลาดออนไลน์แบบครบวงจร เชื่อม Search, Social, Content และข้อมูลให้ช่วยกันสร้างทั้งการรับรู้และผลลัพธ์ทางธุรกิจ',
+      marketingMore: 'รายละเอียดเพิ่มเติม',
+      marketingCards: [
+        ['SEO Service', 'บริการรับทำ SEO ให้ติดอันดับบน Google เติบโตอย่างยั่งยืน สร้าง Organic Traffic และทำให้ธุรกิจเป็นที่รู้จักจากการค้นหาบน Google', 'SEARCH / ORGANIC', '/services/seo'],
+        ['Facebook Marketing', 'รับดูแลเพจ วางแผนการตลาดออนไลน์ คิดคอนเทนต์และออกแบบภาพกราฟิก พร้อมทีมดูแล Facebook แบบครบวงจร เพื่อทำให้แบรนด์โดดเด่นและสื่อสารต่อเนื่อง', 'SOCIAL / CONTENT', '/services/social-content'],
+        ['Google Ads', 'บริการวางแผนและดูแลโฆษณา Google เพื่อเข้าถึงกลุ่มเป้าหมายจากคำค้นหาได้ทันที พร้อมติดตั้ง Conversion Tracking และวัดผลลัพธ์การตลาดได้จริง', 'SEARCH / PERFORMANCE', '/services/performance-ads'],
+        ['WordPress Development', 'ยกระดับภาพลักษณ์ธุรกิจด้วยเว็บไซต์ WordPress ที่ออกแบบให้ทันสมัย ใช้งานง่าย รองรับมือถือ และพร้อมต่อยอดด้านการตลาด', 'WEB / EXPERIENCE', '/services/web-design'],
+        ['Social Media Marketing', 'ดูแลการสื่อสารบน Social Media แบบครบวงจร ตั้งแต่กลยุทธ์ คอนเทนต์ ภาพและวิดีโอ ไปจนถึงโฆษณาที่ออกแบบตามกลุ่มเป้าหมายของธุรกิจ', 'SOCIAL / STRATEGY', '/services/social-content'],
+        ['รับดูแลร้านค้า Shopee / Lazada', 'ดูแลร้านค้าออนไลน์บน Shopee และ Lazada ตั้งแต่หน้าร้าน ข้อมูลสินค้า แคมเปญ โปรโมชัน และสื่อโฆษณา เพื่อเพิ่มโอกาสเข้าถึงและยอดขาย', 'E-COMMERCE / SALES', '/services/performance-ads'],
+      ],
       service1: 'ออกแบบและพัฒนาเว็บไซต์ที่สื่อสารชัด ใช้งานง่าย และมีเอกลักษณ์ของแบรนด์',
       service2: 'วางทิศทางคอนเทนต์ แคมเปญ และสื่อดิจิทัลให้เข้าถึงกลุ่มเป้าหมายอย่างมีระบบ',
       service3: 'ผลิตวิดีโอ โฆษณา ภาพนิ่ง และคอนเทนต์สำหรับทุกแพลตฟอร์ม',
@@ -155,6 +181,18 @@
       hero: 'We design websites, build content, shape marketing and produce moving images so every part of a brand moves in one direction.',
       intro: 'Sion Motion is a creative team that believes strategy, image and technology should tell the same story. We work from the first idea through to finished work ready to launch and perform.',
       services: 'Choose the discipline you need, or bring us in as one team from the first concept through final delivery.',
+      marketingEyebrow: 'Full-service digital marketing',
+      marketingHeading: 'Digital Marketing<br>Agency <i>ครบวงจร!</i>',
+      marketingIntro: 'Full-service digital marketing that connects search, social, content, and data to build awareness and measurable business results.',
+      marketingMore: 'View details',
+      marketingCards: [
+        ['SEO Service', 'Build sustainable visibility on Google through technical SEO, keyword strategy, content planning, and long-term organic growth.', 'SEARCH / ORGANIC', '/services/seo'],
+        ['Facebook Marketing', 'Page management, campaign planning, content, and graphic design delivered as one connected Facebook marketing system.', 'SOCIAL / CONTENT', '/services/social-content'],
+        ['Google Ads', 'Reach high-intent audiences at the moment they search, supported by conversion tracking and measurable campaign optimization.', 'SEARCH / PERFORMANCE', '/services/performance-ads'],
+        ['WordPress Development', 'Modern, responsive WordPress websites designed to strengthen credibility and support the next stage of digital growth.', 'WEB / EXPERIENCE', '/services/web-design'],
+        ['Social Media Marketing', 'Connected strategy, content, design, video, and advertising shaped around the audience each business needs to reach.', 'SOCIAL / STRATEGY', '/services/social-content'],
+        ['Shopee / Lazada', 'Storefront, product, campaign, promotion, and advertising support for stronger reach and sales across major marketplaces.', 'E-COMMERCE / SALES', '/services/performance-ads'],
+      ],
       service1: 'Clear, usable and distinctive websites designed and developed around your brand.',
       service2: 'Content direction, campaigns and digital media planned to reach the right audience with purpose.',
       service3: 'Video, commercial, still and platform-ready content produced from start to finish.',
@@ -211,6 +249,18 @@
           <div class="sionLanding__service sionLanding__reveal"><span class="sionLanding__serviceNum">03</span><h3>AI Solution</h3><p>${t.service5}</p></div>
           <div class="sionLanding__service sionLanding__reveal"><span class="sionLanding__serviceNum">04</span><h3>Web Design</h3><p>${t.service1}</p></div>
           <div class="sionLanding__service sionLanding__reveal"><span class="sionLanding__serviceNum">05</span><h3>Motion Design</h3><p>${t.service4}</p></div>
+        </div>
+      </section>
+      <section class="sionLanding__marketing" id="sion-digital-marketing">
+        <div class="sionLanding__wrap">
+          <div class="sionLanding__sectionHead sionLanding__reveal"><div><p class="sionLanding__kicker">${t.marketingEyebrow}</p><h2>${t.marketingHeading}</h2></div><p>${t.marketingIntro}</p></div>
+          <div class="sionLanding__marketingGrid">${t.marketingCards.map((service, index) => `
+            <a class="sionLanding__marketingCard sionLanding__reveal" href="${service[3]}">
+              <div class="sionLanding__marketingMeta"><span>0${index + 1}</span><span>${service[2]}</span></div>
+              <h3>${service[0]}</h3>
+              <p>${service[1]}</p>
+              <span class="sionLanding__marketingMore"><span>${t.marketingMore}</span><i aria-hidden="true">&#8599;</i></span>
+            </a>`).join('')}</div>
         </div>
       </section>
       <section class="sionLanding__work" id="sion-work">

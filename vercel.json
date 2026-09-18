@@ -1,6 +1,14 @@
 {
   "rewrites": [
     {
+      "source": "/services",
+      "destination": "/services.html"
+    },
+    {
+      "source": "/services/:path*",
+      "destination": "/services.html"
+    },
+    {
       "source": "/(.*)",
       "destination": "/index.html"
     }

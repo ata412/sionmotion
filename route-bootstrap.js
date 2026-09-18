@@ -2,7 +2,19 @@
 // from its own component when it is opened directly or refreshed.
 const staticRoute = location.pathname.replace(/\/$/, '');
 
-if (staticRoute === '/commercial-production' || staticRoute === '/logo') {
+const appRoutes = new Set([
+  '/logo',
+  '/typography',
+  '/color',
+  '/photography',
+  '/campaign',
+  '/motion',
+  '/commercial-production'
+]);
+
+const isServicesRoute = staticRoute === '/services' || staticRoute.startsWith('/services/');
+
+if (appRoutes.has(staticRoute) || isServicesRoute) {
   const payload = document.getElementById('__NUXT_DATA__');
   if (payload) {
     const data = JSON.parse(payload.textContent);
@@ -14,3 +26,9 @@ if (staticRoute === '/commercial-production' || staticRoute === '/logo') {
   }
 }
 
+if (isServicesRoute) {
+  window.__SION_SERVICES_ROUTE__ = staticRoute;
+  const servicesScript = document.createElement('script');
+  servicesScript.src = '/services-page.js';
+  document.head.append(servicesScript);
+}
