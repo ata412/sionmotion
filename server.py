@@ -9,7 +9,9 @@ from pathlib import Path
 class StaticSiteHandler(SimpleHTTPRequestHandler):
     def do_GET(self):
         route = self.path.split("?", 1)[0].rstrip("/")
-        if route == "/services" or route.startswith("/services/"):
+        if route == "/packages":
+            self.path = "/packages.html"
+        elif route == "/services" or route.startswith("/services/"):
             self.path = "/services.html"
         elif route in {"/logo", "/typography", "/color", "/photography", "/campaign", "/motion", "/commercial-production"}:
             self.path = "/index.html"

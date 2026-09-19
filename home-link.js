@@ -37,6 +37,7 @@ headerLogoStyle.textContent = `
     transform: scaleX(1); transform-origin: left;
   }
   .sionGlobalNav__services { color: #ff6038 !important; }
+  .sionGlobalNav__packages { color: #ff6038 !important; }
   @media (hover: hover) and (pointer: fine) {
     .sionGlobalNav { transition: gap .45s cubic-bezier(.16,1,.3,1); }
     .sionGlobalNav:hover { gap: clamp(1.35rem, 2.8vw, 3.4rem); }
@@ -50,7 +51,7 @@ headerLogoStyle.textContent = `
     .sionGlobalNav a:hover + a { z-index: 1; transform: translateY(-.08rem) scale(1.13); }
   }
   @media (max-width: 1100px) {
-    .sionGlobalNav a:not(.sionGlobalNav__services) { display: none; }
+    .sionGlobalNav a:not(.sionGlobalNav__packages) { display: none; }
   }
   @media (max-width: 767px) {
     .sionGlobalNav { left: auto; right: 4.5rem; transform: translateY(-50%); font-size: .9rem; }
@@ -326,6 +327,7 @@ const globalNavItems = [
   ['/motion', 'Motion'],
   ['/commercial-production', 'Show Reel'],
   ['/services', 'Services'],
+  ['/packages', 'Packages'],
 ];
 
 const syncGlobalNavigation = () => {
@@ -339,6 +341,7 @@ const syncGlobalNavigation = () => {
       link.href = href;
       link.textContent = label;
       if (href === '/services') link.className = 'sionGlobalNav__services';
+      if (href === '/packages') link.className = 'sionGlobalNav__packages';
       if (location.pathname === href) link.setAttribute('aria-current', 'page');
       nav.append(link);
     });
@@ -376,6 +379,37 @@ new MutationObserver(syncGlobalNavigation).observe(document.documentElement, {
   subtree: true,
 });
 syncGlobalNavigation();
+
+const syncPackagesMenuItem = () => {
+  const list = document.querySelector('.menu .menu__items');
+  if (!list || list.querySelector('[data-sion-menu-fallback="packages"]')) return;
+  if ([...list.querySelectorAll('.menuItem')].some((item) => /navigate to packages/i.test(item.getAttribute('aria-label') || ''))) return;
+  const source = [...list.querySelectorAll('.menuItem')].at(-1);
+  if (!source) return;
+  const item = source.cloneNode(true);
+  item.classList.remove('active', 'clicked', 'rollover', 'dimmed');
+  item.dataset.sionMenuFallback = 'packages';
+  item.setAttribute('aria-label', 'Navigate to Packages');
+  const index = item.querySelector('.menuItem__index');
+  const link = item.querySelector('.menuItem__link');
+  if (index) index.textContent = '09';
+  if (link) link.textContent = 'Packages';
+  const openPackages = (event) => {
+    if (event.type === 'keydown' && event.key !== 'Enter' && event.key !== ' ') return;
+    event.preventDefault();
+    event.stopImmediatePropagation();
+    window.location.assign('/packages');
+  };
+  item.addEventListener('click', openPackages);
+  item.addEventListener('keydown', openPackages);
+  list.append(item);
+};
+
+new MutationObserver(syncPackagesMenuItem).observe(document.documentElement, {
+  childList: true,
+  subtree: true,
+});
+syncPackagesMenuItem();
 
 document.addEventListener(
   "click",

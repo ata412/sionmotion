@@ -1,6 +1,10 @@
 {
   "rewrites": [
     {
+      "source": "/packages",
+      "destination": "/packages.html"
+    },
+    {
       "source": "/services",
       "destination": "/services.html"
     },
