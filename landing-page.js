@@ -301,7 +301,7 @@
             <article class="sionLanding__project sionLanding__reveal"><div class="sionLanding__projectMedia"><img src="/assets/pitch-portfolio/food-main.webp" alt="Food visual direction" loading="lazy"></div><div class="sionLanding__projectMeta"><h3>Food</h3><span>Content · Photo</span></div></article>
             <article class="sionLanding__project sionLanding__reveal"><div class="sionLanding__projectMedia"><video src="/assets/reels/vampire.mp4" poster="/assets/reels/vampire.jpg" muted loop playsinline preload="metadata" aria-label="Vampire Grill reel"></video></div><div class="sionLanding__projectMeta"><h3>Vampire Grill</h3><span>Experience · Film</span></div></article>
             <article class="sionLanding__project sionLanding__reveal"><div class="sionLanding__projectMedia"><video src="/assets/reels/valentine.mp4" poster="/assets/reels/valentine.jpg" muted loop playsinline preload="metadata" aria-label="Valentine reel"></video></div><div class="sionLanding__projectMeta"><h3>Valentine</h3><span>Campaign · Content</span></div></article>
-            <article class="sionLanding__project sionLanding__reveal"><div class="sionLanding__projectMedia"><img src="/assets/pitch-portfolio/travel-main.webp" alt="Travel visual direction" loading="lazy"></div><div class="sionLanding__projectMeta"><h3>Travel</h3><span>Brand · Photo</span></div></article>
+            <article class="sionLanding__project sionLanding__reveal"><div class="sionLanding__projectMedia"><img src="/assets/pitch-portfolio/street.webp" alt="Street photography" loading="lazy"></div><div class="sionLanding__projectMeta"><h3>Street</h3><span>Brand · Photo</span></div></article>
           </div>
         </div>
       </section>
