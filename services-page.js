@@ -67,7 +67,9 @@
     contact:'Have a project in mind?', contactText:'Talk with us about the right direction for your business.',
     steps:[['01','Discover','Understand the business, objective, and problem.'],['02','Direction','Define strategy, scope, metrics, and plan.'],['03','Create','Design, produce, and connect every part.'],['04','Improve','Launch, measure, learn, and improve.']]
   };
-  const keys = Object.keys(data), slug = route.split('/')[2], current = data[slug], lang = th ? 0 : 1;
+  const keys = ['social-content', 'seo', 'performance-ads', 'web-design', 'production', 'ai-solution'];
+  keys.forEach((key, index) => { data[key].no = String(index + 1).padStart(2, '0'); });
+  const slug = route.split('/')[2], current = data[slug], lang = th ? 0 : 1;
   const serviceNav = () => keys.map(key => `<a href="/services/${key}"${key===slug?' aria-current="page"':''}><span>${data[key].no}</span>${data[key].title}</a>`).join('');
   const contact = () => `<section class="spContact"><p>${ui.contactText}</p><a href="mailto:hello@sionmotion.com">${ui.contact}<span>&#8599;</span></a></section>`;
   const cards = () => keys.map(key => { const s=data[key]; return `<a class="spCard" href="/services/${key}"><div><span>${s.no}</span><span>${s.tag}</span></div><h2>${s.title}</h2><p>${s.intro[lang]}</p><b>${ui.view} &#8599;</b></a>`; }).join('');

@@ -86,6 +86,41 @@ headerLogoStyle.textContent = `
   .sionShowreelSoundToggle.is-visible { opacity: 1; pointer-events: auto; }
   .sionShowreelSoundToggle:hover { background: #fff; color: #111; }
   @media (max-width: 767px) { .sionShowreelSoundToggle { bottom: 1.25rem; font-size: .62rem; } }
+  .sionAiCarouselItem .homeCarouselMotion { display: none !important; }
+  .sionAiCarousel {
+    position: absolute; inset: 0; overflow: hidden; background: #080b08; color: #b8ff3d;
+    font-family: Clarkson, Arial, sans-serif; pointer-events: none;
+  }
+  .sionAiCarousel__media { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: .72; }
+  .sionAiCarousel__shade { position: absolute; inset: 0; background: linear-gradient(90deg, rgba(3,8,3,.88), rgba(3,8,3,.12) 68%, rgba(3,8,3,.48)); }
+  .sionAiCarousel__grid { position: absolute; inset: 0; opacity: .2; background-image: linear-gradient(rgba(184,255,61,.35) 1px,transparent 1px),linear-gradient(90deg,rgba(184,255,61,.35) 1px,transparent 1px); background-size: 7.5vw 7.5vw; }
+  .sionAiCarousel__copy { position: absolute; left: 8vw; top: 50%; z-index: 2; transform: translateY(-50%); }
+  .sionAiCarousel__copy span { display: block; margin-bottom: 1rem; font-size: clamp(.7rem,1vw,1rem); letter-spacing: .16em; text-transform: uppercase; }
+  .sionAiCarousel__copy strong { display: block; font-size: clamp(4rem,10vw,10rem); font-weight: 400; line-height: .78; letter-spacing: -.08em; }
+  .sionAiCarousel__copy em { display: block; margin-top: 1.7rem; color: #fff; font-size: clamp(1rem,1.6vw,1.7rem); font-style: normal; }
+  .sionAiCarousel__box { position: absolute; z-index: 3; border: 2px solid #b8ff3d; box-shadow: 0 0 0 1px rgba(0,0,0,.3); }
+  .sionAiCarousel__box::before { content: attr(data-label); position: absolute; left: -2px; top: -1.55rem; padding: .25rem .45rem; color: #071000; background: #b8ff3d; font-size: .62rem; letter-spacing: .08em; white-space: nowrap; }
+  .sionAiCarousel__box--1 { right: 28%; top: 32%; width: 13%; height: 27%; }
+  .sionAiCarousel__box--2 { right: 12%; top: 38%; width: 12%; height: 23%; }
+  .sionAiCarousel__count { position: absolute; right: 3rem; bottom: 3rem; z-index: 3; padding: .75rem 1rem; border: 1px solid currentColor; background: rgba(3,8,3,.65); font-size: .8rem; letter-spacing: .12em; }
+  .sionDigitalCarouselItem .homeCarouselCampaigns { display: none !important; }
+  .sionDigitalCarousel { position:absolute;inset:0;overflow:hidden;background:#ff6038;color:#0a0a0a;font-family:Clarkson,Arial,sans-serif;pointer-events:none; }
+  .sionDigitalCarousel__grid { position:absolute;inset:0;background-image:linear-gradient(rgba(0,0,0,.18) 1px,transparent 1px),linear-gradient(90deg,rgba(0,0,0,.18) 1px,transparent 1px);background-size:8vw 8vw; }
+  .sionDigitalCarousel__copy { position:absolute;left:7vw;top:50%;z-index:2;transform:translateY(-50%); }
+  .sionDigitalCarousel__copy span { display:block;margin-bottom:1rem;font-size:clamp(.7rem,1vw,1rem);letter-spacing:.16em;text-transform:uppercase; }
+  .sionDigitalCarousel__copy strong { display:block;font-size:clamp(4rem,9.4vw,9.5rem);font-weight:400;line-height:.77;letter-spacing:-.08em; }
+  .sionDigitalCarousel__copy em { display:block;margin-top:1.6rem;font-size:clamp(1rem,1.6vw,1.7rem);font-style:normal; }
+  .sionDigitalCarousel__orbit { position:absolute;right:7vw;top:50%;width:min(33vw,32rem);aspect-ratio:1;border:1px solid currentColor;border-radius:50%;transform:translateY(-50%); }
+  .sionDigitalCarousel__orbit:before,.sionDigitalCarousel__orbit:after{content:'';position:absolute;border:1px solid currentColor;border-radius:50%;inset:16%}.sionDigitalCarousel__orbit:after{inset:33%;background:#0a0a0a}
+  .sionDigitalCarousel__channel{position:absolute;z-index:3;padding:.55rem .75rem;background:#f4f1eb;border:1px solid #0a0a0a;font-size:.72rem;letter-spacing:.08em}.sionDigitalCarousel__channel--a{right:25%;top:18%}.sionDigitalCarousel__channel--b{right:5%;top:47%}.sionDigitalCarousel__channel--c{right:23%;bottom:16%}.sionDigitalCarousel__channel--d{right:39%;top:47%}
+  @media (max-width: 767px) {
+    .sionAiCarousel__copy { left: 7vw; }
+    .sionAiCarousel__copy strong { font-size: 22vw; }
+    .sionAiCarousel__box--1 { right: 18%; top: 27%; width: 28%; height: 25%; }
+    .sionAiCarousel__box--2 { right: 7%; top: 56%; width: 24%; height: 19%; }
+    .sionAiCarousel__count { right: 1rem; bottom: 5rem; }
+    .sionDigitalCarousel__copy{left:7vw;top:39%}.sionDigitalCarousel__copy strong{font-size:19vw}.sionDigitalCarousel__orbit{right:-16vw;top:70%;width:70vw}.sionDigitalCarousel__channel--a{right:31%;top:56%}.sionDigitalCarousel__channel--b{right:3%;top:70%}.sionDigitalCarousel__channel--c{right:24%;bottom:8%}.sionDigitalCarousel__channel--d{right:55%;top:72%}
+  }
 
 
   .commercialProduction .intro__title {
@@ -98,8 +133,46 @@ headerLogoStyle.textContent = `
   .menu .menu__items { scrollbar-width: none; }
   .menu .menu__items::-webkit-scrollbar { display: none; }
   .menu .menu__headerGap, .menu .menu__footer { flex-shrink: 0; }
+  .sionBackToCarousel {
+    position: fixed; left: clamp(1.2rem, 2.5vw, 3rem); bottom: clamp(1.2rem, 2.5vw, 3rem); z-index: 10030;
+    display: inline-flex; align-items: center; gap: .8rem; padding: .9rem 1.25rem;
+    border: 1px solid currentColor; border-radius: 999px; background: #111; color: #fff;
+    font: 500 .9rem/1 Clarkson, Arial, sans-serif; letter-spacing: .08em; text-decoration: none;
+    text-transform: uppercase; transition: background-color .25s ease, color .25s ease, transform .35s cubic-bezier(.16,1,.3,1);
+  }
+  .sionBackToCarousel:hover { background: #fff; color: #111; transform: translateX(-.3rem); }
+  .sionBackToCarousel span { font-size: 1.3em; line-height: .7; }
+  @media (max-width: 767px) {
+    .sionBackToCarousel { font-size: .75rem; padding: .8rem 1rem; }
+  }
 `;
 document.head.append(headerLogoStyle);
+
+const carouselChapterRoutes = new Set([
+  '/logo', '/typography', '/color', '/photography', '/campaign', '/motion', '/commercial-production', '/ai-solution', '/digital-marketing'
+]);
+const syncBackToCarouselButton = () => {
+  const shouldShow = carouselChapterRoutes.has(location.pathname.replace(/\/$/, ''));
+  let button = document.querySelector('.sionBackToCarousel');
+  if (!shouldShow) {
+    button?.remove();
+    return;
+  }
+  if (button) return;
+  button = document.createElement('a');
+  button.className = 'sionBackToCarousel';
+  button.href = '/?carousel=1';
+  button.setAttribute('aria-label', 'Back to carousel');
+  button.innerHTML = '<span aria-hidden="true">&#8592;</span> Carousel';
+  button.addEventListener('click', (event) => {
+    event.preventDefault();
+    location.assign('/?carousel=1');
+  });
+  document.body.append(button);
+};
+new MutationObserver(syncBackToCarouselButton).observe(document.documentElement, { childList: true, subtree: true });
+if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', syncBackToCarouselButton, { once: true });
+else syncBackToCarouselButton();
 
 // Browsers cache tab icons very aggressively. Version every icon reference so
 // the Sion Motion artwork replaces the favicon from the cloned site at once.
@@ -239,7 +312,7 @@ addEventListener('keydown', (event) => {
 
 if (!document.querySelector('script[data-sion-landing]')) {
   const landingScript = document.createElement('script');
-  landingScript.src = '/landing-page.js?v=20260916-13';
+  landingScript.src = '/landing-page.js?v=20260921-01';
   landingScript.dataset.sionLanding = 'true';
   landingScript.addEventListener('error', () => {
     document.documentElement.classList.remove('sionLandingPending');
@@ -318,6 +391,74 @@ new MutationObserver(syncTopRightMenu).observe(document.documentElement, {
 });
 syncTopRightMenu();
 
+const syncAiSolutionMenu = () => {
+  const list = document.querySelector('.menu .menu__items');
+  if (!list) return;
+  const existing = [...list.querySelectorAll('.menuItem')].find((item) =>
+    /ai\s*solution/i.test(item.textContent || '') ||
+    /navigate to ai solution/i.test(item.getAttribute('aria-label') || '')
+  );
+  if (existing) return;
+  const showreel = [...list.querySelectorAll('.menuItem')].find((item) =>
+    /show\s*reel/i.test(item.textContent || '')
+  );
+  if (!showreel) return;
+  const item = showreel.cloneNode(true);
+  item.classList.remove('active', 'clicked', 'rollover', 'dimmed');
+  item.dataset.sionMenuFallback = 'ai-solution';
+  item.setAttribute('aria-label', 'Navigate to AI Solution');
+  const index = item.querySelector('.menuItem__index');
+  const link = item.querySelector('.menuItem__link');
+  if (index) index.textContent = '08';
+  if (link) link.textContent = 'AI Solution';
+  const openAi = (event) => {
+    if (event.type === 'keydown' && event.key !== 'Enter' && event.key !== ' ') return;
+    event.preventDefault();
+    event.stopImmediatePropagation();
+    window.location.assign('/ai-solution');
+  };
+  item.addEventListener('click', openAi);
+  item.addEventListener('keydown', openAi);
+  showreel.after(item);
+};
+
+new MutationObserver(syncAiSolutionMenu).observe(document.documentElement, {
+  childList: true,
+  subtree: true,
+});
+syncAiSolutionMenu();
+
+const syncDigitalMarketingMenu = () => {
+  const list = document.querySelector('.menu .menu__items');
+  if (!list) return;
+  const existing = [...list.querySelectorAll('.menuItem')].find((item) =>
+    /digital\s*marketing/i.test(item.textContent || '') ||
+    /navigate to digital marketing/i.test(item.getAttribute('aria-label') || '')
+  );
+  if (existing) return;
+  const aiSolution = [...list.querySelectorAll('.menuItem')].find((item) => /ai\s*solution/i.test(item.textContent || ''));
+  if (!aiSolution) return;
+  const item = aiSolution.cloneNode(true);
+  item.classList.remove('active', 'clicked', 'rollover', 'dimmed');
+  item.dataset.sionMenuFallback = 'digital-marketing';
+  item.setAttribute('aria-label', 'Navigate to Digital Marketing');
+  const index = item.querySelector('.menuItem__index');
+  const link = item.querySelector('.menuItem__link');
+  if (index) index.textContent = '09';
+  if (link) link.textContent = 'Digital Marketing';
+  const openDigitalMarketing = (event) => {
+    if (event.type === 'keydown' && event.key !== 'Enter' && event.key !== ' ') return;
+    event.preventDefault();
+    event.stopImmediatePropagation();
+    window.location.assign('/digital-marketing');
+  };
+  item.addEventListener('click', openDigitalMarketing);
+  item.addEventListener('keydown', openDigitalMarketing);
+  aiSolution.after(item);
+};
+new MutationObserver(syncDigitalMarketingMenu).observe(document.documentElement, { childList: true, subtree: true });
+syncDigitalMarketingMenu();
+
 // Add a visible navigation bar to the original pages and expose Services in
 // the full-screen Index menu. Both are re-mounted after Nuxt route changes.
 const globalNavItems = [
@@ -326,6 +467,8 @@ const globalNavItems = [
   ['/campaign', 'Web Design'],
   ['/motion', 'Motion'],
   ['/commercial-production', 'Show Reel'],
+  ['/ai-solution', 'AI Solution'],
+  ['/digital-marketing', 'Digital Marketing'],
   ['/services', 'Services'],
   ['/packages', 'Packages'],
 ];
@@ -361,7 +504,7 @@ const syncGlobalNavigation = () => {
   item.setAttribute('aria-label', 'Navigate to Services');
   const index = item.querySelector('.menuItem__index');
   const link = item.querySelector('.menuItem__link');
-  if (index) index.textContent = '08';
+  if (index) index.textContent = '10';
   if (link) link.textContent = 'Services';
   const openServices = (event) => {
     if (event.type === 'keydown' && event.key !== 'Enter' && event.key !== ' ') return;
@@ -392,7 +535,7 @@ const syncPackagesMenuItem = () => {
   item.setAttribute('aria-label', 'Navigate to Packages');
   const index = item.querySelector('.menuItem__index');
   const link = item.querySelector('.menuItem__link');
-  if (index) index.textContent = '09';
+  if (index) index.textContent = '11';
   if (link) link.textContent = 'Packages';
   const openPackages = (event) => {
     if (event.type === 'keydown' && event.key !== 'Enter' && event.key !== ' ') return;
@@ -410,6 +553,56 @@ new MutationObserver(syncPackagesMenuItem).observe(document.documentElement, {
   subtree: true,
 });
 syncPackagesMenuItem();
+
+const syncAiCarouselSlide = () => {
+  const items = [...document.querySelectorAll('.homeCarouselItem')];
+  if (items.length < 8 || !items.some((item) => item.querySelector('.sionShowreel'))) return;
+  const item = items[7];
+  if (!item || item.classList.contains('sionAiCarouselItem')) return;
+  item.classList.add('sionAiCarouselItem');
+  const inner = item.querySelector('.homeCarouselItem__inner') || item;
+  const visual = document.createElement('div');
+  visual.className = 'sionAiCarousel';
+  visual.setAttribute('aria-hidden', 'true');
+  visual.innerHTML = `<video class="sionAiCarousel__media" src="/assets/ai-solution/media/package-conveyor.mp4" poster="/assets/ai-solution/media/package-conveyor.jpg" muted loop playsinline autoplay preload="metadata"></video><div class="sionAiCarousel__shade"></div><div class="sionAiCarousel__grid"></div><div class="sionAiCarousel__copy"><span>Computer vision / Automation</span><strong>AI<br>Solution</strong><em>See it. Count it. Act on it.</em></div><i class="sionAiCarousel__box sionAiCarousel__box--1" data-label="PACKAGE 98%"></i><i class="sionAiCarousel__box sionAiCarousel__box--2" data-label="PACKAGE 96%"></i><div class="sionAiCarousel__count">LIVE COUNT&nbsp;&nbsp; 0248</div>`;
+  inner.append(visual);
+  visual.querySelector('video')?.play().catch(() => {});
+};
+
+new MutationObserver(syncAiCarouselSlide).observe(document.documentElement, { childList: true, subtree: true });
+syncAiCarouselSlide();
+
+const syncDigitalMarketingCarouselSlide = () => {
+  const items = [...document.querySelectorAll('.homeCarouselItem')];
+  if (items.length < 9 || !items.some((item) => item.querySelector('.sionShowreel'))) return;
+  const item = items[8];
+  if (!item || item.classList.contains('sionDigitalCarouselItem')) return;
+  item.classList.add('sionDigitalCarouselItem');
+  const inner = item.querySelector('.homeCarouselItem__inner') || item;
+  const visual = document.createElement('div');
+  visual.className = 'sionDigitalCarousel';
+  visual.setAttribute('aria-hidden', 'true');
+  visual.innerHTML = `<div class="sionDigitalCarousel__grid"></div><div class="sionDigitalCarousel__copy"><span>Strategy / Creative / Media / Data</span><strong>Digital<br>Marketing</strong><em>Every channel. One direction.</em></div><i class="sionDigitalCarousel__orbit"></i><span class="sionDigitalCarousel__channel sionDigitalCarousel__channel--a">SOCIAL</span><span class="sionDigitalCarousel__channel sionDigitalCarousel__channel--b">SEARCH</span><span class="sionDigitalCarousel__channel sionDigitalCarousel__channel--c">CONTENT</span><span class="sionDigitalCarousel__channel sionDigitalCarousel__channel--d">DATA</span>`;
+  inner.append(visual);
+};
+new MutationObserver(syncDigitalMarketingCarouselSlide).observe(document.documentElement, { childList: true, subtree: true });
+syncDigitalMarketingCarouselSlide();
+
+document.addEventListener('click', (event) => {
+  if (!event.target.closest('.sionAiCarouselItem')) return;
+  if (!/ai\s*solution/i.test(document.querySelector('.homeCarouselUi__title')?.textContent || '')) return;
+  event.preventDefault();
+  event.stopImmediatePropagation();
+  location.assign('/ai-solution');
+}, true);
+
+document.addEventListener('click', (event) => {
+  if (!event.target.closest('.sionDigitalCarouselItem')) return;
+  if (!/digital\s*marketing/i.test(document.querySelector('.homeCarouselUi__title')?.textContent || '')) return;
+  event.preventDefault();
+  event.stopImmediatePropagation();
+  location.assign('/digital-marketing');
+}, true);
 
 document.addEventListener(
   "click",

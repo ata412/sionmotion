@@ -1,6 +1,14 @@
 {
   "rewrites": [
     {
+      "source": "/digital-marketing",
+      "destination": "/digital-marketing.html"
+    },
+    {
+      "source": "/ai-solution",
+      "destination": "/ai-solution.html"
+    },
+    {
       "source": "/packages",
       "destination": "/packages.html"
     },

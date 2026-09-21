@@ -26,7 +26,7 @@
     .sionLanding *{box-sizing:border-box}
     .sionLanding section{pointer-events:auto;position:relative}
     .sionLanding__wrap{margin:0 auto;max-width:1440px;padding-left:clamp(2rem,5vw,7.2rem);padding-right:clamp(2rem,5vw,7.2rem)}
-    .sionLanding__hero{background:var(--landing-black);color:#fff;height:640svh;overflow:clip}
+    .sionLanding__hero{background:var(--landing-black);color:#fff;height:1000svh;overflow:clip}
     .sionLanding__heroSticky{align-items:center;display:flex;height:100svh;overflow:hidden;padding:calc(var(--headerHeight,8.8rem) + 4vh) 0 4vh;position:sticky;top:0}
     .sionLanding__heroInner{position:relative;text-align:center;width:100%;z-index:1}
     .sionLanding__eyebrow{align-items:center;display:flex;font:500 1.1rem/1 Clarkson,Arial,sans-serif;gap:1rem;justify-content:center;letter-spacing:.12em;margin:0 0 2.4rem;text-transform:uppercase}
@@ -50,6 +50,12 @@
     .sionLanding__anchorNav{display:flex;flex-wrap:wrap;gap:.8rem;justify-content:center}
     .sionLanding__anchorNav a{border:1px solid rgba(255,255,255,.45);border-radius:999px;color:#fff;font:500 1.1rem/1 Clarkson,Arial,sans-serif;letter-spacing:.08em;padding:1.1rem 1.5rem;text-decoration:none;text-transform:uppercase;transition:.25s ease}
     .sionLanding__anchorNav a:hover{background:#fff;color:#111}
+    .sionLanding__heroActions{display:flex;flex-direction:column;gap:1rem}
+    .sionLanding__contactPrompt{align-items:center;display:flex;flex-wrap:wrap;gap:.65rem;justify-content:center}
+    .sionLanding__contactPrompt>span{font-size:clamp(1.35rem,1.35vw,1.8rem);line-height:1.35}
+    .sionLanding__contactPrompt a{border:1px solid rgba(255,255,255,.55);border-radius:999px;color:#fff;font:500 1.05rem/1 Clarkson,Arial,sans-serif;letter-spacing:.06em;padding:1rem 1.3rem;text-decoration:none;transition:.25s ease}
+    .sionLanding__contactPrompt a:first-of-type{background:var(--landing-accent);border-color:var(--landing-accent);color:#111}
+    .sionLanding__contactPrompt a:hover{background:#fff;border-color:#fff;color:#111}
     .sionLanding__intro{background:var(--landing-paper);padding:clamp(9rem,15vw,22rem) 0}
     .sionLanding__kicker{color:#68655f;font:500 1.1rem/1 Clarkson,Arial,sans-serif;letter-spacing:.12em;margin:0;text-transform:uppercase}
     .sionLanding__statement{font:400 clamp(4.6rem,8.2vw,11.8rem)/.9 Clarkson,Arial,sans-serif;letter-spacing:-.065em;margin:3rem 0 0;max-width:11ch;text-transform:uppercase}
@@ -60,22 +66,25 @@
     .sionLanding__sectionHead{align-items:end;display:grid;gap:3rem;grid-template-columns:1fr minmax(28rem,45rem);margin-bottom:7rem}
     .sionLanding__sectionHead h2{font:400 clamp(5rem,8vw,11rem)/.84 Clarkson,Arial,sans-serif;letter-spacing:-.065em;margin:1.8rem 0 0;text-transform:uppercase}
     .sionLanding__sectionHead p{font-size:clamp(1.6rem,1.45vw,2.1rem);line-height:1.55;margin:0}
-    .sionLanding__service{align-items:center;border-top:1px solid #bdbab4;display:grid;gap:3rem;grid-template-columns:7rem 1fr minmax(26rem,42rem);min-height:15rem;padding:2.4rem 0;transition:padding .35s ease}
+    .sionLanding__service{align-items:center;border-top:1px solid #bdbab4;color:inherit;display:grid;gap:3rem;grid-template-columns:7rem 1fr minmax(26rem,42rem) 3rem;min-height:15rem;padding:2.4rem 0;text-decoration:none;transition:background-color .35s ease,padding .35s ease}
     .sionLanding__service:last-child{border-bottom:1px solid #bdbab4}
-    .sionLanding__service:hover{padding-left:1.5rem;padding-right:1.5rem}
+    .sionLanding__service:hover{background:#f4f2ed;padding-left:1.5rem;padding-right:1.5rem}
     .sionLanding__serviceNum{color:#77736d;font:500 1.2rem/1 Clarkson,Arial,sans-serif}
     .sionLanding__service h3{font:400 clamp(2.8rem,4.2vw,6rem)/.95 Clarkson,Arial,sans-serif;letter-spacing:-.05em;margin:0;text-transform:uppercase}
     .sionLanding__service p{font-size:clamp(1.5rem,1.3vw,1.9rem);line-height:1.5;margin:0}
+    .sionLanding__serviceArrow{font:400 2.4rem/1 Clarkson,Arial,sans-serif;transition:transform .35s cubic-bezier(.16,1,.3,1)}
+    .sionLanding__service:hover .sionLanding__serviceArrow{transform:translate(.35rem,-.35rem)}
     .sionLanding__marketing{background:var(--landing-paper);color:#111;padding:clamp(9rem,12vw,17rem) 0}
     .sionLanding__marketing .sionLanding__sectionHead h2 i{color:var(--landing-accent);font-style:normal}
+    html[data-sion-language="th"] .sionLanding__marketing .sionLanding__sectionHead h2 i{font-family:var(--font-ptt45pride),Tahoma,sans-serif;font-weight:700;letter-spacing:-.045em}
     .sionLanding__marketingGrid{border-left:1px solid #111;border-top:1px solid #111;display:grid;grid-template-columns:repeat(3,minmax(0,1fr))}
-    .sionLanding__marketingCard{background:var(--landing-paper);border-bottom:1px solid #111;border-right:1px solid #111;color:#111;display:flex;flex-direction:column;min-height:clamp(40rem,48vw,58rem);padding:clamp(2rem,3vw,3.5rem);text-decoration:none;transition:background-color .45s ease,color .45s ease,transform .55s cubic-bezier(.16,1,.3,1)}
+    .sionLanding__marketingCard{background:var(--landing-paper);border-bottom:1px solid #111;border-right:1px solid #111;color:#111;display:flex;flex-direction:column;min-height:clamp(40rem,48vw,58rem);min-width:0;overflow:hidden;padding:clamp(2rem,3vw,3.5rem);text-decoration:none;transition:background-color .45s ease,color .45s ease,transform .55s cubic-bezier(.16,1,.3,1)}
     .sionLanding__marketingCard:first-child{background:var(--landing-accent)}
     .sionLanding__marketingCard:nth-child(5){background:#d8d4cc}
     .sionLanding__marketingCard:hover{background:#111;color:#fff;transform:translateY(-1rem)}
     .sionLanding__marketingMeta{display:flex;font:500 1rem/1 Clarkson,Arial,sans-serif;justify-content:space-between;letter-spacing:.08em;text-transform:uppercase}
-    .sionLanding__marketingCard h3{font:400 clamp(3.5rem,5vw,6.5rem)/.84 Clarkson,Arial,sans-serif;letter-spacing:-.065em;margin:auto 0 3rem;max-width:8ch}
-    .sionLanding__marketingCard p{font-size:clamp(1.35rem,1.35vw,1.8rem);line-height:1.5;margin:0 0 4rem}
+    .sionLanding__marketingCard h3{font:400 clamp(2.7rem,5vw,6.5rem)/1 Clarkson,Arial,sans-serif;letter-spacing:-.025em;margin:auto 0 3rem;max-width:9ch;overflow-wrap:anywhere}
+    .sionLanding__marketingCard p{font-size:clamp(1.35rem,1.35vw,1.8rem);line-height:1.5;margin:0 0 4rem;overflow-wrap:anywhere}
     .sionLanding__marketingMore{align-items:center;border-top:1px solid currentColor;display:flex;font:500 1.05rem/1 Clarkson,Arial,sans-serif;justify-content:space-between;letter-spacing:.04em;margin-top:auto;padding-top:1.5rem;text-transform:uppercase}
     .sionLanding__marketingMore i{font-size:2rem;font-style:normal;transition:transform .35s ease}
     .sionLanding__marketingCard:hover .sionLanding__marketingMore i{transform:translate(.35rem,-.35rem)}
@@ -109,15 +118,27 @@
     .sionLanding__reveal{opacity:0;transform:translateY(5rem);transition:opacity .9s ease,transform .9s cubic-bezier(.16,.84,.32,1)}
     .sionLanding__reveal.is-in{opacity:1;transform:none}
     @keyframes sionLandingArrow{50%{transform:translateY(1rem)}}
+    @media(max-height:820px) and (min-width:801px){
+      .sionLanding__heroSticky{padding-bottom:max(1.5rem,env(safe-area-inset-bottom));padding-top:calc(var(--headerHeight,8.8rem) + 1.5rem)}
+      .sionLanding__eyebrow{margin-bottom:1.25rem}
+      .sionLanding__heroBottom{gap:2rem;margin-top:clamp(1.5rem,4vh,3rem);padding-top:1.15rem}
+      .sionLanding__heroBottom p{font-size:clamp(1.2rem,1.35vw,1.7rem)}
+      .sionLanding__anchorNav a{font-size:.95rem;padding:.85rem 1.15rem}
+    }
+    @media(max-width:1100px) and (min-width:801px){
+      .sionLanding__marketingGrid{grid-template-columns:repeat(2,minmax(0,1fr))}
+      .sionLanding__marketingCard{min-height:42rem}
+    }
     @media(max-width:800px){
       .sionLanding__heroSticky{padding-bottom:3rem;padding-top:calc(var(--headerHeight,8.8rem) + 2rem)}.sionLanding__hero h1{font-size:clamp(5.4rem,18vw,9rem)}
       html[data-sion-language="th"] .sionLanding__hero h1{font-size:clamp(5.5rem,14.5vw,7rem)}
       .sionLanding__heroLogo{width:clamp(10rem,27vw,14rem)}
       .sionLanding__heroHeadlineSecond .sionLanding__heroSecondTail{font-size:clamp(4rem,16vw,6rem)}
       .sionLanding__heroBottom,.sionLanding__introText,.sionLanding__sectionHead{grid-template-columns:1fr}
-      .sionLanding__heroBottom{margin-top:4rem}.sionLanding__introText{margin-top:6rem}
-      .sionLanding__service{align-items:start;gap:1rem;grid-template-columns:4rem 1fr;padding:2.8rem 0}
-      .sionLanding__service p{grid-column:2}
+      .sionLanding__heroBottom{gap:1.5rem;margin-top:clamp(1.5rem,5vh,3rem);padding-top:1.25rem}.sionLanding__anchorNav a{font-size:.95rem;padding:.85rem 1.15rem}.sionLanding__introText{margin-top:6rem}
+      .sionLanding__service{align-items:start;gap:1rem;grid-template-columns:4rem 1fr 2rem;padding:2.8rem 0}
+      .sionLanding__service p{grid-column:2/4}
+      .sionLanding__serviceArrow{grid-column:3;grid-row:1;font-size:1.8rem}
       .sionLanding__marketingGrid{grid-template-columns:1fr}.sionLanding__marketingCard{min-height:38rem}.sionLanding__marketingCard:hover{transform:none}
       .sionLanding__project:nth-child(n){grid-column:1/-1;margin-top:4rem}.sionLanding__project:first-child{margin-top:0}
       .sionLanding__processGrid{grid-template-columns:1fr 1fr;row-gap:5rem}
@@ -153,11 +174,11 @@
       marketingIntro: 'บริการรับทำการตลาดออนไลน์แบบครบวงจร เชื่อม Search, Social, Content และข้อมูลให้ช่วยกันสร้างทั้งการรับรู้และผลลัพธ์ทางธุรกิจ',
       marketingMore: 'รายละเอียดเพิ่มเติม',
       marketingCards: [
+        ['Social Media Marketing', 'ดูแลการสื่อสารบน Social Media แบบครบวงจร ตั้งแต่กลยุทธ์ คอนเทนต์ ภาพและวิดีโอ ไปจนถึงโฆษณาที่ออกแบบตามกลุ่มเป้าหมายของธุรกิจ', 'SOCIAL / STRATEGY', '/services/social-content'],
         ['SEO Service', 'บริการรับทำ SEO ให้ติดอันดับบน Google เติบโตอย่างยั่งยืน สร้าง Organic Traffic และทำให้ธุรกิจเป็นที่รู้จักจากการค้นหาบน Google', 'SEARCH / ORGANIC', '/services/seo'],
         ['Facebook Marketing', 'รับดูแลเพจ วางแผนการตลาดออนไลน์ คิดคอนเทนต์และออกแบบภาพกราฟิก พร้อมทีมดูแล Facebook แบบครบวงจร เพื่อทำให้แบรนด์โดดเด่นและสื่อสารต่อเนื่อง', 'SOCIAL / CONTENT', '/services/social-content'],
         ['Google Ads', 'บริการวางแผนและดูแลโฆษณา Google เพื่อเข้าถึงกลุ่มเป้าหมายจากคำค้นหาได้ทันที พร้อมติดตั้ง Conversion Tracking และวัดผลลัพธ์การตลาดได้จริง', 'SEARCH / PERFORMANCE', '/services/performance-ads'],
         ['WordPress Development', 'ยกระดับภาพลักษณ์ธุรกิจด้วยเว็บไซต์ WordPress ที่ออกแบบให้ทันสมัย ใช้งานง่าย รองรับมือถือ และพร้อมต่อยอดด้านการตลาด', 'WEB / EXPERIENCE', '/services/web-design'],
-        ['Social Media Marketing', 'ดูแลการสื่อสารบน Social Media แบบครบวงจร ตั้งแต่กลยุทธ์ คอนเทนต์ ภาพและวิดีโอ ไปจนถึงโฆษณาที่ออกแบบตามกลุ่มเป้าหมายของธุรกิจ', 'SOCIAL / STRATEGY', '/services/social-content'],
         ['รับดูแลร้านค้า Shopee / Lazada', 'ดูแลร้านค้าออนไลน์บน Shopee และ Lazada ตั้งแต่หน้าร้าน ข้อมูลสินค้า แคมเปญ โปรโมชัน และสื่อโฆษณา เพื่อเพิ่มโอกาสเข้าถึงและยอดขาย', 'E-COMMERCE / SALES', '/services/performance-ads'],
       ],
       service1: 'ออกแบบและพัฒนาเว็บไซต์ที่สื่อสารชัด ใช้งานง่าย และมีเอกลักษณ์ของแบรนด์',
@@ -172,6 +193,7 @@
       step4: 'ส่งมอบไฟล์พร้อมใช้ ดูแลการเผยแพร่ และต่อยอดจากผลลัพธ์',
       close: 'เลื่อนต่อเพื่อเข้าสู่พื้นที่ทดลองของ Sion Motion และสำรวจระบบงานแต่ละหมวดในรูปแบบอินเทอร์แอ็กทีฟ',
       portal: 'Scroll to explore Sion Motion',
+      consultation: 'มีโปรเจกต์ในใจ? รับคำปรึกษาฟรี',
     },
     en: {
       headline: 'We build brands that <span>move.</span>',
@@ -181,16 +203,17 @@
       hero: 'We design websites, build content, shape marketing and produce moving images so every part of a brand moves in one direction.',
       intro: 'Sion Motion is a creative team that believes strategy, image and technology should tell the same story. We work from the first idea through to finished work ready to launch and perform.',
       services: 'Choose the discipline you need, or bring us in as one team from the first concept through final delivery.',
+      consultation: 'Have a project in mind? Get a free consultation.',
       marketingEyebrow: 'Full-service digital marketing',
       marketingHeading: 'Digital Marketing<br>Agency <i>ครบวงจร!</i>',
       marketingIntro: 'Full-service digital marketing that connects search, social, content, and data to build awareness and measurable business results.',
       marketingMore: 'View details',
       marketingCards: [
+        ['Social Media Marketing', 'Connected strategy, content, design, video, and advertising shaped around the audience each business needs to reach.', 'SOCIAL / STRATEGY', '/services/social-content'],
         ['SEO Service', 'Build sustainable visibility on Google through technical SEO, keyword strategy, content planning, and long-term organic growth.', 'SEARCH / ORGANIC', '/services/seo'],
         ['Facebook Marketing', 'Page management, campaign planning, content, and graphic design delivered as one connected Facebook marketing system.', 'SOCIAL / CONTENT', '/services/social-content'],
         ['Google Ads', 'Reach high-intent audiences at the moment they search, supported by conversion tracking and measurable campaign optimization.', 'SEARCH / PERFORMANCE', '/services/performance-ads'],
         ['WordPress Development', 'Modern, responsive WordPress websites designed to strengthen credibility and support the next stage of digital growth.', 'WEB / EXPERIENCE', '/services/web-design'],
-        ['Social Media Marketing', 'Connected strategy, content, design, video, and advertising shaped around the audience each business needs to reach.', 'SOCIAL / STRATEGY', '/services/social-content'],
         ['Shopee / Lazada', 'Storefront, product, campaign, promotion, and advertising support for stronger reach and sales across major marketplaces.', 'E-COMMERCE / SALES', '/services/performance-ads'],
       ],
       service1: 'Clear, usable and distinctive websites designed and developed around your brand.',
@@ -228,7 +251,7 @@
               <div class="sionLanding__heroHeadlineSecond"><h1><span class="sionLanding__heroSecondLead">${t.secondLead}</span><span class="sionLanding__heroSecondTail"><span class="sionLanding__heroTailPrompt">${t.secondTail}<span class="sionLanding__heroTailChar">.</span><span class="sionLanding__heroTailChar">.</span><span class="sionLanding__heroTailChar">.</span><span class="sionLanding__heroTailChar">?</span></span><strong class="sionLanding__heroTailAccent">${t.secondAccent}</strong></span></h1></div>
             </div>
             <div class="sionLanding__heroBottom">
-              <nav class="sionLanding__anchorNav" aria-label="Landing page sections"><a href="#sion-capabilities">Capabilities</a><a href="#sion-work">Work</a><a href="#sion-process">Process</a></nav>
+              <div class="sionLanding__heroActions"><div class="sionLanding__contactPrompt"><span>${t.consultation}</span><a href="https://line.me/ti/p/dfPg1ktRiT" target="_blank" rel="noopener noreferrer">LINE</a><a href="tel:0972082873" aria-label="Phone 0972082873">PHONE · 0972082873</a></div><nav class="sionLanding__anchorNav" aria-label="Landing page sections"><a href="#sion-capabilities">Capabilities</a><a href="#sion-work">Work</a><a href="#sion-process">Process</a></nav></div>
               <p>${t.hero}</p>
             </div>
           </div>
@@ -244,11 +267,11 @@
       <section class="sionLanding__services" id="sion-capabilities">
         <div class="sionLanding__wrap">
           <div class="sionLanding__sectionHead sionLanding__reveal"><div><p class="sionLanding__kicker">What We Do</p><h2>One team.<br>Full range.</h2></div><p>${t.services}</p></div>
-          <div class="sionLanding__service sionLanding__reveal"><span class="sionLanding__serviceNum">01</span><h3>Production</h3><p>${t.service3}</p></div>
-          <div class="sionLanding__service sionLanding__reveal"><span class="sionLanding__serviceNum">02</span><h3>Digital Marketing</h3><p>${t.service2}</p></div>
-          <div class="sionLanding__service sionLanding__reveal"><span class="sionLanding__serviceNum">03</span><h3>AI Solution</h3><p>${t.service5}</p></div>
-          <div class="sionLanding__service sionLanding__reveal"><span class="sionLanding__serviceNum">04</span><h3>Web Design</h3><p>${t.service1}</p></div>
-          <div class="sionLanding__service sionLanding__reveal"><span class="sionLanding__serviceNum">05</span><h3>Motion Design</h3><p>${t.service4}</p></div>
+          <a class="sionLanding__service sionLanding__reveal" href="/commercial-production" aria-label="Production — Show Reel"><span class="sionLanding__serviceNum">01</span><h3>Production</h3><p>${t.service3}</p><i class="sionLanding__serviceArrow" aria-hidden="true">↗</i></a>
+          <a class="sionLanding__service sionLanding__reveal" href="/digital-marketing" aria-label="Digital Marketing"><span class="sionLanding__serviceNum">02</span><h3>Digital Marketing</h3><p>${t.service2}</p><i class="sionLanding__serviceArrow" aria-hidden="true">↗</i></a>
+          <a class="sionLanding__service sionLanding__reveal" href="/ai-solution" aria-label="AI Solution"><span class="sionLanding__serviceNum">03</span><h3>AI Solution</h3><p>${t.service5}</p><i class="sionLanding__serviceArrow" aria-hidden="true">↗</i></a>
+          <a class="sionLanding__service sionLanding__reveal" href="/campaign" aria-label="Web Design"><span class="sionLanding__serviceNum">04</span><h3>Web Design</h3><p>${t.service1}</p><i class="sionLanding__serviceArrow" aria-hidden="true">↗</i></a>
+          <a class="sionLanding__service sionLanding__reveal" href="/motion" aria-label="Motion Design"><span class="sionLanding__serviceNum">05</span><h3>Motion Design</h3><p>${t.service4}</p><i class="sionLanding__serviceArrow" aria-hidden="true">↗</i></a>
         </div>
       </section>
       <section class="sionLanding__marketing" id="sion-digital-marketing">
@@ -510,6 +533,13 @@
       updateCarouselAccess();
     }, 500);
     updateCarouselAccess();
+    if (new URLSearchParams(location.search).get('carousel') === '1') {
+      requestAnimationFrame(() => {
+        scrollTo(0, Math.max(0, document.documentElement.scrollHeight - innerHeight));
+        updateCarouselAccess();
+        history.replaceState(history.state, '', '/');
+      });
+    }
   }
 
   function mount() {

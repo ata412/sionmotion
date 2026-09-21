@@ -13,8 +13,10 @@ const appRoutes = new Set([
 ]);
 
 const isServicesRoute = staticRoute === '/services' || staticRoute.startsWith('/services/');
+const isAiSolutionRoute = staticRoute === '/ai-solution';
+const isDigitalMarketingRoute = staticRoute === '/digital-marketing';
 
-if (appRoutes.has(staticRoute) || isServicesRoute) {
+if (appRoutes.has(staticRoute) || isServicesRoute || isAiSolutionRoute || isDigitalMarketingRoute) {
   const payload = document.getElementById('__NUXT_DATA__');
   if (payload) {
     const data = JSON.parse(payload.textContent);
@@ -29,6 +31,18 @@ if (appRoutes.has(staticRoute) || isServicesRoute) {
 if (isServicesRoute) {
   window.__SION_SERVICES_ROUTE__ = staticRoute;
   const servicesScript = document.createElement('script');
-  servicesScript.src = '/services-page.js';
+  servicesScript.src = '/services-page.js?v=20260920-01';
   document.head.append(servicesScript);
+}
+
+if (isAiSolutionRoute) {
+  const aiSolutionScript = document.createElement('script');
+  aiSolutionScript.src = '/ai-solution-page.js?v=20260920-03';
+  document.head.append(aiSolutionScript);
+}
+
+if (isDigitalMarketingRoute) {
+  const digitalMarketingScript = document.createElement('script');
+  digitalMarketingScript.src = '/digital-marketing-page.js?v=20260921-01';
+  document.head.append(digitalMarketingScript);
 }
