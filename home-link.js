@@ -129,7 +129,15 @@ headerLogoStyle.textContent = `
   }
   .commercialProduction .intro .intro__subtitle { position: static; display: block; margin-bottom: 16px; }
   .commercialProduction .intro .intro__description .spacer { display: none; }
-  .menu .menu__items { width: 100%; max-width: 100%; min-height: 0; overflow-y: auto; overflow-x: hidden; }
+  .menu .menu__content { overflow: hidden; }
+  .menu .menu__items {
+    width: 100%; max-width: 100%; min-height: 0; flex: 1 1 auto;
+    overflow-y: auto !important; overflow-x: hidden;
+    overscroll-behavior: contain; touch-action: pan-y;
+    -webkit-overflow-scrolling: touch; scroll-behavior: smooth;
+    padding-bottom: clamp(1.5rem, 4vh, 4rem);
+  }
+  .menu .menu__items:focus-visible { outline: 1px solid currentColor; outline-offset: .5rem; }
   .menu .menu__items { scrollbar-width: none; }
   .menu .menu__items::-webkit-scrollbar { display: none; }
   .menu .menu__headerGap, .menu .menu__footer { flex-shrink: 0; }
@@ -384,6 +392,25 @@ const syncTopRightMenu = () => {
   });
   list.append(item);
 };
+
+// Keep the expanded Index menu independently scrollable while the carousel
+// and the page-level smooth-scroll controller are locked behind it.
+const syncScrollableMenu = () => {
+  const list = document.querySelector('.menu .menu__items');
+  if (!list || list.dataset.sionScrollableMenu === 'true') return;
+  list.dataset.sionScrollableMenu = 'true';
+  list.setAttribute('data-lenis-prevent', '');
+  list.setAttribute('data-lenis-prevent-wheel', '');
+  list.setAttribute('data-lenis-prevent-touch', '');
+  list.setAttribute('tabindex', '0');
+  list.setAttribute('aria-label', 'Carousel sections');
+};
+
+new MutationObserver(syncScrollableMenu).observe(document.documentElement, {
+  childList: true,
+  subtree: true,
+});
+syncScrollableMenu();
 
 new MutationObserver(syncTopRightMenu).observe(document.documentElement, {
   childList: true,
