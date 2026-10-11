@@ -263,6 +263,7 @@ const blockCarouselScrollGesture = (event) => {
   // Synthetic wheel events are forwarded to the original Vue carousel so it
   // can keep its zoom-out and wheel transition without moving the document.
   if (!event.isTrusted) return;
+  if (event.target.closest?.('.menu')) return;
   if (!document.querySelector('.sionLanding')) return;
   const carouselReady = document.body.classList.contains('sionLandingCarouselReady');
   if (carouselReady) {
@@ -289,6 +290,8 @@ const blockCarouselScrollGesture = (event) => {
 addEventListener('wheel', blockCarouselScrollGesture, { capture: true, passive: false });
 addEventListener('touchmove', blockCarouselScrollGesture, { capture: true, passive: false });
 addEventListener('touchstart', (event) => {
+  carouselTouchStart = null;
+  if (event.target.closest?.('.menu, .header__top')) return;
   if (!document.body.classList.contains('sionLandingCarouselReady')) return;
   const touch = event.touches[0];
   carouselTouchStart = touch ? { x: touch.clientX, y: touch.clientY } : null;
@@ -301,10 +304,18 @@ addEventListener('touchend', (event) => {
   event.stopImmediatePropagation();
   const deltaX = carouselTouchStart.x - touch.clientX;
   const deltaY = carouselTouchStart.y - touch.clientY;
+  carouselTouchStart = null;
+  if (Math.abs(deltaY) > Math.abs(deltaX) && deltaY < -30) {
+    // Pull down to return to the landing page; horizontal swipes keep
+    // navigating chapters without releasing the carousel scroll lock.
+    dispatchEvent(new Event('sion:carousel-unlock'));
+    window.scrollTo({ top: Math.max(0, scrollY - Math.max(-deltaY, innerHeight)), behavior: 'smooth' });
+    return;
+  }
   const movement = Math.abs(deltaX) > Math.abs(deltaY) ? deltaX : deltaY;
   if (Math.abs(movement) > 30) moveCarousel(movement);
-  carouselTouchStart = null;
 }, { capture: true, passive: false });
+addEventListener('touchcancel', () => { carouselTouchStart = null; }, { capture: true, passive: true });
 addEventListener('pointerdown', (event) => {
   if (!document.body.classList.contains('sionLandingCarouselReady')) return;
   if (event.target.closest('.homeCarouselUi__arrowLeft, .homeCarouselUi__arrowRight')) {
@@ -636,6 +647,8 @@ document.addEventListener(
   (event) => {
     if (event.target.closest(".header__name, .header__nameLink")) {
       event.preventDefault();
+      event.stopImmediatePropagation();
+      carouselTouchStart = null;
       if (location.pathname === '/' || location.pathname === '/index.html') {
         dispatchEvent(new Event('sion:carousel-unlock'));
         window.scrollTo({ top: 0, behavior: 'smooth' });
