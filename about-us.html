@@ -9,9 +9,9 @@
   <link rel="icon" href="/favicon.ico">
   <link rel="canonical" href="https://www.sionmotion.com/about-us">
   <link rel="stylesheet" href="/thai-font.css">
-  <link rel="stylesheet" href="/about-us.css?v=20261013-01">
+  <link rel="stylesheet" href="/about-us.css?v=20261013-04">
   <link rel="preload" as="image" href="/assets/about-us/on-set.webp" imagesrcset="/assets/about-us/on-set-mobile.webp 640w, /assets/about-us/on-set.webp 1280w" imagesizes="(max-width: 700px) 100vw, 56vw">
-  <script src="/about-us.js?v=20261013-01" defer></script>
+  <script src="/about-us.js?v=20261013-02" defer></script>
 </head>
 <body>
   <a class="aboutSkip" href="#about-main" data-copy="skip">ข้ามไปเนื้อหา</a>
@@ -37,7 +37,7 @@
         <p class="aboutHero__intro" data-copy="intro">Sion Motion ผลิตวิดีโอและภาพนิ่งให้แบรนด์ <br>ตั้งแต่คิดเรื่อง วางแผนถ่ายทำ ไปจนถึงตัดต่อและ<span class="aboutNoWrap">ส่งมอบงาน</span></p>
         <div class="aboutHero__actions">
           <a class="aboutButton" href="#contact" data-copy="start">เริ่มโปรเจกต์ด้วยกัน ↗</a>
-          <a class="aboutTextLink" href="#production" data-copy="explore">ดูสิ่งที่เราทำ ↓</a>
+          <a class="aboutTextLink" href="/commercial-production" data-copy="explore">ดูสิ่งที่เราทำ ↓</a>
         </div>
       </div>
       <p class="aboutHero__chapter"><span aria-hidden="true"></span>ABOUT US / SION MOTION</p>
@@ -50,13 +50,34 @@
         <h2 id="production-title">From the first idea<br>to the final <em>frame.</em></h2>
         <p class="aboutProduction__lead" data-copy="productionLead">ดูแลทุกขั้นตอนของงาน Production</p>
         <ol class="aboutServices">
-          <li><span>01</span><h3>Brand films &amp; commercials</h3><p data-copy="films">วิดีโอแบรนด์ โฆษณา และคอนเทนต์สินค้า</p></li>
-          <li><span>02</span><h3>Social content &amp; reels</h3><p data-copy="social">วิดีโอสั้นสำหรับร้านอาหาร คาเฟ่ โรงแรม และไลฟ์สไตล์</p></li>
-          <li><span>03</span><h3>Photography</h3><p data-copy="photo">ภาพสินค้า อาหาร สถานที่ และภาพเล่าเรื่อง</p></li>
-          <li><span>04</span><h3>Post-production</h3><p data-copy="post">ตัดต่อ เกรดสี ออกแบบเสียง และโมชั่นประกอบ</p></li>
+          <li><a href="/commercial-production"><span>01</span><h3>Brand films &amp; commercials <span class="aboutServiceArrow" aria-hidden="true">↗</span></h3><p data-copy="films">วิดีโอแบรนด์ โฆษณา และคอนเทนต์สินค้า</p></a></li>
+          <li><a href="/services/social-content"><span>02</span><h3>Social content &amp; reels <span class="aboutServiceArrow" aria-hidden="true">↗</span></h3><p data-copy="social">วิดีโอสั้นสำหรับร้านอาหาร คาเฟ่ โรงแรม และไลฟ์สไตล์</p></a></li>
+          <li><a href="/photography"><span>03</span><h3>Photography <span class="aboutServiceArrow" aria-hidden="true">↗</span></h3><p data-copy="photo">ภาพสินค้า อาหาร สถานที่ และภาพเล่าเรื่อง</p></a></li>
+          <li><a href="/services/production"><span>04</span><h3>Post-production <span class="aboutServiceArrow" aria-hidden="true">↗</span></h3><p data-copy="post">ตัดต่อ เกรดสี ออกแบบเสียง และโมชั่นประกอบ</p></a></li>
         </ol>
         <ol class="aboutProcess" aria-label="Production workflow"><li>Brief</li><li>Plan</li><li>Shoot</li><li>Edit &amp; deliver</li></ol>
       </div>
+    </section>
+    <section class="aboutStats" aria-labelledby="stats-title" aria-describedby="stats-note" data-stats>
+      <header class="aboutStats__header">
+        <h2 id="stats-title">Stories in <em>numbers.</em></h2>
+        <p data-copy="statsIntro">ทุกโปรเจกต์เริ่มจากความไว้ใจ<br>และเติบโตเป็นเรื่องราวที่เราสร้างร่วมกัน</p>
+      </header>
+      <dl class="aboutStats__grid" data-counter-state="idle">
+        <div class="aboutStats__item">
+          <dt data-copy="statsBrands">แบรนด์ที่ร่วมงาน</dt>
+          <dd><span class="aboutStats__value" aria-hidden="true"><span data-count-to="120">120</span><span class="aboutStats__plus">+</span></span><span class="aboutSrOnly" data-counter-final>120+</span></dd>
+        </div>
+        <div class="aboutStats__item">
+          <dt data-copy="statsProjects">โปรเจกต์ที่สร้างสรรค์</dt>
+          <dd><span class="aboutStats__value" aria-hidden="true"><span data-count-to="380">380</span><span class="aboutStats__plus">+</span></span><span class="aboutSrOnly" data-counter-final>380+</span></dd>
+        </div>
+        <div class="aboutStats__item">
+          <dt data-copy="statsDeliverables">ชิ้นงานภาพและวิดีโอ</dt>
+          <dd><span class="aboutStats__value" aria-hidden="true"><span data-count-to="1200">1,200</span><span class="aboutStats__plus">+</span></span><span class="aboutSrOnly" data-counter-final>1,200+</span></dd>
+        </div>
+      </dl>
+      <p class="aboutStats__note" id="stats-note" data-copy="statsNote">ตัวเลขสมมติสำหรับงานออกแบบ — ยังไม่ใช่สถิติจริง</p>
     </section>
     <section class="aboutClients" aria-labelledby="clients-title">
       <div class="aboutClients__intro">
@@ -65,6 +86,16 @@
       </div>
       <div class="aboutClients__rail">
         <div class="aboutMarquee" role="region" aria-label="Brands we have worked with" tabindex="0"><div class="aboutMarquee__track" data-logo-track><ul class="aboutMarquee__group" data-logo-group>
+          <li class="aboutMarquee__brand"><img src="/assets/about-us/clients/thaihealth.webp" alt="สสส. — สำนักงานกองทุนสนับสนุนการสร้างเสริมสุขภาพ" width="240" height="207"></li>
+          <li class="aboutMarquee__brand"><img src="/assets/about-us/clients/circular-mark.webp" alt="โลโก้แบรนด์สัญลักษณ์วงกลม" width="312" height="210"></li>
+          <li class="aboutMarquee__brand"><img src="/assets/about-us/clients/brand-stamp.webp" alt="อะยั้งฟิล์ม (Ayungfilm)" width="191" height="141"></li>
+          <li class="aboutMarquee__brand"><img src="/assets/about-us/clients/gold-wordmark.webp" alt="โลโก้แบรนด์อักษรสีทอง" width="191" height="141"></li>
+          <li class="aboutMarquee__brand"><img src="/assets/about-us/clients/nature-pure.webp" alt="Nature Pure" width="900" height="275"></li>
+          <li class="aboutMarquee__brand"><img src="/assets/about-us/clients/aiat.webp" alt="Artificial Intelligence Association of Thailand (AIAT)" width="900" height="365"></li>
+          <li class="aboutMarquee__brand"><img src="/assets/about-us/clients/aesthetic-plus.webp" alt="Aesthetic Plus" width="447" height="447"></li>
+          <li class="aboutMarquee__brand"><img src="/assets/about-us/clients/thai-pbs.webp" alt="Thai PBS" width="900" height="675"></li>
+          <li class="aboutMarquee__brand"><img src="/assets/about-us/clients/miss-grand-thailand.webp" alt="Miss Grand Thailand" width="491" height="203"></li>
+          <li class="aboutMarquee__brand"><img src="/assets/about-us/clients/oppo.webp" alt="OPPO" width="900" height="600"></li>
           <li style="--logo-width:650px"><img src="/assets/about-us/clients/5.webp" alt="Sakanaya" width="1800" height="1273"></li>
           <li style="--logo-width:300px"><img src="/assets/about-us/clients/7.webp" alt="Burapa Eastern Thai Cuisine &amp; Bar" width="1800" height="1273"></li>
           <li style="--logo-width:490px"><img src="/assets/about-us/clients/12.webp" alt="Klain Cafe" width="1800" height="1273"></li>
