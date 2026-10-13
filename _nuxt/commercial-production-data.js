@@ -1,6 +1,7 @@
 import { c as motion } from './DFOCP24b.js';
 import { reels, reelMedia } from '../showreel-media.js';
 import { films } from '../showreel-films.js';
+import { featuredFilms, featuredMedia } from '../showreel-featured.js';
 
 const copy = (en, th) => document.documentElement.dataset.sionLanguage === 'th' ? th : en;
 
@@ -19,7 +20,8 @@ const replaceMedia = (value) => {
 
 const sections = motion.components.map((section) => {
   if (section.id === 'motionIntro') {
-    return { ...section, media: Array.from({ length: 6 }, (_, index) => reelMedia(index)) };
+    return { ...section, media: Array.from({ length: 6 }, (_, index) =>
+      featuredFilms[index] ? featuredMedia(featuredFilms[index]) : reelMedia(index)) };
   }
   if (section.id === 'paragraph') {
     return section.index === 1 ? {
