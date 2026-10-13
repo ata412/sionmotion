@@ -9,8 +9,7 @@ style.textContent = `
   .sionFullFilms__grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 5rem 3rem; }
   .sionFullFilms__film { min-width: 0; }
   .sionFullFilms__film video { display: block; width: 100%; height: auto; aspect-ratio: 16 / 9; object-fit: contain; background: #111; }
-  .sionFullFilms__caption { display: flex; justify-content: space-between; gap: 2rem; margin-top: 1.5rem; font-size: 1.4rem; line-height: 1.6; }
-  .sionFullFilms__caption h3 { font: inherit; overflow-wrap: anywhere; }
+  .sionFullFilms__caption { display: flex; justify-content: flex-end; margin-top: 1.5rem; font-size: 1.4rem; line-height: 1.6; }
   .sionFullFilms__duration { opacity: .65; white-space: nowrap; }
   .sionFullFilmsLink { padding-top: 3rem; padding-bottom: 3rem; }
   .sionFullFilmsLink a { display: inline-flex; gap: 1rem; align-items: center; padding: 1rem 1.5rem; border: 1px solid currentColor; border-radius: 999px; font-size: 1.3rem; color: inherit; text-decoration: none; }
@@ -71,7 +70,6 @@ export const FullLengthFilms = {
             'aria-label': film.title, onPlay: pauseOtherFilms,
           }),
           element('div', { class: 'sionFullFilms__caption' }, [
-            element('h3', null, film.title),
             element('span', { class: 'sionFullFilms__duration' }, durationLabel(film.duration)),
           ]),
         ])

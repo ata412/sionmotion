@@ -3,13 +3,6 @@ import { reels, reelMedia } from '../showreel-media.js';
 import { films } from '../showreel-films.js';
 
 const copy = (en, th) => document.documentElement.dataset.sionLanguage === 'th' ? th : en;
-const reelTitles = [
-  'Coffee', 'Cocktail', 'Pasta', 'Wine', 'Breakfast', 'Vampire Grill',
-  'Izakaya', 'Chill Out', 'Picnic', 'Mini Zoo', 'Work From Anywhere',
-  'Morph', 'MSN', 'Tastory', 'Tastory — Misty', 'Tastory — Can I Call You Rose',
-  'Tastory — Christmas', 'Tastory — Blue', "Valentine’s Day", "Mother’s Day",
-  'I Will Follow You', 'Reel 02', 'Reel Test',
-];
 
 // Keep the existing layouts while assigning every video to the local reel set.
 let nextReel = 6;
@@ -18,10 +11,10 @@ const replaceMedia = (value) => {
   if (!value || typeof value !== 'object') return value;
   if (value.media?.type === 'video') {
     const index = nextReel++ % reels.length;
-    return { ...value, media: reelMedia(index), caption: reelTitles[index] };
+    return { ...value, media: reelMedia(index), caption: '' };
   }
   return Object.fromEntries(Object.entries(value).map(([key, item]) =>
-    [key, key === 'caption' ? copy('Selected reels', 'ผลงานวิดีโอสั้น') : replaceMedia(item)]));
+    [key, key === 'caption' ? '' : replaceMedia(item)]));
 };
 
 const sections = motion.components.map((section) => {
