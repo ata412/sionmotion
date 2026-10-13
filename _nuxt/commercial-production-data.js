@@ -48,6 +48,7 @@ const sections = motion.components.map((section) => {
   }
   const result = replaceMedia(section);
   if (section.id === 'carouselBasic') {
+    result.snapAlign = 'center';
     result.itemColumnsDesktop = 3;
     result.itemColumnsMobile = 9;
   }
