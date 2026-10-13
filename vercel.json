@@ -1,6 +1,14 @@
 {
   "rewrites": [
     {
+      "source": "/about-us",
+      "destination": "/about-us.html"
+    },
+    {
+      "source": "/about-us/",
+      "destination": "/about-us.html"
+    },
+    {
       "source": "/digital-marketing",
       "destination": "/digital-marketing.html"
     },

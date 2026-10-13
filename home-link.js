@@ -160,6 +160,7 @@ const carouselChapterRoutes = new Set([
   '/logo', '/typography', '/color', '/photography', '/campaign', '/motion', '/commercial-production', '/ai-solution', '/digital-marketing'
 ]);
 const syncBackToCarouselButton = () => {
+  if (!document.body) return;
   const shouldShow = carouselChapterRoutes.has(location.pathname.replace(/\/$/, ''));
   let button = document.querySelector('.sionBackToCarousel');
   if (!shouldShow) {
@@ -500,6 +501,7 @@ syncDigitalMarketingMenu();
 // Add a visible navigation bar to the original pages and expose Services in
 // the full-screen Index menu. Both are re-mounted after Nuxt route changes.
 const globalNavItems = [
+  ['/about-us', 'About Us'],
   ['/logo', 'Logo'],
   ['/photography', 'Photography'],
   ['/campaign', 'Web Design'],
@@ -592,6 +594,32 @@ new MutationObserver(syncPackagesMenuItem).observe(document.documentElement, {
 });
 syncPackagesMenuItem();
 
+const syncAboutUsMenuItem = () => {
+  const list = document.querySelector('.menu .menu__items');
+  if (!list || list.querySelector('[data-sion-menu-fallback="about-us"]')) return;
+  const source = [...list.querySelectorAll('.menuItem')].at(-1);
+  if (!source) return;
+  const item = source.cloneNode(true);
+  item.classList.remove('active', 'clicked', 'rollover', 'dimmed');
+  item.dataset.sionMenuFallback = 'about-us';
+  item.setAttribute('aria-label', 'Navigate to About Us');
+  const index = item.querySelector('.menuItem__index');
+  const link = item.querySelector('.menuItem__link');
+  if (index) index.textContent = '12';
+  if (link) link.textContent = 'About Us';
+  const openAboutUs = (event) => {
+    if (event.type === 'keydown' && event.key !== 'Enter' && event.key !== ' ') return;
+    event.preventDefault();
+    event.stopImmediatePropagation();
+    window.location.assign('/about-us');
+  };
+  item.addEventListener('click', openAboutUs);
+  item.addEventListener('keydown', openAboutUs);
+  list.append(item);
+};
+new MutationObserver(syncAboutUsMenuItem).observe(document.documentElement, { childList: true, subtree: true });
+syncAboutUsMenuItem();
+
 const syncAiCarouselSlide = () => {
   const items = [...document.querySelectorAll('.homeCarouselItem')];
   if (items.length < 8 || !items.some((item) => item.querySelector('.sionShowreel'))) return;
@@ -671,68 +699,35 @@ const stopEmbeddedShowreel = () => {
 
 setInterval(stopEmbeddedShowreel, 300);
 
-// Keep the original cursor-trail timing and transitions, but give the Show
-// Reel slide its own production footage instead of reusing Motion assets.
-const syncShowreelTrailAssets = () => {
-  const showreel = document.querySelector('.sionShowreel');
-  if (!showreel) return;
-
-  showreel.querySelectorAll('.homeCarouselMotionItem video').forEach((video) => {
-    const match = video.currentSrc.match(/\/pages\/home\/motion\/(\d{2})@sm\.mp4/) ||
-      video.getAttribute('src')?.match(/\/pages\/home\/motion\/(\d{2})@sm\.mp4/);
-    const index = match?.[1] || video.dataset.sionTrailIndex;
-    if (!index) return;
-    const source = `/assets/showreel-trail/${index}@sm.mp4`;
-    video.dataset.sionTrailIndex = index;
-    video.muted = true;
-    video.defaultMuted = true;
-    video.playsInline = true;
-    video.preload = 'metadata';
-    video.setAttribute('muted', '');
-    video.setAttribute('playsinline', '');
-    if (video.getAttribute('src') === source) return;
-    video.src = source;
-    video.load();
-  });
-
-  showreel.querySelectorAll('.homeCarouselMotionItem img').forEach((poster) => {
-    const match = poster.currentSrc.match(/\/pages\/home\/motion\/(\d{2})-poster@(lg|sm)\.webp/) ||
-      poster.getAttribute('src')?.match(/\/pages\/home\/motion\/(\d{2})-poster@(lg|sm)\.webp/);
-    const index = match?.[1] || poster.dataset.sionTrailIndex;
-    if (!index) return;
-    poster.dataset.sionTrailIndex = index;
-    const source = `/assets/showreel-trail/${index}-poster.jpg`;
-    if (poster.getAttribute('src') !== source) poster.src = source;
-    poster.removeAttribute('srcset');
-  });
-};
-
-new MutationObserver(syncShowreelTrailAssets).observe(document.documentElement, {
-  childList: true,
-  subtree: true,
-});
-syncShowreelTrailAssets();
+// Use the same reel collection as the production page and cursor trail.
+let showreelReels = [];
+import('/showreel-media.js').then(({ reels }) => { showreelReels = reels; });
 
 const syncFullscreenShowreel = () => {
   const carousel = document.querySelector('.homeCarousel');
   const showreel = carousel?.querySelector('.sionShowreel');
   const title = document.querySelector('.homeCarouselUi__title')?.textContent || '';
-  if (!carousel || !showreel) return;
+  if (!carousel || !showreel || !showreelReels.length) return;
 
   let video = carousel.querySelector('.sionShowreelFullBackground');
   if (!video) {
     video = document.createElement('video');
     video.className = 'sionShowreelFullBackground';
-    video.src = '/pages/home/show-reel/background-clear.mp4';
-    video.poster = '/pages/home/show-reel/poster.jpg';
+    video.dataset.sionReelIndex = '0';
+    video.src = showreelReels[0].src;
+    video.poster = showreelReels[0].poster;
     video.muted = true;
-    video.loop = true;
+    video.loop = false;
     video.playsInline = true;
-    video.preload = 'auto';
+    video.preload = 'metadata';
     video.setAttribute('aria-hidden', 'true');
     video.addEventListener('ended', () => {
       if (!video.classList.contains('is-visible')) return;
-      video.currentTime = 0;
+      const index = (Number(video.dataset.sionReelIndex) + 1) % showreelReels.length;
+      video.dataset.sionReelIndex = String(index);
+      video.src = showreelReels[index].src;
+      video.poster = showreelReels[index].poster;
+      video.load();
       video.play().catch(() => {});
     });
     // This must live inside the showreel panel. The panel has an opaque black
