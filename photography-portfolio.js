@@ -4,7 +4,7 @@
     ...[1, 2, 3].map((number) => `/assets/pitch-portfolio/${name}-detail-${number}.webp`)
   ]);
   const galleryImages = ['hotel', 'food', 'lifestyle', 'portrait', 'street', 'travel'].flatMap((name) => [
-    `/assets/pitch-portfolio/${name}-main.webp`,
+    `/assets/pitch-portfolio/${name === 'travel' ? 'travel-detail-1' : `${name}-main`}.webp`,
     ...[1, 2, 3].map((number) => `/assets/pitch-portfolio/${name}-detail-${number}.webp`)
   ]);
 

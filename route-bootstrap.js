@@ -31,7 +31,7 @@ if (appRoutes.has(staticRoute) || isServicesRoute || isAiSolutionRoute || isDigi
 if (isServicesRoute) {
   window.__SION_SERVICES_ROUTE__ = staticRoute;
   const servicesScript = document.createElement('script');
-  servicesScript.src = '/services-page.js?v=20260920-01';
+  servicesScript.src = '/services-page.js?v=20261028-01';
   document.head.append(servicesScript);
 }
 

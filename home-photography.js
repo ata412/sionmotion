@@ -1,6 +1,6 @@
 (() => {
   const sets = ['hotel', 'food', 'lifestyle', 'portrait', 'street', 'travel'].map((name) => ({
-    background: `/assets/pitch-portfolio/${name}-main.webp`,
+    background: `/assets/pitch-portfolio/${name === 'travel' ? 'travel-detail-1' : `${name}-main`}.webp`,
     details: [1, 2, 3].map((number) => `/assets/pitch-portfolio/${name}-detail-${number}.webp`)
   }));
 

@@ -141,6 +141,14 @@ headerLogoStyle.textContent = `
   .menu .menu__items { scrollbar-width: none; }
   .menu .menu__items::-webkit-scrollbar { display: none; }
   .menu .menu__headerGap, .menu .menu__footer { flex-shrink: 0; }
+  @media (max-width: 900px) {
+    .menu .menu__items .menuItem .menuItem__link {
+      width: calc(100% - 4rem); font-size: clamp(24px, 8vw, 36px);
+      line-height: 1.1; padding-block: 6px; overflow-wrap: anywhere;
+    }
+    .menu .menu__footerInner { flex-wrap: wrap; gap: .5rem 1rem; }
+    .typography .clarksonFamily .layout1Row__title.cta { margin-left: 0; }
+  }
   .sionBackToCarousel {
     position: fixed; left: clamp(1.2rem, 2.5vw, 3rem); bottom: clamp(1.2rem, 2.5vw, 3rem); z-index: 10030;
     display: inline-flex; align-items: center; gap: .8rem; padding: .9rem 1.25rem;
