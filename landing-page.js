@@ -45,6 +45,9 @@
     .sionLanding__hero h1 .sionLanding__heroTailPrompt{color:#fff;display:flex;justify-content:center;white-space:nowrap}
     .sionLanding__hero h1 .sionLanding__heroTailChar{color:#fff;display:inline-block;opacity:0;transform:translateY(.38em);will-change:opacity,transform}
     .sionLanding__heroTailAccent{color:var(--landing-accent);display:block;font:inherit;font-size:1.12em;margin-top:.28em;opacity:0;transform:translateY(.55em);will-change:opacity,transform}
+    html[data-sion-language="en"] .sionLanding__heroHeadlineSecond h1{font-size:clamp(2rem,min(7.5vw,14svh),10rem);line-height:1}
+    html[data-sion-language="en"] .sionLanding__heroHeadlineSecond .sionLanding__heroSecondTail{font-size:1em;line-height:1}
+    html[data-sion-language="en"] .sionLanding__heroTailAccent{white-space:nowrap}
     .sionLanding__heroBottom{align-items:end;border-top:1px solid rgba(255,255,255,.35);display:grid;gap:3rem;grid-template-columns:1fr minmax(26rem,44rem);margin-top:5rem;padding-top:2rem}
     .sionLanding__heroBottom p{font-size:clamp(1.65rem,1.55vw,2.2rem);line-height:1.45;margin:0;text-align:center}
     .sionLanding__anchorNav{display:flex;flex-wrap:wrap;gap:.8rem;justify-content:center}
