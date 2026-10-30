@@ -101,9 +101,6 @@
     .sionLanding__projectMedia{aspect-ratio:9/16}
     .sionLanding__project img,.sionLanding__project video{display:block;height:100%;object-fit:cover;transition:transform 1s cubic-bezier(.16,.84,.32,1);width:100%}
     .sionLanding__project:hover img,.sionLanding__project:hover video{transform:scale(1.025)}
-    .sionLanding__projectMeta{align-items:baseline;border-top:1px solid #555;display:flex;justify-content:space-between;margin-top:1.4rem;padding-top:1.2rem}
-    .sionLanding__projectMeta h3{font:400 clamp(2rem,2.2vw,3.2rem)/1 Clarkson,Arial,sans-serif;letter-spacing:-.04em;margin:0;text-transform:uppercase}
-    .sionLanding__projectMeta span{color:#aaa;font:500 1rem/1 Clarkson,Arial,sans-serif;letter-spacing:.08em;text-transform:uppercase}
     .sionLanding__process{background:var(--landing-accent);color:#111;padding:clamp(9rem,12vw,17rem) 0}
     .sionLanding__processGrid{display:grid;grid-template-columns:repeat(4,1fr);margin-top:7rem}
     .sionLanding__step{border-left:1px solid rgba(0,0,0,.45);display:flex;flex-direction:column;min-height:35rem;padding:0 2.5rem}
@@ -295,16 +292,16 @@
           <div class="sionLanding__workGrid">
             <article class="sionLanding__project sionLanding__reveal"><div class="sionLanding__projectMedia"><video src="/assets/reels/cocktail.mp4" poster="/assets/reels/cocktail.jpg" muted loop playsinline preload="metadata" aria-label="Tastory cocktail reel"></video></div></article>
             <article class="sionLanding__project sionLanding__reveal"><div class="sionLanding__projectMedia"><video src="/assets/reels/coffee.mp4" poster="/assets/reels/coffee.jpg" muted loop playsinline preload="metadata" aria-label="Tastory seaside cafe reel"></video></div></article>
-            <article class="sionLanding__project sionLanding__reveal"><div class="sionLanding__projectMedia"><img src="/assets/pitch-portfolio/hotel-main.webp" alt="Resort architecture and poolside photography" loading="lazy"></div><div class="sionLanding__projectMeta"><h3>Resort & Poolside</h3><span>Hospitality · Photography</span></div></article>
+            <article class="sionLanding__project sionLanding__reveal"><div class="sionLanding__projectMedia"><img src="/assets/pitch-portfolio/hotel-main.webp" alt="Resort architecture and poolside photography" loading="lazy"></div></article>
             <article class="sionLanding__project sionLanding__reveal"><div class="sionLanding__projectMedia"><video src="/assets/reels/msn.mp4" poster="/assets/reels/msn.jpg" muted loop playsinline preload="metadata" aria-label="Interior details reel"></video></div></article>
             <article class="sionLanding__project sionLanding__reveal"><div class="sionLanding__projectMedia"><video src="/assets/reels/morph.mp4" poster="/assets/reels/morph.jpg" muted loop playsinline preload="metadata" aria-label="Morph Bangkok Hotel reel"></video></div></article>
-            <article class="sionLanding__project sionLanding__reveal"><div class="sionLanding__projectMedia"><img src="/assets/pitch-portfolio/portrait-main.webp" alt="Wedding couple photography" loading="lazy"></div><div class="sionLanding__projectMeta"><h3>Wedding Moments</h3><span>Wedding · Photography</span></div></article>
+            <article class="sionLanding__project sionLanding__reveal"><div class="sionLanding__projectMedia"><img src="/assets/pitch-portfolio/portrait-main.webp" alt="Wedding couple photography" loading="lazy"></div></article>
             <article class="sionLanding__project sionLanding__reveal"><div class="sionLanding__projectMedia"><video src="/assets/reels/picnic.mp4" poster="/assets/reels/picnic.jpg" muted loop playsinline preload="metadata" aria-label="Chill Out Farm and Cafe reel"></video></div></article>
             <article class="sionLanding__project sionLanding__reveal"><div class="sionLanding__projectMedia"><video src="/assets/reels/christmas.mp4" poster="/assets/reels/christmas.jpg" muted loop playsinline preload="metadata" aria-label="Christmas at Tastory reel"></video></div></article>
-            <article class="sionLanding__project sionLanding__reveal"><div class="sionLanding__projectMedia"><img src="/assets/pitch-portfolio/food-main.webp" alt="Garden lounge seating photography" loading="lazy"></div><div class="sionLanding__projectMeta"><h3>Garden Lounge</h3><span>Interior · Photography</span></div></article>
+            <article class="sionLanding__project sionLanding__reveal"><div class="sionLanding__projectMedia"><img src="/assets/pitch-portfolio/food-main.webp" alt="Garden lounge seating photography" loading="lazy"></div></article>
             <article class="sionLanding__project sionLanding__reveal"><div class="sionLanding__projectMedia"><video src="/assets/reels/vampire.mp4" poster="/assets/reels/vampire.jpg" muted loop playsinline preload="metadata" aria-label="Vampire's Grill restaurant reel"></video></div></article>
             <article class="sionLanding__project sionLanding__reveal"><div class="sionLanding__projectMedia"><video src="/assets/reels/valentine.mp4" poster="/assets/reels/valentine.jpg" muted loop playsinline preload="metadata" aria-label="Valentine's food reel"></video></div></article>
-            <article class="sionLanding__project sionLanding__reveal"><div class="sionLanding__projectMedia"><img src="/assets/pitch-portfolio/street.webp" alt="Street food stall photography" loading="lazy"></div><div class="sionLanding__projectMeta"><h3>Street Stories</h3><span>Street · Photography</span></div></article>
+            <article class="sionLanding__project sionLanding__reveal"><div class="sionLanding__projectMedia"><img src="/assets/pitch-portfolio/street.webp" alt="Street food stall photography" loading="lazy"></div></article>
           </div>
         </div>
       </section>
