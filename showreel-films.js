@@ -334,19 +334,10 @@ export const films = [
     "height": 1080
   },
   {
-    "original": "VTR นางสาวไทย 2019.mov",
-    "title": "VTR นางสาวไทย 2019",
-    "src": "/assets/showreel-full/film-38.mp4",
-    "poster": "/assets/showreel-full/film-38-poster.webp",
-    "duration": 241.16,
-    "width": 1280,
-    "height": 720
-  },
-  {
     "original": "มูลนิธิกำลังใจ 2.35-1 v.6.mp4",
     "title": "มูลนิธิกำลังใจ 2.35-1 v.6",
-    "src": "/assets/showreel-full/film-39.mp4",
-    "poster": "/assets/showreel-full/film-39-poster.webp",
+    "src": "/assets/showreel-full/film-38.mp4",
+    "poster": "/assets/showreel-full/film-38-poster.webp",
     "duration": 291.48,
     "width": 1280,
     "height": 720
@@ -354,8 +345,8 @@ export const films = [
   {
     "original": "โรงเรียนพระหฤทัยนนทบุรี (ฉบับย่อ).mp4",
     "title": "โรงเรียนพระหฤทัยนนทบุรี (ฉบับย่อ)",
-    "src": "/assets/showreel-full/film-40.mp4",
-    "poster": "/assets/showreel-full/film-40-poster.webp",
+    "src": "/assets/showreel-full/film-39.mp4",
+    "poster": "/assets/showreel-full/film-39-poster.webp",
     "duration": 637.16,
     "width": 1280,
     "height": 720

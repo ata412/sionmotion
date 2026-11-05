@@ -233,6 +233,14 @@
 
   const text = () => copy[document.documentElement.lang === 'en' ? 'en' : 'th'];
 
+  // Hydration replaces the first landing page, and the replacement must still
+  // open the carousel even though the URL has been cleaned by then. The request
+  // ends as soon as the visitor takes over.
+  let returnToCarousel = new URLSearchParams(location.search).get('carousel') === '1';
+  ['touchstart', 'wheel', 'keydown', 'pointerdown'].forEach((type) => {
+    addEventListener(type, () => { returnToCarousel = false; }, { capture: true, passive: true, once: true });
+  });
+
   function createLanding(page) {
     if (page.querySelector(':scope > .sionLanding')) return;
     const t = text();
@@ -533,7 +541,7 @@
       updateCarouselAccess();
     }, 500);
     updateCarouselAccess();
-    if (new URLSearchParams(location.search).get('carousel') === '1') {
+    if (returnToCarousel) {
       requestAnimationFrame(() => {
         scrollTo(0, Math.max(0, document.documentElement.scrollHeight - innerHeight));
         updateCarouselAccess();

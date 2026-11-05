@@ -5,20 +5,40 @@ import { featuredFilms, featuredMedia } from '../showreel-featured.js';
 
 const copy = (en, th) => document.documentElement.dataset.sionLanguage === 'th' ? th : en;
 
-// Keep the existing layouts while assigning every video to the local reel set.
-let nextReel = 6;
+// Show each local reel once. The opening cards use reels 1-4, so the sections
+// below draw from the rest and any layout that cannot be filled is left out.
+const reelQueue = reels.map((_, index) => index).filter((index) => index < 1 || index > 4);
+reelQueue.push(...reelQueue.splice(0, reelQueue.indexOf(6)));
+const countVideos = (value) => {
+  if (Array.isArray(value)) return value.reduce((total, item) => total + countVideos(item), 0);
+  if (!value || typeof value !== 'object') return 0;
+  if (value.media?.type === 'video') return 1;
+  return Object.values(value).reduce((total, item) => total + countVideos(item), 0);
+};
+let unassignedReels = reelQueue.length;
+const fittingComponents = motion.components.filter((section) => {
+  if (section.id === 'motionIntro') return true;
+  const needed = countVideos(section);
+  if (needed > unassignedReels) return false;
+  unassignedReels -= needed;
+  return true;
+});
+const withSpareSlides = (section) => section.id === 'carouselBasic' ? {
+  ...section,
+  slides: [...section.slides, ...Array(unassignedReels).fill(section.slides.at(-1))],
+} : section;
+let nextReel = 0;
 const replaceMedia = (value) => {
   if (Array.isArray(value)) return value.map(replaceMedia);
   if (!value || typeof value !== 'object') return value;
   if (value.media?.type === 'video') {
-    const index = nextReel++ % reels.length;
-    return { ...value, media: reelMedia(index), caption: '' };
+    return { ...value, media: reelMedia(reelQueue[nextReel++]), caption: '' };
   }
   return Object.fromEntries(Object.entries(value).map(([key, item]) =>
     [key, key === 'caption' ? '' : replaceMedia(item)]));
 };
 
-const sections = motion.components.map((section) => {
+const sections = fittingComponents.map(withSpareSlides).map((section) => {
   if (section.id === 'motionIntro') {
     return { ...section, media: Array.from({ length: 6 }, (_, index) =>
       featuredFilms[index] ? featuredMedia(featuredFilms[index]) : reelMedia(index)) };

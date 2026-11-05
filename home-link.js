@@ -309,11 +309,14 @@ addEventListener('touchend', (event) => {
   if (!carouselTouchStart || !document.body.classList.contains('sionLandingCarouselReady')) return;
   const touch = event.changedTouches[0];
   if (!touch) return;
-  event.preventDefault();
-  event.stopImmediatePropagation();
   const deltaX = carouselTouchStart.x - touch.clientX;
   const deltaY = carouselTouchStart.y - touch.clientY;
   carouselTouchStart = null;
+  // A tap is not a gesture: let the browser fire its click so chapters and
+  // arrows respond on touch screens the same way they do with a mouse.
+  if (Math.abs(deltaX) < 10 && Math.abs(deltaY) < 10) return;
+  event.preventDefault();
+  event.stopImmediatePropagation();
   if (Math.abs(deltaY) > Math.abs(deltaX) && deltaY < -30) {
     // Pull down to return to the landing page; horizontal swipes keep
     // navigating chapters without releasing the carousel scroll lock.
@@ -325,6 +328,21 @@ addEventListener('touchend', (event) => {
   if (Math.abs(movement) > 30) moveCarousel(movement);
 }, { capture: true, passive: false });
 addEventListener('touchcancel', () => { carouselTouchStart = null; }, { capture: true, passive: true });
+// The full-screen Show Reel slide stacks above the carousel arrows, so a press
+// on an arrow would open that slide. Give the press back to the arrow under it.
+document.addEventListener('click', (event) => {
+  if (!event.isTrusted || !document.body.classList.contains('sionLandingCarouselReady')) return;
+  if (event.target.closest?.('.menu, .header__top, .homeCarouselUi__arrowLeft, .homeCarouselUi__arrowRight')) return;
+  const arrow = [...document.querySelectorAll('.homeCarouselUi__arrowLeft, .homeCarouselUi__arrowRight')].find((button) => {
+    const box = button.getBoundingClientRect();
+    return event.clientX >= box.left - 8 && event.clientX <= box.right + 8
+      && event.clientY >= box.top - 8 && event.clientY <= box.bottom + 8;
+  });
+  if (!arrow) return;
+  event.preventDefault();
+  event.stopImmediatePropagation();
+  arrow.click();
+}, true);
 addEventListener('pointerdown', (event) => {
   if (!document.body.classList.contains('sionLandingCarouselReady')) return;
   if (event.target.closest('.homeCarouselUi__arrowLeft, .homeCarouselUi__arrowRight')) {
@@ -340,7 +358,7 @@ addEventListener('keydown', (event) => {
 
 if (!document.querySelector('script[data-sion-landing]')) {
   const landingScript = document.createElement('script');
-  landingScript.src = '/landing-page.js?v=20261030-02';
+  landingScript.src = '/landing-page.js?v=20261105-01';
   landingScript.dataset.sionLanding = 'true';
   landingScript.addEventListener('error', () => {
     document.documentElement.classList.remove('sionLandingPending');
@@ -506,6 +524,26 @@ const syncDigitalMarketingMenu = () => {
 new MutationObserver(syncDigitalMarketingMenu).observe(document.documentElement, { childList: true, subtree: true });
 syncDigitalMarketingMenu();
 
+// The cloned menu already lists these two pages, so the fallbacks above never
+// run, but its router has no such routes and would land on /404. They are
+// standalone documents, so open them with a full page load instead.
+const standaloneMenuPages = [
+  [/ai\s*solution/i, '/ai-solution'],
+  [/digital\s*marketing/i, '/digital-marketing'],
+];
+const openStandaloneMenuPage = (event) => {
+  if (event.type === 'keydown' && event.key !== 'Enter' && event.key !== ' ') return;
+  const item = event.target.closest?.('.menu .menuItem');
+  if (!item) return;
+  const page = standaloneMenuPages.find(([label]) => label.test(item.textContent || ''));
+  if (!page) return;
+  event.preventDefault();
+  event.stopImmediatePropagation();
+  window.location.assign(page[1]);
+};
+document.addEventListener('click', openStandaloneMenuPage, true);
+document.addEventListener('keydown', openStandaloneMenuPage, true);
+
 // Add a visible navigation bar to the original pages and expose Services in
 // the full-screen Index menu. Both are re-mounted after Nuxt route changes.
 const globalNavItems = [
@@ -663,7 +701,9 @@ new MutationObserver(syncDigitalMarketingCarouselSlide).observe(document.documen
 syncDigitalMarketingCarouselSlide();
 
 document.addEventListener('click', (event) => {
-  if (!event.target.closest('.sionAiCarouselItem')) return;
+  // Any press on the open slide navigates, not only one on its artwork, and the
+  // cloned router has no route for this standalone page.
+  if (!event.target.closest('.homeCarousel') || event.target.closest('.homeCarouselUi__arrows')) return;
   if (!/ai\s*solution/i.test(document.querySelector('.homeCarouselUi__title')?.textContent || '')) return;
   event.preventDefault();
   event.stopImmediatePropagation();
@@ -671,7 +711,9 @@ document.addEventListener('click', (event) => {
 }, true);
 
 document.addEventListener('click', (event) => {
-  if (!event.target.closest('.sionDigitalCarouselItem')) return;
+  // Any press on the open slide navigates, not only one on its artwork, and the
+  // cloned router has no route for this standalone page.
+  if (!event.target.closest('.homeCarousel') || event.target.closest('.homeCarouselUi__arrows')) return;
   if (!/digital\s*marketing/i.test(document.querySelector('.homeCarouselUi__title')?.textContent || '')) return;
   event.preventDefault();
   event.stopImmediatePropagation();
