@@ -1,4 +1,42 @@
 {
+  "headers": [
+    {
+      "source": "/assets/(.*)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=604800, stale-while-revalidate=2592000"
+        }
+      ]
+    },
+    {
+      "source": "/pages/(.*)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=604800, stale-while-revalidate=2592000"
+        }
+      ]
+    },
+    {
+      "source": "/fonts/(.*)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=604800, stale-while-revalidate=2592000"
+        }
+      ]
+    },
+    {
+      "source": "/_nuxt/(.*)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=3600, stale-while-revalidate=86400"
+        }
+      ]
+    }
+  ],
   "rewrites": [
     {
       "source": "/about-us",
@@ -13,11 +51,23 @@
       "destination": "/digital-marketing.html"
     },
     {
+      "source": "/digital-marketing/",
+      "destination": "/digital-marketing.html"
+    },
+    {
       "source": "/ai-solution",
       "destination": "/ai-solution.html"
     },
     {
+      "source": "/ai-solution/",
+      "destination": "/ai-solution.html"
+    },
+    {
       "source": "/packages",
+      "destination": "/packages.html"
+    },
+    {
+      "source": "/packages/",
       "destination": "/packages.html"
     },
     {
@@ -29,7 +79,59 @@
       "destination": "/services.html"
     },
     {
-      "source": "/(.*)",
+      "source": "/logo",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/logo/",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/typography",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/typography/",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/color",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/color/",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/photography",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/photography/",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/campaign",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/campaign/",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/motion",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/motion/",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/commercial-production",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/commercial-production/",
       "destination": "/index.html"
     }
   ]

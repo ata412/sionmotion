@@ -727,7 +727,7 @@ const syncFullscreenShowreel = () => {
     video.muted = true;
     video.loop = false;
     video.playsInline = true;
-    video.preload = 'metadata';
+    video.preload = 'none';
     video.setAttribute('aria-hidden', 'true');
     video.addEventListener('ended', () => {
       if (!video.classList.contains('is-visible')) return;

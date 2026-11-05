@@ -31,21 +31,21 @@
     .sionLanding__heroInner{position:relative;text-align:center;width:100%;z-index:1}
     .sionLanding__eyebrow{align-items:center;display:flex;font:500 1.1rem/1 Clarkson,Arial,sans-serif;gap:1rem;justify-content:center;letter-spacing:.12em;margin:0 0 2.4rem;text-transform:uppercase}
     .sionLanding__eyebrow:before{background:currentColor;border-radius:50%;content:"";height:.7rem;width:.7rem}
-    .sionLanding__hero h1{font:400 clamp(6rem,11.2vw,16rem)/.78 Clarkson,Arial,sans-serif;letter-spacing:-.075em;margin:0;max-width:12ch;text-transform:uppercase}
-    .sionLanding__hero h1 span{color:var(--landing-accent)}
-    html[data-sion-language="th"] .sionLanding__hero h1{font-family:var(--font-ptt45pride),Tahoma,sans-serif;font-size:clamp(5.5rem,8.5vw,12rem);font-weight:700;letter-spacing:-.045em;line-height:.84;max-width:none;text-transform:none}
+    .sionLanding__hero .sionLanding__heading{font:400 clamp(6rem,11.2vw,16rem)/.78 Clarkson,Arial,sans-serif;letter-spacing:-.075em;margin:0;max-width:12ch;text-transform:uppercase}
+    .sionLanding__hero .sionLanding__heading span{color:var(--landing-accent)}
+    html[data-sion-language="th"] .sionLanding__hero .sionLanding__heading{font-family:var(--font-ptt45pride),Tahoma,sans-serif;font-size:clamp(5.5rem,8.5vw,12rem);font-weight:700;letter-spacing:-.045em;line-height:.84;max-width:none;text-transform:none}
     .sionLanding__heroSequence{display:grid;justify-items:center;position:relative}
     .sionLanding__heroHeadline{align-items:center;display:flex;justify-content:center;margin:0 auto;width:fit-content;will-change:opacity,transform}
     .sionLanding__heroLogoSlot{flex:0 0 auto;margin-left:0;overflow:hidden;width:0}
     .sionLanding__heroLogo{display:block;height:auto;opacity:0;transform:translateX(-2.5rem) scale(.94);transform-origin:left center;width:clamp(14rem,18vw,26rem);will-change:clip-path,opacity,transform}
     .sionLanding__heroHeadlineSecond{left:50%;position:absolute;top:50%;transform:translate(-50%,-50%);width:100%}
-    .sionLanding__heroHeadlineSecond h1{display:grid;margin-left:auto;margin-right:auto;max-width:none;place-items:center;text-align:center;width:100%}
-    .sionLanding__heroHeadlineSecond h1>.sionLanding__heroSecondLead,.sionLanding__heroHeadlineSecond h1>.sionLanding__heroSecondTail{color:#fff;display:block;grid-area:1/1;opacity:0;will-change:opacity,transform}
+    .sionLanding__heroHeadlineSecond .sionLanding__heading{display:grid;margin-left:auto;margin-right:auto;max-width:none;place-items:center;text-align:center;width:100%}
+    .sionLanding__heroHeadlineSecond .sionLanding__heading>.sionLanding__heroSecondLead,.sionLanding__heroHeadlineSecond .sionLanding__heading>.sionLanding__heroSecondTail{color:#fff;display:block;grid-area:1/1;opacity:0;will-change:opacity,transform}
     .sionLanding__heroHeadlineSecond .sionLanding__heroSecondTail{font-size:1.2em;line-height:.82}
-    .sionLanding__hero h1 .sionLanding__heroTailPrompt{color:#fff;display:flex;justify-content:center;white-space:nowrap}
-    .sionLanding__hero h1 .sionLanding__heroTailChar{color:#fff;display:inline-block;opacity:0;transform:translateY(.38em);will-change:opacity,transform}
+    .sionLanding__hero .sionLanding__heading .sionLanding__heroTailPrompt{color:#fff;display:flex;justify-content:center;white-space:nowrap}
+    .sionLanding__hero .sionLanding__heading .sionLanding__heroTailChar{color:#fff;display:inline-block;opacity:0;transform:translateY(.38em);will-change:opacity,transform}
     .sionLanding__heroTailAccent{color:var(--landing-accent);display:block;font:inherit;font-size:1.12em;margin-top:.28em;opacity:0;transform:translateY(.55em);will-change:opacity,transform}
-    html[data-sion-language="en"] .sionLanding__heroHeadlineSecond h1{font-size:clamp(2rem,min(7.5vw,14svh),10rem);line-height:1}
+    html[data-sion-language="en"] .sionLanding__heroHeadlineSecond .sionLanding__heading{font-size:clamp(2rem,min(7.5vw,14svh),10rem);line-height:1}
     html[data-sion-language="en"] .sionLanding__heroHeadlineSecond .sionLanding__heroSecondTail{font-size:1em;line-height:1}
     html[data-sion-language="en"] .sionLanding__heroTailAccent{white-space:nowrap}
     .sionLanding__heroBottom{align-items:end;border-top:1px solid rgba(255,255,255,.35);display:grid;gap:3rem;grid-template-columns:1fr minmax(26rem,44rem);margin-top:5rem;padding-top:2rem}
@@ -130,8 +130,8 @@
       .sionLanding__marketingCard{min-height:42rem}
     }
     @media(max-width:800px){
-      .sionLanding__heroSticky{padding-bottom:3rem;padding-top:calc(var(--headerHeight,8.8rem) + 2rem)}.sionLanding__hero h1{font-size:clamp(5.4rem,18vw,9rem)}
-      html[data-sion-language="th"] .sionLanding__hero h1{font-size:clamp(5.5rem,14.5vw,7rem)}
+      .sionLanding__heroSticky{padding-bottom:3rem;padding-top:calc(var(--headerHeight,8.8rem) + 2rem)}.sionLanding__hero .sionLanding__heading{font-size:clamp(5.4rem,18vw,9rem)}
+      html[data-sion-language="th"] .sionLanding__hero .sionLanding__heading{font-size:clamp(5.5rem,14.5vw,7rem)}
       .sionLanding__heroLogo{width:clamp(10rem,27vw,14rem)}
       .sionLanding__heroHeadlineSecond .sionLanding__heroSecondTail{font-size:clamp(4rem,16vw,6rem)}
       .sionLanding__heroBottom,.sionLanding__introText,.sionLanding__sectionHead{grid-template-columns:1fr}
@@ -245,10 +245,10 @@
             <p class="sionLanding__eyebrow">Sion Motion</p>
             <div class="sionLanding__heroSequence">
               <div class="sionLanding__heroHeadline">
-                <h1>${t.headline}</h1>
+                <div class="sionLanding__heading">${t.headline}</div>
                 <div class="sionLanding__heroLogoSlot"><img class="sionLanding__heroLogo" src="/assets/sion-motion-logo-header.png" alt="Sion Motion" width="312" height="496"></div>
               </div>
-              <div class="sionLanding__heroHeadlineSecond"><h1><span class="sionLanding__heroSecondLead">${t.secondLead}</span><span class="sionLanding__heroSecondTail"><span class="sionLanding__heroTailPrompt">${t.secondTail}<span class="sionLanding__heroTailChar">.</span><span class="sionLanding__heroTailChar">.</span><span class="sionLanding__heroTailChar">.</span><span class="sionLanding__heroTailChar">?</span></span><strong class="sionLanding__heroTailAccent">${t.secondAccent}</strong></span></h1></div>
+              <div class="sionLanding__heroHeadlineSecond"><div class="sionLanding__heading"><span class="sionLanding__heroSecondLead">${t.secondLead}</span><span class="sionLanding__heroSecondTail"><span class="sionLanding__heroTailPrompt">${t.secondTail}<span class="sionLanding__heroTailChar">.</span><span class="sionLanding__heroTailChar">.</span><span class="sionLanding__heroTailChar">.</span><span class="sionLanding__heroTailChar">?</span></span><strong class="sionLanding__heroTailAccent">${t.secondAccent}</strong></span></div></div>
             </div>
             <div class="sionLanding__heroBottom">
               <div class="sionLanding__heroActions"><div class="sionLanding__contactPrompt"><span>${t.consultation}</span><a href="https://line.me/ti/p/dfPg1ktRiT" target="_blank" rel="noopener noreferrer">LINE</a><a href="tel:0972082873" aria-label="Phone 0972082873">PHONE · 0972082873</a></div><nav class="sionLanding__anchorNav" aria-label="Landing page sections"><a href="#sion-capabilities">Capabilities</a><a href="#sion-work">Work</a><a href="#sion-process">Process</a></nav></div>
@@ -290,17 +290,17 @@
         <div class="sionLanding__wrap">
           <div class="sionLanding__sectionHead sionLanding__reveal"><div><p class="sionLanding__kicker">Selected Direction</p><h2>Work that<br>moves people.</h2></div><p>${t.work}</p></div>
           <div class="sionLanding__workGrid">
-            <article class="sionLanding__project sionLanding__reveal"><div class="sionLanding__projectMedia"><video src="/assets/reels/cocktail.mp4" poster="/assets/reels/cocktail.jpg" muted loop playsinline preload="metadata" aria-label="Tastory cocktail reel"></video></div></article>
-            <article class="sionLanding__project sionLanding__reveal"><div class="sionLanding__projectMedia"><video src="/assets/reels/coffee.mp4" poster="/assets/reels/coffee.jpg" muted loop playsinline preload="metadata" aria-label="Tastory seaside cafe reel"></video></div></article>
+            <article class="sionLanding__project sionLanding__reveal"><div class="sionLanding__projectMedia"><video src="/assets/reels/cocktail.mp4" poster="/assets/reels/cocktail.jpg" muted loop playsinline preload="none" aria-label="Tastory cocktail reel"></video></div></article>
+            <article class="sionLanding__project sionLanding__reveal"><div class="sionLanding__projectMedia"><video src="/assets/reels/coffee.mp4" poster="/assets/reels/coffee.jpg" muted loop playsinline preload="none" aria-label="Tastory seaside cafe reel"></video></div></article>
             <article class="sionLanding__project sionLanding__reveal"><div class="sionLanding__projectMedia"><img src="/assets/pitch-portfolio/hotel-main.webp" alt="Resort architecture and poolside photography" loading="lazy"></div></article>
-            <article class="sionLanding__project sionLanding__reveal"><div class="sionLanding__projectMedia"><video src="/assets/reels/msn.mp4" poster="/assets/reels/msn.jpg" muted loop playsinline preload="metadata" aria-label="Interior details reel"></video></div></article>
-            <article class="sionLanding__project sionLanding__reveal"><div class="sionLanding__projectMedia"><video src="/assets/reels/morph.mp4" poster="/assets/reels/morph.jpg" muted loop playsinline preload="metadata" aria-label="Morph Bangkok Hotel reel"></video></div></article>
+            <article class="sionLanding__project sionLanding__reveal"><div class="sionLanding__projectMedia"><video src="/assets/reels/msn.mp4" poster="/assets/reels/msn.jpg" muted loop playsinline preload="none" aria-label="Interior details reel"></video></div></article>
+            <article class="sionLanding__project sionLanding__reveal"><div class="sionLanding__projectMedia"><video src="/assets/reels/morph.mp4" poster="/assets/reels/morph.jpg" muted loop playsinline preload="none" aria-label="Morph Bangkok Hotel reel"></video></div></article>
             <article class="sionLanding__project sionLanding__reveal"><div class="sionLanding__projectMedia"><img src="/assets/pitch-portfolio/portrait-main.webp" alt="Wedding couple photography" loading="lazy"></div></article>
-            <article class="sionLanding__project sionLanding__reveal"><div class="sionLanding__projectMedia"><video src="/assets/reels/picnic.mp4" poster="/assets/reels/picnic.jpg" muted loop playsinline preload="metadata" aria-label="Chill Out Farm and Cafe reel"></video></div></article>
-            <article class="sionLanding__project sionLanding__reveal"><div class="sionLanding__projectMedia"><video src="/assets/reels/christmas.mp4" poster="/assets/reels/christmas.jpg" muted loop playsinline preload="metadata" aria-label="Christmas at Tastory reel"></video></div></article>
+            <article class="sionLanding__project sionLanding__reveal"><div class="sionLanding__projectMedia"><video src="/assets/reels/picnic.mp4" poster="/assets/reels/picnic.jpg" muted loop playsinline preload="none" aria-label="Chill Out Farm and Cafe reel"></video></div></article>
+            <article class="sionLanding__project sionLanding__reveal"><div class="sionLanding__projectMedia"><video src="/assets/reels/christmas.mp4" poster="/assets/reels/christmas.jpg" muted loop playsinline preload="none" aria-label="Christmas at Tastory reel"></video></div></article>
             <article class="sionLanding__project sionLanding__reveal"><div class="sionLanding__projectMedia"><img src="/assets/pitch-portfolio/food-main.webp" alt="Garden lounge seating photography" loading="lazy"></div></article>
-            <article class="sionLanding__project sionLanding__reveal"><div class="sionLanding__projectMedia"><video src="/assets/reels/vampire.mp4" poster="/assets/reels/vampire.jpg" muted loop playsinline preload="metadata" aria-label="Vampire's Grill restaurant reel"></video></div></article>
-            <article class="sionLanding__project sionLanding__reveal"><div class="sionLanding__projectMedia"><video src="/assets/reels/valentine.mp4" poster="/assets/reels/valentine.jpg" muted loop playsinline preload="metadata" aria-label="Valentine's food reel"></video></div></article>
+            <article class="sionLanding__project sionLanding__reveal"><div class="sionLanding__projectMedia"><video src="/assets/reels/vampire.mp4" poster="/assets/reels/vampire.jpg" muted loop playsinline preload="none" aria-label="Vampire's Grill restaurant reel"></video></div></article>
+            <article class="sionLanding__project sionLanding__reveal"><div class="sionLanding__projectMedia"><video src="/assets/reels/valentine.mp4" poster="/assets/reels/valentine.jpg" muted loop playsinline preload="none" aria-label="Valentine's food reel"></video></div></article>
             <article class="sionLanding__project sionLanding__reveal"><div class="sionLanding__projectMedia"><img src="/assets/pitch-portfolio/street.webp" alt="Street food stall photography" loading="lazy"></div></article>
           </div>
         </div>

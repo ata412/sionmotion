@@ -2,6 +2,23 @@
 // from its own component when it is opened directly or refreshed.
 const staticRoute = location.pathname.replace(/\/$/, '');
 
+// Nuxt renders the home title as "Sion Motion | Sion Motion"; keep a descriptive one.
+const homeTitle = 'Sion Motion — Production, Digital Marketing, AI และ Web Design';
+const fixHomeTitle = () => {
+  if (location.pathname === '/' && document.title !== homeTitle && /^Sion Motion( \| Sion Motion)?$/.test(document.title)) {
+    document.title = homeTitle;
+  }
+};
+new MutationObserver(fixHomeTitle).observe(document.head, { childList: true, subtree: true, characterData: true });
+fixHomeTitle();
+
+if (!document.querySelector('link[rel="canonical"]')) {
+  const canonical = document.createElement('link');
+  canonical.rel = 'canonical';
+  canonical.href = `https://www.sionmotion.com${staticRoute || '/'}`;
+  document.head.append(canonical);
+}
+
 const appRoutes = new Set([
   '/logo',
   '/typography',

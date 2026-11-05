@@ -16,7 +16,8 @@
 </head>
 <body>
   <div id="__nuxt"></div>
-  <script>window.__SION_SERVICES_ROUTE__ = location.pathname.replace(/\/$/, '') || '/services';</script>
+  <script>window.__SION_SERVICES_ROUTE__ = location.pathname.replace(/\/$/, '') || '/services';
+    const canonical = document.createElement('link'); canonical.rel = 'canonical'; canonical.href = 'https://www.sionmotion.com' + window.__SION_SERVICES_ROUTE__; document.head.append(canonical);</script>
   <script src="/services-page.js?v=20261028-01"></script>
 </body>
 </html>
