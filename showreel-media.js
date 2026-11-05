@@ -170,14 +170,6 @@ export const reels = [
     "height": 1280
   },
   {
-    "original": "2.MP4",
-    "title": "2",
-    "src": "/assets/showreel/reel-2.mp4",
-    "poster": "/assets/showreel/reel-2-poster.webp",
-    "width": 720,
-    "height": 1280
-  },
-  {
     "original": "TEST.mp4",
     "title": "TEST",
     "src": "/assets/showreel/test.mp4",

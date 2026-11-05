@@ -48,18 +48,18 @@ if (appRoutes.has(staticRoute) || isServicesRoute || isAiSolutionRoute || isDigi
 if (isServicesRoute) {
   window.__SION_SERVICES_ROUTE__ = staticRoute;
   const servicesScript = document.createElement('script');
-  servicesScript.src = '/services-page.js?v=20261028-01';
+  servicesScript.src = '/services-page.js?v=20261105-01';
   document.head.append(servicesScript);
 }
 
 if (isAiSolutionRoute) {
   const aiSolutionScript = document.createElement('script');
-  aiSolutionScript.src = '/ai-solution-page.js?v=20260920-03';
+  aiSolutionScript.src = '/ai-solution-page.js?v=20261105-02';
   document.head.append(aiSolutionScript);
 }
 
 if (isDigitalMarketingRoute) {
   const digitalMarketingScript = document.createElement('script');
-  digitalMarketingScript.src = '/digital-marketing-page.js?v=20260921-01';
+  digitalMarketingScript.src = '/digital-marketing-page.js?v=20261105-02';
   document.head.append(digitalMarketingScript);
 }

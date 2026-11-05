@@ -159,7 +159,29 @@ headerLogoStyle.textContent = `
   .sionBackToCarousel:hover { background: #fff; color: #111; transform: translateX(-.3rem); }
   .sionBackToCarousel span { font-size: 1.3em; line-height: .7; }
   @media (max-width: 767px) {
-    .sionBackToCarousel { font-size: .75rem; padding: .8rem 1rem; }
+    .sionBackToCarousel { font-size: max(.75rem, 11px); padding: .8rem 1rem; }
+    .sionGlobalNav { font-size: max(.9rem, 11px); }
+    .sionShowreelSoundToggle, .sionCapabilities__index, .sionMarketing__eyebrow, .sionMarketing__cta,
+    .sionMarketing__cardMeta, .sionReasons__eyebrow, .sionReasons__number, .sionFaq__eyebrow,
+    .sionFaq__number, .sionPackages__eyebrow, .sionPackages__number,
+    .sionAiCarousel__copy span, .sionDigitalCarousel__copy span, .sionAiCarousel__count,
+    .sionDigitalCarousel__channel, .sionAiCarousel__box::before { font-size: 10px !important; }
+  }
+  /* Added menu rows follow the original rows when the menu dims the inactive ones. */
+  .menu__items:has(.menuItem.dimmed) .menuItem[data-sion-menu-fallback]:not(:hover) { opacity: .3; }
+  /* Fit every row above the menu footer on short phones. */
+  @media (max-width: 900px) and (max-height: 640px) {
+    .menu .menu__items .menuItem .menuItem__link { font-size: 20px; padding-block: 3px; }
+  }
+  @media (hover: none) {
+    /* A hint that follows the mouse has no position to follow on a touch screen. */
+    .tapToExplore { display: none !important; }
+    /* Let page content through when the header hides on the way down. */
+    .sionGlobalNav__packages, .sionBackToCarousel { transition: opacity .25s ease; }
+    body:not(:has(.sionLanding)) .header__top:not(.menuOpen):has(.header__name:not(.visible)) .sionGlobalNav__packages,
+    body:not(:has(.sionLanding)):has(.header__top:not(.menuOpen) .header__name:not(.visible)) .sionBackToCarousel {
+      opacity: 0; pointer-events: none !important;
+    }
   }
 `;
 document.head.append(headerLogoStyle);
@@ -239,14 +261,47 @@ if (location.pathname === '/' || location.pathname === '/index.html') {
 const nativeMediaPlay = HTMLMediaElement.prototype.play;
 if (!HTMLMediaElement.prototype.sionSafePlay) {
   Object.defineProperty(HTMLMediaElement.prototype, 'sionSafePlay', { value: true });
+  // The carousel stays mounted behind the landing page. Hold its videos until
+  // it opens so visitors do not download footage they cannot see.
+  const nativeMediaPause = HTMLMediaElement.prototype.pause;
+  const heldCarouselVideos = new Set();
+  const carouselIsHidden = () => (
+    document.documentElement.classList.contains('sionLandingPending') || document.querySelector('.sionLanding')
+  ) && !document.body?.classList.contains('sionLandingCarouselOpening');
   HTMLMediaElement.prototype.play = function (...args) {
     if (this.classList?.contains('sionShowreel__background')) {
       this.muted = true;
       this.defaultMuted = true;
       this.setAttribute('muted', '');
     }
+    if (this.closest?.('.homeCarousel') && carouselIsHidden()) {
+      heldCarouselVideos.add(this);
+      return Promise.resolve();
+    }
     return nativeMediaPlay.apply(this, args);
   };
+  HTMLMediaElement.prototype.pause = function (...args) {
+    heldCarouselVideos.delete(this);
+    return nativeMediaPause.apply(this, args);
+  };
+  const syncHeldCarouselVideos = () => {
+    if (carouselIsHidden()) {
+      document.querySelectorAll('.homeCarousel video').forEach((video) => {
+        if (video.paused) return;
+        nativeMediaPause.call(video);
+        heldCarouselVideos.add(video);
+      });
+      return;
+    }
+    heldCarouselVideos.forEach((video) => {
+      if (video.isConnected) nativeMediaPlay.call(video)?.catch?.(() => {});
+    });
+    heldCarouselVideos.clear();
+  };
+  const watchCarouselOpening = () => new MutationObserver(syncHeldCarouselVideos)
+    .observe(document.body, { attributes: true, attributeFilter: ['class'] });
+  if (document.body) watchCarouselOpening();
+  else document.addEventListener('DOMContentLoaded', watchCarouselOpening, { once: true });
 }
 
 const blockCarouselInputBehindLanding = (event) => {
@@ -358,7 +413,7 @@ addEventListener('keydown', (event) => {
 
 if (!document.querySelector('script[data-sion-landing]')) {
   const landingScript = document.createElement('script');
-  landingScript.src = '/landing-page.js?v=20261105-01';
+  landingScript.src = '/landing-page.js?v=20261105-03';
   landingScript.dataset.sionLanding = 'true';
   landingScript.addEventListener('error', () => {
     document.documentElement.classList.remove('sionLandingPending');

@@ -22,6 +22,9 @@
         bottom: calc(var(--headerHeight, 80px) + var(--consentBannerHeight, 0px) + 16px);
       }
     }
+    @media (min-width: 768px) and (max-height: 500px) {
+      body:not(:has(.homeCarousel)) > .sionLanguage { position: absolute; top: 9rem; bottom: auto; }
+    }
     @media (max-width: 767px) {
       body > .sionLanguage { display: none; }
       .menu__footer:has(> .sionLanguage) {

@@ -32,7 +32,6 @@ FILES = [
     ('valentine_s day_1.mp4', 'valentine'),
     ('Mother_s day.mp4', 'mothers-day'),
     ('I Will Follow You (1963).mp4', 'i-will-follow-you'),
-    ('2.MP4', 'reel-2'),
     ('TEST.mp4', 'test'),
 ]
 

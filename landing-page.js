@@ -156,6 +156,23 @@
       .sionLanding__step:first-child{border-top:0}.sionLanding__step h3{margin:6rem 0 1.5rem}
       .sionLanding__project:nth-child(n) .sionLanding__projectMedia{aspect-ratio:9/16}
     }
+    @media(max-width:1100px) and (min-width:801px){
+      .sionLanding__service{grid-template-columns:5rem minmax(0,1fr) minmax(0,1.2fr) 3rem}
+    }
+    @media(max-height:500px) and (orientation:landscape){
+      .sionLanding__heroSticky{align-items:flex-start;padding:calc(var(--headerHeight,8.8rem) + .25rem) 0 .5rem}
+      .sionLanding__eyebrow{display:none}
+      .sionLanding__hero .sionLanding__heading,html[data-sion-language="th"] .sionLanding__hero .sionLanding__heading{font-size:clamp(3rem,15vh,5.5rem)}
+      .sionLanding__heroSequence,.sionLanding__heroHeadline,.sionLanding__heroLogoSlot{height:calc(100svh - var(--headerHeight,5.4rem) - 12rem);min-height:0}
+      .sionLanding__heroHeadlineSecond{inset:0;height:100%}
+      .sionLanding__heroLogo{width:clamp(6rem,22vh,9rem)}
+      .sionLanding__heroHeadlineSecond .sionLanding__heroSecondTail{font-size:clamp(2.6rem,12vh,4rem)}
+      .sionLanding__heroBottom{align-items:center;gap:1.5rem;grid-template-columns:1fr;margin-top:.5rem;padding-top:.6rem}
+      .sionLanding__heroActions{gap:.5rem}
+      .sionLanding__contactPrompt,.sionLanding__anchorNav{flex-wrap:nowrap;justify-content:flex-start}
+      .sionLanding__contactPrompt a,.sionLanding__anchorNav a{padding:.65rem 1rem;white-space:nowrap}
+      .sionLanding__heroBottom p{display:none}
+    }
     @media(prefers-reduced-motion:reduce){.sionLanding__reveal{opacity:1;transform:none}.sionLanding__project img,.sionLanding__portalLabel:after{animation:none;transition:none}}
   `;
   document.head.append(style);
