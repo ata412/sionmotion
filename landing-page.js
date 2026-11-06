@@ -71,26 +71,40 @@
     .sionLanding__sectionHead p{font-size:clamp(1.6rem,1.45vw,2.1rem);line-height:1.55;margin:0}
     .sionLanding__service{align-items:center;border-top:1px solid #bdbab4;color:inherit;display:grid;gap:3rem;grid-template-columns:7rem 1fr minmax(26rem,42rem) 3rem;min-height:15rem;padding:2.4rem 0;text-decoration:none;transition:background-color .35s ease,padding .35s ease}
     .sionLanding__service:last-child{border-bottom:1px solid #bdbab4}
-    .sionLanding__service:hover{background:#f4f2ed;padding-left:1.5rem;padding-right:1.5rem}
+    .sionLanding__serviceNum,.sionLanding__service h3,.sionLanding__service p{transition:color .3s,opacity .3s,transform .55s cubic-bezier(.16,1,.3,1)}
+    .sionLanding__service:is(:hover,:focus-visible,.is-focus) h3{transform:translateX(1.6rem)}
+    .sionLanding__service:is(:hover,:focus-visible,.is-focus) .sionLanding__serviceNum{color:var(--landing-accent)}
+    .sionLanding__services.is-previewing .sionLanding__service:not(:hover,:focus-visible) :is(h3,p,.sionLanding__serviceNum,.sionLanding__serviceArrow){opacity:.28}
+    .sionLanding__preview{--size:clamp(19rem,20vw,28rem);aspect-ratio:9/16;background:#111;clip-path:inset(50% 0 50% 0);left:0;overflow:hidden;pointer-events:none;position:fixed;top:0;transition:clip-path .6s cubic-bezier(.16,1,.3,1);width:var(--size);will-change:transform;z-index:6}
+    .sionLanding__preview.is-on{clip-path:inset(0)}
+    .sionLanding__previewItem{height:100%;inset:0;object-fit:cover;opacity:0;position:absolute;transform:scale(1.12);transition:opacity .35s,transform .9s cubic-bezier(.16,1,.3,1);width:100%}
+    .sionLanding__previewItem.is-on{opacity:1;transform:none}
+    .sionLanding__previewTag{align-items:center;background:var(--landing-accent);border-radius:50%;bottom:1.6rem;color:#111;display:flex;font:400 2.4rem/1 Clarkson,Arial,sans-serif;height:6.4rem;justify-content:center;position:absolute;right:1.6rem;width:6.4rem}
+    .sionLanding__serviceThumb{aspect-ratio:9/16;background:#111;display:block;grid-column:3;grid-row:2;overflow:hidden;width:100%}
+    .sionLanding__serviceThumb>*{display:block;height:100%;object-fit:cover;width:100%}
     .sionLanding__serviceNum{color:#77736d;font:500 1.2rem/1 Clarkson,Arial,sans-serif}
     .sionLanding__service h3{font:400 clamp(2.8rem,4.2vw,6rem)/.95 Clarkson,Arial,sans-serif;letter-spacing:-.05em;margin:0;text-transform:uppercase}
     .sionLanding__service p{font-size:clamp(1.5rem,1.3vw,1.9rem);line-height:1.5;margin:0}
-    .sionLanding__serviceArrow{font:400 2.4rem/1 Clarkson,Arial,sans-serif;transition:transform .35s cubic-bezier(.16,1,.3,1)}
+    .sionLanding__serviceArrow{font:400 2.4rem/1 Clarkson,Arial,sans-serif;transition:opacity .3s,transform .35s cubic-bezier(.16,1,.3,1)}
     .sionLanding__service:hover .sionLanding__serviceArrow{transform:translate(.35rem,-.35rem)}
     .sionLanding__marketing{background:var(--landing-paper);color:#111;padding:clamp(9rem,12vw,17rem) 0}
     .sionLanding__marketing .sionLanding__sectionHead h2 i{color:var(--landing-accent);font-style:normal}
     html[data-sion-language="th"] .sionLanding__marketing .sionLanding__sectionHead h2 i{font-family:var(--font-ptt45pride),Tahoma,sans-serif;font-weight:700;letter-spacing:-.045em}
-    .sionLanding__marketingGrid{border-left:1px solid #111;border-top:1px solid #111;display:grid;grid-template-columns:repeat(3,minmax(0,1fr))}
-    .sionLanding__marketingCard{background:var(--landing-paper);border-bottom:1px solid #111;border-right:1px solid #111;color:#111;display:flex;flex-direction:column;min-height:clamp(40rem,48vw,58rem);min-width:0;overflow:hidden;padding:clamp(2rem,3vw,3.5rem);text-decoration:none;transition:background-color .45s ease,color .45s ease,transform .55s cubic-bezier(.16,1,.3,1)}
-    .sionLanding__marketingCard:first-child{background:var(--landing-accent)}
-    .sionLanding__marketingCard:nth-child(5){background:#d8d4cc}
-    .sionLanding__marketingCard:hover{background:#111;color:#fff;transform:translateY(-1rem)}
+    .sionLanding__marketingGrid{border-left:1px solid #bdbab4;border-top:1px solid #bdbab4;display:grid;grid-template-columns:repeat(3,minmax(0,1fr))}
+    .sionLanding__marketingCard{background:var(--landing-paper);border-bottom:1px solid #bdbab4;border-right:1px solid #bdbab4;color:#111;display:flex;flex-direction:column;isolation:isolate;min-height:clamp(32rem,31vw,42rem);min-width:0;overflow:hidden;padding:clamp(2rem,2.4vw,3rem);position:relative;text-decoration:none}
+    .sionLanding__marketingCard:before{background:var(--landing-accent);clip-path:circle(0 at var(--mx,50%) var(--my,50%));content:"";inset:0;position:absolute;transition:clip-path .75s cubic-bezier(.16,1,.3,1);z-index:-1}
+    .sionLanding__marketingCard:after{background:linear-gradient(#111,#111) 0 0/0 2px no-repeat,linear-gradient(#111,#111) 100% 0/2px 0 no-repeat,linear-gradient(#111,#111) 100% 100%/0 2px no-repeat,linear-gradient(#111,#111) 0 100%/2px 0 no-repeat;content:"";inset:0;pointer-events:none;position:absolute;transition:background-size .6s cubic-bezier(.16,1,.3,1)}
+    .sionLanding__marketingCard:is(:hover,:focus-visible,.is-focus):before{clip-path:circle(150% at var(--mx,50%) var(--my,50%))}
+    .sionLanding__marketingCard:is(:hover,:focus-visible,.is-focus):after{background-size:100% 2px,2px 100%,100% 2px,2px 100%}
+    .sionLanding__marketingCard:focus-visible{outline:0}
+    .sionLanding__marketingGrid:hover .sionLanding__marketingCard:not(:hover)>*{opacity:.45}
+    .sionLanding__marketingCard>*{transition:opacity .3s}
     .sionLanding__marketingMeta{display:flex;font:500 1rem/1 Clarkson,Arial,sans-serif;justify-content:space-between;letter-spacing:.08em;text-transform:uppercase}
-    .sionLanding__marketingCard h3{font:400 clamp(2.7rem,5vw,6.5rem)/1 Clarkson,Arial,sans-serif;letter-spacing:-.025em;margin:auto 0 3rem;max-width:9ch;overflow-wrap:anywhere}
-    .sionLanding__marketingCard p{font-size:clamp(1.35rem,1.35vw,1.8rem);line-height:1.5;margin:0 0 4rem;overflow-wrap:anywhere}
+    .sionLanding__marketingCard h3{font:400 clamp(2.7rem,3.9vw,5.4rem)/1 Clarkson,Arial,sans-serif;letter-spacing:-.025em;margin:auto 0 2rem;max-width:12ch;overflow-wrap:break-word}
+    .sionLanding__marketingCard p{font-size:clamp(1.35rem,1.25vw,1.7rem);line-height:1.5;margin:0 0 2.6rem;overflow-wrap:anywhere}
     .sionLanding__marketingMore{align-items:center;border-top:1px solid currentColor;display:flex;font:500 1.05rem/1 Clarkson,Arial,sans-serif;justify-content:space-between;letter-spacing:.04em;margin-top:auto;padding-top:1.5rem;text-transform:uppercase}
     .sionLanding__marketingMore i{font-size:2rem;font-style:normal;transition:transform .35s ease}
-    .sionLanding__marketingCard:hover .sionLanding__marketingMore i{transform:translate(.35rem,-.35rem)}
+    .sionLanding__marketingCard:is(:hover,:focus-visible,.is-focus) .sionLanding__marketingMore i{transform:translate(.35rem,-.35rem)}
     .sionLanding__work{background:var(--landing-black);color:#fff;padding:clamp(9rem,12vw,17rem) 0}
     .sionLanding__work .sionLanding__kicker{color:#aaa}
     .sionLanding__workGrid{display:grid;gap:clamp(1.2rem,2vw,2.8rem);grid-template-columns:repeat(12,1fr)}
@@ -102,8 +116,13 @@
     .sionLanding__project img,.sionLanding__project video{display:block;height:100%;object-fit:cover;transition:transform 1s cubic-bezier(.16,.84,.32,1);width:100%}
     .sionLanding__project:hover img,.sionLanding__project:hover video{transform:scale(1.025)}
     .sionLanding__process{background:var(--landing-accent);color:#111;padding:clamp(9rem,12vw,17rem) 0}
+    .sionLanding__process .sionLanding__statement i{color:#fff}
     .sionLanding__processGrid{display:grid;grid-template-columns:repeat(4,1fr);margin-top:7rem}
-    .sionLanding__step{border-left:1px solid rgba(0,0,0,.45);display:flex;flex-direction:column;min-height:35rem;padding:0 2.5rem}
+    .sionLanding__step{--p:1;border-left:1px solid rgba(0,0,0,.45);display:flex;flex-direction:column;min-height:35rem;padding:2.2rem 2.5rem 0;position:relative}
+    .sionLanding__step:before{background:rgba(0,0,0,.28);content:"";height:1px;left:0;position:absolute;right:0;top:0}
+    .sionLanding__step:after{background:#111;content:"";height:3px;left:0;position:absolute;right:0;top:-1px;transform:scaleX(var(--p));transform-origin:left}
+    .sionLanding__step>*{opacity:calc(.42 + .58*var(--p));transition:transform .55s cubic-bezier(.16,1,.3,1)}
+    .sionLanding__step:hover>h3{transform:translateX(.8rem)}
     .sionLanding__step:first-child{padding-left:0;border-left:0}
     .sionLanding__stepNum{font:500 1.1rem/1 Clarkson,Arial,sans-serif;letter-spacing:.1em}
     .sionLanding__step h3{font:400 clamp(2.6rem,3vw,4.4rem)/.95 Clarkson,Arial,sans-serif;letter-spacing:-.05em;margin:auto 0 2rem;text-transform:uppercase}
@@ -136,10 +155,12 @@
       .sionLanding__heroHeadlineSecond .sionLanding__heroSecondTail{font-size:clamp(4rem,16vw,6rem)}
       .sionLanding__heroBottom,.sionLanding__introText,.sionLanding__sectionHead{grid-template-columns:1fr}
       .sionLanding__heroBottom{gap:1.5rem;margin-top:clamp(1.5rem,5vh,3rem);padding-top:1.25rem}.sionLanding__anchorNav a{font-size:.95rem;padding:.85rem 1.15rem}.sionLanding__introText{margin-top:6rem}
-      .sionLanding__service{align-items:start;gap:1rem;grid-template-columns:4rem 1fr 2rem;padding:2.8rem 0}
+      .sionLanding__service{align-items:start;gap:1rem;grid-template-columns:4rem minmax(0,1fr) 2rem;padding:2.8rem 0}
       .sionLanding__service p{grid-column:2/4}
-      .sionLanding__serviceArrow{grid-column:3;grid-row:1;font-size:1.8rem}
-      .sionLanding__marketingGrid{grid-template-columns:1fr}.sionLanding__marketingCard{min-height:38rem}.sionLanding__marketingCard:hover{transform:none}
+      .sionLanding__service.has-thumb{grid-template-columns:4rem minmax(0,1fr) 8rem}
+      .sionLanding__service.has-thumb p{grid-column:2;grid-row:2}
+      .sionLanding__serviceArrow{grid-column:3;grid-row:1;font-size:1.8rem;text-align:right}
+      .sionLanding__marketingGrid{grid-template-columns:1fr}.sionLanding__marketingCard{min-height:34rem}
       .sionLanding__project:nth-child(n){grid-column:1/-1;margin-top:4rem}.sionLanding__project:first-child{margin-top:0}
       .sionLanding__processGrid{grid-template-columns:1fr 1fr;row-gap:5rem}
       .sionLanding__step{min-height:25rem}.sionLanding__step:nth-child(3){border-left:0;padding-left:0}
@@ -152,8 +173,7 @@
       }
     }
     @media(max-width:520px){
-      .sionLanding__processGrid{grid-template-columns:1fr}.sionLanding__step{border-left:0;border-top:1px solid rgba(0,0,0,.4);min-height:0;padding:3rem 0}
-      .sionLanding__step:first-child{border-top:0}.sionLanding__step h3{margin:6rem 0 1.5rem}
+      .sionLanding__processGrid{grid-template-columns:1fr}.sionLanding__step{border-left:0;min-height:0;padding:3rem 0}.sionLanding__step h3{margin:6rem 0 1.5rem}
       .sionLanding__project:nth-child(n) .sionLanding__projectMedia{aspect-ratio:9/16}
     }
     @media(max-width:1100px) and (min-width:801px){
@@ -173,7 +193,7 @@
       .sionLanding__contactPrompt a,.sionLanding__anchorNav a{padding:.65rem 1rem;white-space:nowrap}
       .sionLanding__heroBottom p{display:none}
     }
-    @media(prefers-reduced-motion:reduce){.sionLanding__reveal{opacity:1;transform:none}.sionLanding__project img,.sionLanding__portalLabel:after{animation:none;transition:none}}
+    @media(prefers-reduced-motion:reduce){.sionLanding__preview,.sionLanding__previewItem,.sionLanding__marketingCard:before,.sionLanding__marketingCard:after{transition:none}.sionLanding__reveal{opacity:1;transform:none}.sionLanding__project img,.sionLanding__portalLabel:after{animation:none;transition:none}}
   `;
   document.head.append(style);
 
@@ -439,6 +459,167 @@
       });
     }, { rootMargin: '20% 0px', threshold: .12 });
     landing.querySelectorAll('.sionLanding__project video').forEach((video) => videoObserver.observe(video));
+
+    // Interactive "tables": rows preview real work, cards flood from the pointer, and
+    // the process rule fills with scroll. Media is only requested when it is shown.
+    const reduceMotion = matchMedia('(prefers-reduced-motion:reduce)').matches;
+    const canHover = matchMedia('(hover:hover) and (pointer:fine)').matches;
+    const saveData = navigator.connection?.saveData;
+    const servicePreviews = {
+      '/commercial-production': { video: '/assets/reels/cocktail.mp4', poster: '/assets/reels/cocktail.jpg' },
+      '/digital-marketing': { video: '/assets/reels/coffee.mp4', poster: '/assets/reels/coffee.jpg' },
+      '/ai-solution': { video: '/assets/ai-solution/media/factory-conveyor.mp4', poster: '/assets/ai-solution/media/factory-conveyor.jpg' },
+      '/campaign': { image: '/assets/landing-preview/web-design.webp' },
+      '/motion': { video: '/assets/reels/morph.mp4', poster: '/assets/reels/morph.jpg' },
+    };
+    const makeMedia = (media, className = '') => {
+      const element = document.createElement(media.video ? 'video' : 'img');
+      element.className = className;
+      if (media.video) {
+        element.poster = media.poster;
+        element.muted = true;
+        element.loop = true;
+        element.playsInline = true;
+        element.preload = 'none';
+        element.dataset.src = media.video;
+      } else {
+        element.src = media.image;
+        element.alt = '';
+        element.loading = 'lazy';
+      }
+      element.setAttribute('aria-hidden', 'true');
+      return element;
+    };
+    const playMedia = (element) => {
+      if (element.tagName !== 'VIDEO' || reduceMotion || saveData) return;
+      if (!element.src && element.dataset.src) element.src = element.dataset.src;
+      element.play().catch(() => {});
+    };
+    const servicesSection = landing.querySelector('.sionLanding__services');
+    const serviceRows = [...landing.querySelectorAll('.sionLanding__service')];
+    if (canHover) {
+      const preview = document.createElement('div');
+      preview.className = 'sionLanding__preview';
+      preview.setAttribute('aria-hidden', 'true');
+      const items = new Map(serviceRows.map((row) => {
+        const item = makeMedia(servicePreviews[row.getAttribute('href')], 'sionLanding__previewItem');
+        preview.append(item);
+        return [row, item];
+      }));
+      const tag = document.createElement('span');
+      tag.className = 'sionLanding__previewTag';
+      tag.textContent = '↗';
+      preview.append(tag);
+      landing.append(preview);
+      let targetX = 0, targetY = 0, currentX = 0, currentY = 0, previewFrame = 0, activeRow = null;
+      const place = () => {
+        const box = preview.getBoundingClientRect();
+        targetX = Math.max(12, Math.min(innerWidth - box.width - 12, targetX));
+        targetY = Math.max(12, Math.min(innerHeight - box.height - 12, targetY));
+      };
+      const glide = () => {
+        previewFrame = 0;
+        currentX += (targetX - currentX) * (reduceMotion ? 1 : .14);
+        currentY += (targetY - currentY) * (reduceMotion ? 1 : .14);
+        preview.style.transform = `translate3d(${currentX}px,${currentY}px,0)`;
+        if (activeRow && (Math.abs(targetX - currentX) > .5 || Math.abs(targetY - currentY) > .5)) previewFrame = requestAnimationFrame(glide);
+      };
+      const aim = (x, y, jump) => {
+        const box = preview.getBoundingClientRect();
+        // Stay clear of the hovered service name so the title remains readable.
+        const title = activeRow?.querySelector('h3');
+        const range = document.createRange();
+        if (title) range.selectNodeContents(title);
+        targetX = Math.max(x + 28, title ? range.getBoundingClientRect().right + 44 : 0);
+        targetY = y - box.height / 2;
+        place();
+        if (jump) { currentX = targetX; currentY = targetY; }
+        if (!previewFrame) previewFrame = requestAnimationFrame(glide);
+      };
+      const open = (row, x, y) => {
+        const wasOpen = !!activeRow;
+        if (activeRow === row) return aim(x, y);
+        activeRow = row;
+        items.forEach((item, owner) => {
+          const on = owner === row;
+          item.classList.toggle('is-on', on);
+          if (on) playMedia(item);
+          else if (item.tagName === 'VIDEO') item.pause();
+        });
+        preview.classList.add('is-on');
+        servicesSection.classList.add('is-previewing');
+        aim(x, y, !wasOpen);
+      };
+      const close = () => {
+        activeRow = null;
+        preview.classList.remove('is-on');
+        servicesSection.classList.remove('is-previewing');
+        items.forEach((item) => { if (item.tagName === 'VIDEO') item.pause(); });
+      };
+      serviceRows.forEach((row) => {
+        row.addEventListener('pointerenter', (event) => open(row, event.clientX, event.clientY));
+        row.addEventListener('pointermove', (event) => aim(event.clientX, event.clientY));
+        row.addEventListener('pointerleave', (event) => { if (!serviceRows.includes(event.relatedTarget?.closest?.('.sionLanding__service'))) close(); });
+        row.addEventListener('focus', () => {
+          if (!row.matches(':focus-visible')) return;
+          const box = row.getBoundingClientRect();
+          open(row, box.left + box.width * .42, box.top + box.height / 2);
+        });
+        row.addEventListener('blur', close);
+      });
+      addEventListener('scroll', () => { if (activeRow && !activeRow.matches(':hover, :focus-visible')) close(); }, { passive: true });
+    } else {
+      serviceRows.forEach((row) => {
+        const thumb = document.createElement('span');
+        thumb.className = 'sionLanding__serviceThumb';
+        thumb.append(makeMedia(servicePreviews[row.getAttribute('href')]));
+        row.classList.add('has-thumb');
+        row.append(thumb);
+      });
+    }
+    const marketingCards = [...landing.querySelectorAll('.sionLanding__marketingCard')];
+    const trackPointer = (event) => {
+      const card = event.currentTarget;
+      const box = card.getBoundingClientRect();
+      card.style.setProperty('--mx', `${event.clientX - box.left}px`);
+      card.style.setProperty('--my', `${event.clientY - box.top}px`);
+    };
+    marketingCards.forEach((card) => {
+      card.addEventListener('pointerenter', trackPointer);
+      card.addEventListener('pointerleave', trackPointer);
+    });
+    if (!canHover) {
+      // Touch screens have no hover, so the row or card crossing mid-screen takes the state.
+      const focusObserver = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          entry.target.classList.toggle('is-focus', entry.isIntersecting);
+          const clip = entry.target.querySelector('.sionLanding__serviceThumb video');
+          if (!clip) return;
+          if (entry.isIntersecting) playMedia(clip);
+          else clip.pause();
+        });
+      }, { rootMargin: '-45% 0px -45% 0px' });
+      [...serviceRows, ...marketingCards].forEach((item) => focusObserver.observe(item));
+    }
+    const processGrid = landing.querySelector('.sionLanding__processGrid');
+    const processSteps = [...processGrid.children];
+    let processFrame = 0;
+    const syncProcess = () => {
+      processFrame = 0;
+      const box = processGrid.getBoundingClientRect();
+      const start = innerHeight * .85;
+      const end = innerHeight * .5;
+      const progress = Math.max(0, Math.min(1, (start - box.top) / Math.max(1, box.height + start - end)));
+      processSteps.forEach((step, index) => {
+        step.style.setProperty('--p', Math.max(0, Math.min(1, progress * processSteps.length - index)).toFixed(3));
+      });
+    };
+    if (!reduceMotion) {
+      const requestProcess = () => { if (!processFrame) processFrame = requestAnimationFrame(syncProcess); };
+      addEventListener('scroll', requestProcess, { passive: true });
+      addEventListener('resize', requestProcess, { passive: true });
+      syncProcess();
+    }
 
     const portal = landing.querySelector('.sionLanding__portal');
     let lastCarouselReset = 0;
