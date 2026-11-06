@@ -8,6 +8,12 @@ style.textContent = `
   .sionFullFilms__heading p { margin-top: 1.5rem; font-size: 1.6rem; line-height: 1.7; }
   .sionFullFilms__grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 5rem 3rem; }
   .sionFullFilms__film { min-width: 0; }
+  .sionFullFilms__media { position: relative; }
+  .sionFullFilms__media::after {
+    content: ''; position: absolute; top: 50%; left: 50%; width: 0; height: 0; margin: -14px 0 0 -9px;
+    border-style: solid; border-width: 14px 0 14px 24px; border-color: transparent transparent transparent #fff;
+    filter: drop-shadow(0 1px 6px rgba(0, 0, 0, .55)); pointer-events: none;
+  }
   .sionFullFilms__film video { display: block; width: 100%; height: auto; aspect-ratio: 16 / 9; object-fit: contain; background: #111; }
   .sionFullFilms__caption { display: flex; justify-content: flex-end; margin-top: 1.5rem; font-size: 1.4rem; line-height: 1.6; }
   .sionFullFilms__duration { opacity: .65; white-space: nowrap; }
@@ -52,11 +58,6 @@ export const FullLengthFilms = {
   inheritAttrs: false,
   props: { items: { type: Array, default: () => [] } },
   setup(props) {
-    const pauseOtherFilms = (event) => {
-      document.querySelectorAll('.sionFullFilms video').forEach((video) => {
-        if (video !== event.target) video.pause();
-      });
-    };
     return () => element('section', { class: 'sionFullFilms gridContainer', id: 'full-length-films' }, [
       element('div', { class: 'sionFullFilms__heading' }, [
         element('h2', null, 'Full-length films'),
@@ -64,11 +65,13 @@ export const FullLengthFilms = {
       ]),
       element('div', { class: 'sionFullFilms__grid' }, props.items.map((film) =>
         element('article', { class: 'sionFullFilms__film', key: film.src }, [
-          element('video', {
-            src: film.src, poster: film.poster, controls: true, playsinline: true,
-            preload: 'none', width: film.width, height: film.height,
-            'aria-label': film.title, onPlay: pauseOtherFilms,
-          }),
+          element('div', { class: 'sionFullFilms__media' }, [
+            element('video', {
+              src: film.src, poster: film.poster, playsinline: true,
+              preload: 'none', width: film.width, height: film.height,
+              role: 'button', tabindex: 0, 'aria-label': film.title,
+            }),
+          ]),
           element('div', { class: 'sionFullFilms__caption' }, [
             element('span', { class: 'sionFullFilms__duration' }, durationLabel(film.duration)),
           ]),
